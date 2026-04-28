@@ -1,0 +1,4206 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Défi 7 jours | Hélène Collette</title>
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+      :root {
+        --bg: #090909;
+        --bg-soft: #111111;
+        --panel: rgba(20, 20, 20, 0.9);
+        --panel-strong: #141414;
+        --ink: #f3f3f3;
+        --muted: #8f8f95;
+        --line: rgba(255, 255, 255, 0.09);
+        --line-strong: rgba(255, 255, 255, 0.16);
+        --primary: #ff00a8;
+        --primary-soft: rgba(255, 0, 168, 0.14);
+        --primary-glow: rgba(255, 0, 168, 0.28);
+        --accent: #e7ff19;
+        --accent-soft: rgba(231, 255, 25, 0.14);
+        --danger: #ff6b6b;
+        --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --space-buffer: 24px;
+        --card-padding: 24px;
+        --space-stack-xs: 8px;
+        --space-stack-sm: 12px;
+        --space-stack-md: 16px;
+        --space-stack-lg: 20px;
+        --max-width: 1280px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 50% 22%, rgba(255, 0, 168, 0.12), transparent 30%),
+          radial-gradient(circle at 50% 85%, rgba(255, 0, 168, 0.08), transparent 24%),
+          linear-gradient(180deg, #080808 0%, #0b0b0b 100%);
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 52px 52px;
+        opacity: 0.34;
+      }
+
+      body::after {
+        background:
+          radial-gradient(circle at 50% 30%, rgba(255, 0, 168, 0.09), transparent 20%),
+          radial-gradient(circle at 8% 10%, rgba(231, 255, 25, 0.08), transparent 16%);
+        filter: blur(28px);
+        opacity: 0.9;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      select {
+        font: inherit;
+      }
+
+      .shell {
+        position: relative;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 28px 20px 44px;
+      }
+
+      .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        border: 1px solid rgba(231, 255, 25, 0.22);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent),
+          linear-gradient(135deg, rgba(255, 0, 168, 0.22), rgba(255, 0, 168, 0.03));
+        color: var(--accent);
+        box-shadow: 0 0 0 1px rgba(255, 0, 168, 0.08), 0 18px 38px rgba(0, 0, 0, 0.45);
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-copy small,
+      .eyebrow,
+      .label {
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.72rem;
+        line-height: 1.3;
+        color: var(--primary);
+        margin-bottom: var(--space-stack-sm);
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-size: 1rem;
+        font-weight: 800;
+        line-height: 1.15;
+      }
+
+      .topbar-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .topbar-tools {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .prelive-nav {
+        position: relative;
+      }
+
+      .prelive-nav summary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        cursor: pointer;
+        list-style: none;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .prelive-nav summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .prelive-nav[open] summary,
+      .prelive-nav summary:hover {
+        border-color: var(--line-strong);
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateY(-1px);
+      }
+
+      .prelive-nav-icon {
+        display: grid;
+        gap: 5px;
+      }
+
+      .prelive-nav-icon span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .prelive-nav-panel {
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 0;
+        width: min(360px, calc(100vw - 40px));
+        padding: 18px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 0, 168, 0.18);
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.1), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 16%),
+          rgba(14, 14, 14, 0.96);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+        z-index: 40;
+      }
+
+      .prelive-nav-header strong {
+        display: block;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      .prelive-nav-header p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .prelive-nav-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .prelive-nav-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        text-align: left;
+      }
+
+      .prelive-nav-item.is-active {
+        border-color: rgba(255, 0, 168, 0.24);
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.1), transparent 34%),
+          rgba(255, 255, 255, 0.035);
+      }
+
+      .prelive-nav-item small {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.66rem;
+      }
+
+      .prelive-nav-item strong {
+        display: block;
+        font-size: 0.98rem;
+        line-height: 1.3;
+      }
+
+      .prelive-nav-item span {
+        color: var(--muted);
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+
+      .toggle,
+      .ghost-button,
+      .primary-button,
+      .secondary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 13px 18px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .primary-button {
+        border: 1px solid rgba(231, 255, 25, 0.28);
+        color: #111;
+        font-weight: 800;
+        background: var(--accent);
+        box-shadow: 0 0 0 1px rgba(231, 255, 25, 0.14), 0 14px 30px rgba(231, 255, 25, 0.18);
+      }
+
+      .secondary-button {
+        border: 1px solid rgba(255, 0, 168, 0.28);
+        color: var(--ink);
+        background: linear-gradient(180deg, rgba(255, 0, 168, 0.16), rgba(255, 0, 168, 0.06));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      .ghost-button,
+      .toggle {
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      button:hover,
+      select:hover {
+        transform: translateY(-1px);
+      }
+
+      .primary-button:hover {
+        box-shadow: 0 0 0 1px rgba(231, 255, 25, 0.18), 0 18px 42px rgba(231, 255, 25, 0.24);
+      }
+
+      .secondary-button:hover,
+      .ghost-button:hover,
+      .toggle:hover {
+        border-color: var(--line-strong);
+      }
+
+      button:disabled {
+        opacity: 0.42;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.78fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .panel {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 18%), var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .panel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 24%);
+      }
+
+      .content-panel {
+        padding: 32px;
+      }
+
+      .sidebar {
+        display: grid;
+        gap: var(--space-buffer);
+      }
+
+      .hero {
+        position: relative;
+        padding: 30px;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 0, 168, 0.16);
+        background:
+          radial-gradient(circle at 50% 100%, rgba(255, 0, 168, 0.14), transparent 42%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 20%),
+          linear-gradient(180deg, #0f0f10 0%, #090909 100%);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        pointer-events: none;
+        background: linear-gradient(135deg, rgba(255, 0, 168, 0.22), transparent 25%, transparent 70%, rgba(231, 255, 25, 0.15));
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        padding: 1px;
+      }
+
+      .hero h1,
+      .screen-header h2,
+      .video-card h3,
+      .section-card h3,
+      .mini-panel h3,
+      .admin-panel h3 {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.04;
+        letter-spacing: -0.05em;
+        font-weight: 800;
+      }
+
+      .hero h1 {
+        max-width: 10.5ch;
+        font-size: clamp(3rem, 7vw, 5.8rem);
+      }
+
+      .hero h1 .accent-text {
+        color: var(--primary);
+        text-shadow: 0 0 26px rgba(255, 0, 168, 0.18);
+      }
+
+      .hero-line {
+        display: block;
+      }
+
+      .hero p {
+        max-width: 60ch;
+        margin: var(--space-stack-lg) 0 0;
+        color: rgba(243, 243, 243, 0.72);
+        font-size: 1rem;
+        line-height: 1.72;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: var(--space-buffer);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
+        color: rgba(243, 243, 243, 0.72);
+        font-size: 0.8rem;
+      }
+
+      .screen-header {
+        margin-top: 32px;
+      }
+
+      .screen-header .eyebrow:empty {
+        display: none;
+        margin: 0;
+      }
+
+      .screen-header h2 {
+        max-width: 13ch;
+        font-size: clamp(2.2rem, 5vw, 4rem);
+      }
+
+      .screen-header p {
+        max-width: 58ch;
+        margin-top: var(--space-stack-md);
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
+      .progress-rail {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 12px;
+        margin: 24px 0 18px;
+        justify-items: center;
+      }
+
+      .progress-step {
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        padding: 0;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.05);
+        text-align: center;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--muted);
+        line-height: 1;
+        cursor: default;
+        transition: transform 0.18s ease, border-color 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .progress-step.is-clickable {
+        cursor: pointer;
+      }
+
+      .progress-step.is-clickable:hover {
+        transform: translateY(-1px);
+        border-color: var(--line-strong);
+      }
+
+      .progress-step:disabled {
+        opacity: 0.48;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .progress-step.active {
+        background: linear-gradient(180deg, #ff11aa 0%, #ff00a8 100%);
+        color: #fff;
+        border-color: rgba(255, 0, 168, 0.5);
+        box-shadow: 0 10px 26px rgba(255, 0, 168, 0.28);
+      }
+
+      .progress-step.done {
+        background: rgba(231, 255, 25, 0.08);
+        color: rgba(243, 243, 243, 0.88);
+        border-color: rgba(231, 255, 25, 0.18);
+      }
+
+      .progress-step.intermediate-dot {
+        width: 14px;
+        height: 14px;
+        min-width: 14px;
+        min-height: 14px;
+        margin-top: 20px;
+        border-width: 0;
+        background: rgba(255, 255, 255, 0.16);
+        box-shadow: none;
+      }
+
+      .progress-step.intermediate-dot.active {
+        background: #ff00a8;
+        box-shadow: 0 0 0 6px rgba(255, 0, 168, 0.16);
+      }
+
+      .progress-step.intermediate-dot.done {
+        background: rgba(231, 255, 25, 0.82);
+      }
+
+      .grid-two {
+        display: grid;
+        grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .grid-two > div {
+        display: grid;
+        gap: var(--space-buffer);
+        align-content: start;
+      }
+
+      .card,
+      .video-card,
+      .section-card,
+      .mini-panel,
+      .admin-panel {
+        padding: var(--card-padding);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 16%), rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--line);
+      }
+
+      .video-card > h3,
+      .section-card > h3,
+      .mini-panel > h3,
+      .admin-panel > h3 {
+        margin-bottom: var(--space-stack-lg);
+      }
+
+      .section-card.highlight {
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.12), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 18%),
+          rgba(255, 255, 255, 0.025);
+        border-color: rgba(255, 0, 168, 0.22);
+      }
+
+      .rich-text {
+        color: rgba(243, 243, 243, 0.92);
+        line-height: 1.78;
+      }
+
+      .rich-text p {
+        margin: 0 0 var(--space-stack-lg);
+      }
+
+      .rich-text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .rich-text ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .rich-text li + li {
+        margin-top: 8px;
+      }
+
+      .instruction-scroll {
+        max-height: 300px;
+        overflow: auto;
+        padding-right: 6px;
+      }
+
+      .instruction-status,
+      .inline-note,
+      .status-line {
+        margin-top: var(--space-stack-md);
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .status-line strong {
+        color: var(--ink);
+      }
+
+      .checklist {
+        display: grid;
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .check-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: var(--card-padding);
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .check-item strong {
+        display: block;
+        line-height: 1.18;
+      }
+
+      .check-item span {
+        display: block;
+        margin-top: var(--space-stack-xs);
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      .state-pill {
+        flex: 0 0 auto;
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.2;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+      }
+
+      .state-pill.done {
+        background: rgba(231, 255, 25, 0.1);
+        color: var(--accent);
+      }
+
+      .video-frame {
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        aspect-ratio: 16 / 9;
+        background: #080808;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .video-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .video-frame wistia-player {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .video-actions,
+      .page-actions,
+      .admin-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: var(--space-buffer);
+      }
+
+      .video-note {
+        margin-top: var(--space-stack-md);
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-buffer);
+      }
+
+      .metric {
+        padding: var(--card-padding);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: var(--space-stack-sm);
+        font-size: 1.5rem;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+      }
+
+      .metric span {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        line-height: 1.3;
+      }
+
+      .timeline {
+        display: grid;
+        gap: var(--space-buffer);
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+      }
+
+      .timeline-item strong {
+        display: block;
+        line-height: 1.18;
+      }
+
+      .timeline-badge {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: rgba(255, 0, 168, 0.12);
+        color: var(--primary);
+        font-weight: 800;
+      }
+
+      .timeline-copy {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+
+      .countdown {
+        margin-top: 14px;
+        padding: var(--card-padding);
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.08), transparent 28%),
+          rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .countdown strong {
+        display: block;
+        margin-top: var(--space-stack-sm);
+        font-size: 1.7rem;
+        letter-spacing: -0.05em;
+        line-height: 1.02;
+      }
+
+      .wait-card {
+        display: grid;
+        gap: var(--space-buffer);
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.1), transparent 34%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .wait-card > .rich-text,
+      .wait-card > .countdown,
+      .wait-card > .vip-offer-card,
+      .wait-card > .page-actions {
+        margin-top: 0;
+      }
+
+      .wait-card > .vip-offer-card {
+        padding: var(--card-padding);
+      }
+
+      .wait-card.simple-wait-card {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      .conversion-list {
+        display: grid;
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .conversion-point {
+        padding: var(--card-padding);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 0, 168, 0.14);
+        background: rgba(255, 0, 168, 0.06);
+        color: rgba(243, 243, 243, 0.86);
+      }
+
+      .premium-day-story,
+      .premium-action-panel {
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.08), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 16%),
+          rgba(255, 255, 255, 0.02);
+      }
+
+      .premium-day-story {
+        display: grid;
+        gap: var(--space-buffer);
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+
+      .premium-lead {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+        gap: var(--space-buffer);
+        margin-top: 0;
+      }
+
+      .premium-lead-card,
+      .premium-highlight-card,
+      .premium-action-meta,
+      .premium-action-note {
+        padding: var(--card-padding);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .premium-lead-card {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 22%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .premium-lead-card p,
+      .premium-highlight-card p,
+      .premium-insight-card p,
+      .premium-action-meta p,
+      .premium-action-note p {
+        margin: 0;
+      }
+
+      .premium-highlight-card {
+        border-color: rgba(255, 0, 168, 0.18);
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.1), transparent 34%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .premium-highlight-card strong,
+      .premium-insight-card strong,
+      .premium-action-meta strong,
+      .premium-action-note strong {
+        display: block;
+        margin-bottom: var(--space-stack-sm);
+        line-height: 1.18;
+      }
+
+      .premium-highlight-number {
+        display: block;
+        margin: var(--space-stack-md) 0 var(--space-stack-xs);
+        font-size: clamp(2.4rem, 4vw, 3.6rem);
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        font-weight: 800;
+      }
+
+      .premium-insight-grid,
+      .premium-action-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .premium-day-story .premium-insight-grid {
+        margin-top: 0;
+      }
+
+      .premium-insight-card {
+        padding: var(--card-padding);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .premium-insight-index,
+      .premium-action-kicker {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 42px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(255, 0, 168, 0.1);
+        border: 1px solid rgba(255, 0, 168, 0.16);
+        color: var(--primary);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .premium-insight-card strong,
+      .premium-action-meta strong {
+        margin-top: var(--space-stack-md);
+      }
+
+      .premium-action-panel .page-actions {
+        margin-top: var(--space-buffer);
+      }
+
+      .premium-action-panel .primary-action-row {
+        justify-content: center;
+        margin-top: var(--space-buffer);
+      }
+
+      .premium-action-panel .primary-action-row .primary-button {
+        min-width: min(100%, 340px);
+        padding: 18px 30px;
+        font-size: 1.05rem;
+      }
+
+      .premium-action-panel .community-action {
+        margin-top: var(--space-stack-lg);
+      }
+
+      .vip-offer-card .vip-action-row {
+        justify-content: flex-end;
+      }
+
+      .daily-checklist {
+        display: grid;
+        gap: 12px;
+      }
+
+      .daily-checklist-item {
+        display: grid;
+        grid-template-columns: 22px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+        color: rgba(243, 243, 243, 0.88);
+        line-height: 1.45;
+      }
+
+      .daily-checklist-item input {
+        width: 18px;
+        height: 18px;
+        margin: 2px 0 0;
+        accent-color: var(--accent);
+      }
+
+      .daily-checklist-item span {
+        display: block;
+        font-size: 0.94rem;
+      }
+
+      .action-error-message {
+        max-width: 520px;
+        margin: var(--space-stack-md) auto 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 107, 107, 0.22);
+        background: rgba(255, 107, 107, 0.08);
+        color: rgba(255, 224, 224, 0.94);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        text-align: center;
+      }
+
+      .premium-action-meta.is-ready {
+        border-color: rgba(231, 255, 25, 0.16);
+        background:
+          radial-gradient(circle at bottom left, rgba(231, 255, 25, 0.08), transparent 36%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .premium-action-status {
+        display: grid;
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .premium-action-note {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--space-buffer);
+      }
+
+      .premium-action-note .state-pill {
+        margin-top: 2px;
+      }
+
+      .auth-card,
+      .vip-offer-card {
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.1), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 16%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .form-field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .form-field.full {
+        grid-column: 1 / -1;
+      }
+
+      .form-field label {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .text-input {
+        width: 100%;
+        min-height: 52px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .text-input::placeholder {
+        color: rgba(243, 243, 243, 0.34);
+      }
+
+      .auth-helper,
+      .vip-price-note {
+        margin-top: var(--space-stack-md);
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .offer-comparison {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .offer-tier {
+        padding: var(--card-padding);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .offer-tier.highlight {
+        border-color: rgba(255, 0, 168, 0.2);
+        background:
+          radial-gradient(circle at bottom right, rgba(255, 0, 168, 0.1), transparent 36%),
+          rgba(255, 255, 255, 0.03);
+      }
+
+      .offer-tier strong {
+        display: block;
+        margin-bottom: var(--space-stack-sm);
+        line-height: 1.18;
+      }
+
+      .offer-tier-price {
+        display: block;
+        margin-top: var(--space-stack-md);
+        font-size: 2rem;
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+        font-weight: 800;
+      }
+
+      .admin-panel label {
+        display: block;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .admin-panel select {
+        width: 100%;
+        margin-top: 8px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ink);
+      }
+
+      pre {
+        margin: 0;
+        padding: 16px;
+        overflow: auto;
+        border-radius: 18px;
+        background: #0c0c0c;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: #f5f5f5;
+        font-size: 0.8rem;
+        line-height: 1.55;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .dev-inline-panel {
+        margin: 18px 0 24px;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 0, 168, 0.2);
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.1), transparent 32%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .dev-inline-panel h3 {
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.1;
+      }
+
+      .dev-inline-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .dev-inline-panel label {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .dev-inline-panel select {
+        width: 100%;
+        margin-top: 8px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ink);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .client-corner-logo,
+      .client-hero-logo {
+        display: none;
+      }
+
+      body.client-view .shell {
+        max-width: 1440px;
+      }
+
+      body.client-view .client-hero-logo {
+        display: block;
+        width: min(24vw, 240px);
+        margin: 0 auto 20px;
+        pointer-events: none;
+      }
+
+      body.client-view .client-hero-logo img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      body.client-view .brand {
+        display: none;
+      }
+
+      body.client-view .brand-mark,
+      body.client-view #brandModeLabel {
+        display: none;
+      }
+
+      body.client-view .brand-copy strong {
+        font-size: 0.95rem;
+      }
+
+      body.client-view .topbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 14px;
+      }
+
+      body.client-view .topbar-tools {
+        margin-left: auto;
+      }
+
+      body.client-view .layout {
+        grid-template-columns: 1fr;
+      }
+
+      body.client-view .content-panel {
+        width: min(100%, 75vw);
+        margin: 0 auto;
+      }
+
+      body.client-view .sidebar {
+        width: min(100%, 75vw);
+        margin: 0 auto;
+      }
+
+      body.client-view .hero {
+        padding: 34px clamp(22px, 4vw, 44px);
+        text-align: center;
+      }
+
+      body.client-view .hero h1 {
+        max-width: none;
+        margin: 18px auto 0;
+        font-size: clamp(2.4rem, 3.7vw, 3.35rem);
+        line-height: 0.92;
+      }
+
+      body.client-view .hero h1 .hero-line:last-child {
+        white-space: nowrap;
+      }
+
+      body.client-view .hero p {
+        max-width: 30ch;
+        margin: 20px auto 0;
+      }
+
+      body.client-view .hero-meta {
+        justify-content: center;
+      }
+
+      body.client-view .screen-header {
+        max-width: 920px;
+        margin: 30px auto 0;
+        text-align: center;
+      }
+
+      body.client-view .screen-header .eyebrow {
+        margin-bottom: 10px;
+      }
+
+      body.client-view .screen-header h2 {
+        max-width: 13.5ch;
+        margin: 0 auto;
+        font-size: clamp(2.4rem, 4.3vw, 3.8rem);
+        line-height: 0.94;
+        text-wrap: balance;
+      }
+
+      body.client-view .screen-header p {
+        display: none;
+      }
+
+      body.client-view .progress-rail {
+        max-width: 920px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      body.client-view.client-top-focus-view .hero {
+        display: none;
+      }
+
+      body.client-view.client-top-focus-view .content-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      body.client-view.client-top-focus-view .progress-rail {
+        order: 1;
+        position: sticky;
+        top: 10px;
+        z-index: 18;
+        max-width: 100%;
+        margin: 0 0 22px;
+        padding: 14px 24px 18px;
+        border-radius: 24px;
+        background: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+      }
+
+      body.client-view.client-top-focus-view .screen-header {
+        order: 2;
+        max-width: none;
+        margin: 0 auto 26px;
+        text-align: left;
+      }
+
+      body.client-view.client-top-focus-view .screen-header h2 {
+        max-width: none;
+        margin: 0;
+        color: #c8048a;
+        font-size: clamp(2.5rem, 4vw, 4.4rem);
+        line-height: 1;
+      }
+
+      body.client-view.client-top-focus-view .screen-header p {
+        display: none;
+      }
+
+      body.client-view.client-top-focus-view.client-wait-view .screen-header p {
+        display: block;
+        margin: var(--space-stack-lg) 0 0;
+        color: var(--ink);
+        font-size: clamp(2rem, 4vw, 4rem);
+        line-height: 1;
+        letter-spacing: 0;
+        font-weight: 800;
+      }
+
+      body.client-view.client-top-focus-view.client-wait-view .screen-header {
+        width: 100%;
+        text-align: center;
+      }
+
+      body.client-view.client-top-focus-view.client-wait-view .screen-header h2 {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      body.client-view.client-top-focus-view.client-wait-view .screen-header .primary-button {
+        margin-top: var(--space-stack-lg);
+        padding: 18px 30px;
+      }
+
+      body.client-view.client-top-focus-view #screenRoot {
+        order: 3;
+      }
+
+      body.client-view.client-journey-view .hero {
+        display: none;
+      }
+
+      body.client-view.client-journey-view .content-panel {
+        padding-top: 40px;
+      }
+
+      body.client-view.client-journey-view .screen-header {
+        max-width: none;
+        margin: 0 auto 30px;
+        padding-top: 10px;
+      }
+
+      body.client-view.client-journey-view .progress-rail {
+        position: relative;
+        max-width: 760px;
+        grid-template-columns: repeat(13, minmax(0, 1fr));
+        margin: 8px auto 40px;
+        padding: 14px 18px;
+      }
+
+      body.client-view.client-journey-view .progress-rail::before {
+        content: "";
+        position: absolute;
+        left: 42px;
+        right: 42px;
+        top: 50%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      body.client-view.client-journey-view .progress-step {
+        position: relative;
+        z-index: 1;
+        background: #1b1b1d;
+      }
+
+      body.client-view.client-journey-view .progress-step.intermediate-dot {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      body.client-view.client-top-focus-view .progress-step.active:not(.intermediate-dot) {
+        animation: current-day-pulse 3.4s ease-in-out infinite;
+      }
+
+      body.client-view.client-journey-view .screen-header .eyebrow {
+        margin-bottom: 16px;
+      }
+
+      body.client-view.client-journey-view .screen-header h2 {
+        max-width: none;
+        white-space: nowrap;
+        font-size: clamp(2.2rem, 3vw, 4.3rem);
+        line-height: 0.92;
+      }
+
+      .video-card.video-card-minimal {
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .video-card.video-card-minimal .video-frame {
+        border-radius: 24px;
+      }
+
+      .video-complete-badge {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        color: #081008;
+        background: #47f06a;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 12px 32px rgba(71, 240, 106, 0.34);
+      }
+
+      .video-complete-badge svg {
+        width: 24px;
+        height: 24px;
+        stroke-width: 3;
+      }
+
+      @keyframes current-day-pulse {
+        0%,
+        100% {
+          box-shadow: 0 10px 30px rgba(255, 0, 168, 0.44), 0 0 0 1px rgba(255, 0, 168, 0.42);
+        }
+
+        50% {
+          box-shadow: 0 14px 42px rgba(255, 0, 168, 0.68), 0 0 0 1px rgba(255, 0, 168, 0.56);
+        }
+      }
+
+      body.client-view #screenRoot {
+        max-width: 920px;
+        margin: 0 auto;
+        display: grid;
+        gap: var(--space-buffer);
+      }
+
+      body.client-view #screenRoot .grid-two {
+        grid-template-columns: 1fr;
+        max-width: 920px;
+      }
+
+      body.client-view #screenRoot .video-card {
+        width: 100%;
+      }
+
+      body.client-view #screenRoot .section-card.action-only {
+        text-align: center;
+      }
+
+      body.client-view #screenRoot .section-card.action-only .page-actions {
+        justify-content: center;
+        flex-wrap: nowrap;
+      }
+
+      body.client-view #screenRoot .section-card.action-only .page-actions > * {
+        flex: 0 1 auto;
+      }
+
+      @media (max-width: 1080px) {
+        .layout,
+        .grid-two {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1,
+        .screen-header h2 {
+          max-width: none;
+        }
+
+        .premium-lead,
+        .premium-insight-grid,
+        .form-grid,
+        .offer-comparison {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .shell {
+          padding: 16px 12px 28px;
+        }
+
+        body.client-view .content-panel,
+        body.client-view .sidebar {
+          width: 100%;
+        }
+
+        body.client-view .client-hero-logo {
+          width: min(42vw, 170px);
+          margin-bottom: 18px;
+        }
+
+        body.client-view .topbar {
+          display: none;
+        }
+
+        body.client-view.client-top-focus-view .progress-rail {
+          top: 0;
+          margin-bottom: 18px;
+          padding: 12px 16px 16px;
+          border-radius: 18px;
+        }
+
+        body.client-view .hero {
+          text-align: left;
+        }
+
+        body.client-view #screenRoot .section-card.action-only .page-actions {
+          flex-wrap: wrap;
+        }
+
+        body.client-view .screen-header h2 {
+          max-width: 10ch;
+          margin-left: 0;
+          margin-right: 0;
+          font-size: clamp(2.1rem, 10vw, 3rem);
+        }
+
+        .premium-action-note {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        body.client-view.client-journey-view .progress-rail {
+          max-width: 100%;
+          gap: 6px;
+          padding: 6px 0;
+        }
+
+        .premium-action-grid {
+          grid-template-columns: 1fr;
+        }
+
+        body.client-view.client-journey-view .progress-rail::before {
+          left: 26px;
+          right: 26px;
+        }
+
+        body.client-view.client-journey-view .progress-step {
+          width: 34px;
+          height: 34px;
+          min-width: 34px;
+          min-height: 34px;
+          font-size: 0.9rem;
+          opacity: 0.72;
+        }
+
+        body.client-view.client-journey-view .progress-step.next-up {
+          width: 42px;
+          height: 42px;
+          min-width: 42px;
+          min-height: 42px;
+          font-size: 0.98rem;
+          opacity: 0.96;
+          border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        body.client-view.client-journey-view .progress-step.active {
+          width: 50px;
+          height: 50px;
+          min-width: 50px;
+          min-height: 50px;
+          font-size: 1.05rem;
+          opacity: 1;
+        }
+
+        body.client-view.client-journey-view .progress-step.intermediate-dot {
+          width: 8px;
+          height: 8px;
+          min-width: 8px;
+          min-height: 8px;
+          margin-top: 13px;
+          opacity: 0.62;
+        }
+
+        body.client-view.client-journey-view .progress-step.intermediate-dot.active {
+          box-shadow: 0 0 0 4px rgba(255, 0, 168, 0.16);
+        }
+
+        body.client-view .hero h1,
+        body.client-view .hero p {
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        body.client-view.client-journey-view .content-panel {
+          padding-top: 24px;
+        }
+
+        body.client-view.client-journey-view .screen-header {
+          margin-bottom: 18px;
+          padding-top: 0;
+        }
+
+        body.client-view.client-journey-view .screen-header h2 {
+          white-space: normal;
+          font-size: clamp(2.1rem, 10vw, 3rem);
+          line-height: 0.94;
+        }
+
+        body.client-view .hero h1 .hero-line:last-child {
+          white-space: normal;
+        }
+
+        body.client-view .hero-meta,
+        body.client-view .screen-header {
+          justify-content: flex-start;
+          text-align: left;
+        }
+
+        .content-panel,
+        .hero,
+        .card,
+        .video-card,
+        .section-card,
+        .mini-panel,
+        .admin-panel {
+          padding: 18px;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.7rem, 16vw, 4.2rem);
+        }
+
+        .screen-header h2 {
+          font-size: clamp(2rem, 11vw, 3rem);
+        }
+
+        .progress-rail {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .dev-inline-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar-actions,
+        .video-actions,
+        .page-actions,
+        .admin-actions {
+          flex-direction: column;
+        }
+
+        .topbar-actions > *,
+        .video-actions > *,
+        .page-actions > *,
+        .admin-actions > * {
+          width: 100%;
+        }
+
+        .topbar-tools {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .prelive-nav {
+          margin-left: auto;
+        }
+
+        .prelive-nav-panel {
+          right: 0;
+          width: min(100%, 360px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+      <div class="shell">
+      <div class="client-corner-logo" aria-hidden="true">
+        <img src="/univers-rebelle-logo-12.png" alt="" />
+      </div>
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-label="Hélène Collette">HC</div>
+          <div class="brand-copy">
+            <small id="brandModeLabel">Prototype fonctionnel</small>
+            <strong>Défi présence sociale sur 7 jours</strong>
+          </div>
+        </div>
+        <div class="topbar-tools">
+          <div class="topbar-actions" id="topbarActions">
+            <button class="toggle" id="devModeToggle" type="button">Mode dev: inactif</button>
+            <button class="ghost-button" id="resetProgressButton" type="button">Réinitialiser le parcours</button>
+          </div>
+          <details class="prelive-nav" id="preliveNav">
+            <summary aria-label="Ouvrir le menu des pages">
+              <span class="prelive-nav-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </summary>
+            <div class="prelive-nav-panel">
+              <div class="prelive-nav-header">
+                <strong>Accès pré-live</strong>
+                <p>Toutes les pages restent accessibles ici tant que l’expérience n’est pas en production.</p>
+              </div>
+              <div class="prelive-nav-list" id="preliveNavList"></div>
+            </div>
+          </details>
+        </div>
+      </header>
+
+      <div class="layout">
+        <main class="panel content-panel">
+          <section class="hero">
+            <div class="client-hero-logo" aria-hidden="true">
+              <img src="/univers-rebelle-logo-12.png" alt="" />
+            </div>
+            <span class="eyebrow">Expérience défi Hélène Collette</span>
+            <h1>
+              <span class="hero-line">7 jours pour</span>
+              <span class="hero-line"><span class="accent-text">prendre plus de place</span> sur les réseaux</span>
+            </h1>
+            <p>
+              Une expérience pensée pour guider les femmes entrepreneures vers plus de visibilité,
+              de constance et de conversion, avec un rythme quotidien simple à suivre.
+            </p>
+            <div class="hero-meta" id="heroMeta">
+              <span class="chip">Responsive mobile et desktop</span>
+              <span class="chip">Compatible intégration HTML Lovable</span>
+              <span class="chip">Payload webhook prêt pour GHL</span>
+            </div>
+          </section>
+
+          <section class="screen-header">
+            <span class="eyebrow" id="screenEyebrow">Bienvenue</span>
+            <h2 id="screenTitle">Chargement du défi</h2>
+            <p id="screenSummary">
+              Préparation de l'expérience, de la progression et des règles temporelles.
+            </p>
+          </section>
+
+          <section class="dev-inline-panel hidden" id="clientDevPanel">
+            <span class="eyebrow">Mode dev client</span>
+            <h3>Accès rapide aux journées et aux pages</h3>
+            <div class="dev-inline-grid">
+              <div>
+                <label for="clientDaySelector">Aller directement à une journée</label>
+                <select id="clientDaySelector"></select>
+              </div>
+              <div>
+                <label for="clientStepSelector">Ouvrir une page exacte</label>
+                <select id="clientStepSelector"></select>
+              </div>
+            </div>
+            <div class="page-actions">
+              <button class="secondary-button" id="clientOpenDayButton" type="button">Ouvrir la journée</button>
+              <button class="ghost-button" id="clientOpenStepButton" type="button">Ouvrir la page</button>
+              <button class="primary-button" id="clientAdvanceButton" type="button">Avancer à l’étape suivante</button>
+            </div>
+            <div class="inline-note">
+              Ce panneau n’apparaît qu’en mode dev. Astuce: ajoute `?dev=1` à l’URL cliente pour l’activer directement.
+            </div>
+          </section>
+
+          <div class="progress-rail" id="progressRail"></div>
+          <section id="screenRoot"></section>
+        </main>
+
+        <aside class="sidebar">
+          <section class="panel mini-panel" id="statsPanel">
+            <span class="eyebrow">Statistiques simples</span>
+            <h3>Avancement</h3>
+            <div class="metric-grid" id="metricsGrid"></div>
+          </section>
+
+          <section class="panel mini-panel" id="cadencePanel">
+            <span class="eyebrow">Cadence du défi</span>
+            <h3>Prochain accès</h3>
+            <div class="countdown">
+              <span class="label">Déblocage</span>
+              <strong id="nextUnlockText">Immédiat</strong>
+              <div class="status-line" id="nextUnlockDetails">
+                La prochaine étape sera calculée automatiquement.
+              </div>
+            </div>
+            <div class="footer-note">
+              Le passage vers la journée suivante est permis à partir de 8h00, heure locale,
+              le lendemain de l'entrée dans le défi.
+            </div>
+          </section>
+
+          <section class="panel mini-panel" id="timelinePanel">
+            <span class="eyebrow">Journal d'activité</span>
+            <h3>Derniers événements</h3>
+            <div class="timeline" id="eventTimeline"></div>
+          </section>
+
+          <section class="panel admin-panel" id="adminPanel">
+            <span class="eyebrow">Edition / dev</span>
+            <h3>Contrôle complet</h3>
+            <label for="pageSelector">Accès direct à n'importe quelle page</label>
+            <select id="pageSelector"></select>
+            <div class="admin-actions">
+              <button class="secondary-button" id="jumpButton" type="button">Ouvrir la page</button>
+              <button class="ghost-button" id="simulateWebhookButton" type="button">Prévisualiser le payload</button>
+            </div>
+            <div class="inline-note">
+              En mode dev, toutes les pages sont accessibles sans attendre le déblocage quotidien.
+            </div>
+          </section>
+
+          <section class="panel mini-panel" id="payloadPanel">
+            <span class="eyebrow">Payload webhook</span>
+            <h3>Prévisualisation JSON</h3>
+            <pre id="payloadPreview">{}</pre>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <script>
+      const APP_CONFIG = {
+        storageKey: "helene-collette-challenge-v1",
+        challengeId: "hc-defi-presence-sociale-7-jours",
+        challengeTitle: "Défi présence sociale sur 7 jours",
+        version: "1.0.0",
+        locale: "fr-CA",
+        challengeTimezone: "America/Toronto",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Toronto",
+        telegramUrl: "https://t.me/helene_collette_communaute",
+        saleUrl: "https://orders.helenecollette.com/methode-rebelle",
+        timelineNavigation: {
+          // Regle temporaire de preview: on laisse la navigation libre en client et en dev.
+          allowAllDaysInClientPreview: true,
+          allowAllDaysInDev: true
+        },
+        preliveAccessEnabled: true,
+        webhook: {
+          enabled: true,
+          endpoint: "/api/challenge-webhook-preview",
+          source: "lovable"
+        },
+        vipOffer: {
+          priceLabel: "7$",
+          unlocksFullChallenge: true,
+          simulationMode: true
+        },
+        videoDefaults: {
+          provider: "wistia",
+          youtubeId: "M7lc1UVf-VE",
+          wistiaIds: {
+            intro: "3l5i8w2z5t",
+            days: {
+              1: "3l5i8w2z5t",
+              2: "3l5i8w2z5t",
+              3: "3l5i8w2z5t",
+              4: "3l5i8w2z5t",
+              5: "3l5i8w2z5t",
+              6: "3l5i8w2z5t",
+              7: "3l5i8w2z5t"
+            }
+          }
+        }
+      };
+
+      const DAY_CONTENT = [
+        {
+          day: 1,
+          title: "Clarifier ton message",
+          type: "valeur_pure",
+          conversionCashflow: false,
+          vslPromoCashflow: false,
+          summary: "On travaille ton angle, ta promesse et ta manière de dire les choses avec plus d'impact.",
+          highlightTitle: "1 message",
+          text: [
+            "Aujourd'hui, l'objectif est de faire tomber la pression de devoir tout dire. On choisit plutôt un message principal que ton audience peut reconnaître en quelques secondes.",
+            "Commence par nommer le problème que ta cliente vit déjà. Ensuite, relie ce problème à une transformation tangible qu'elle désire maintenant, pas plus tard.",
+            "Un bon contenu ne cherche pas seulement à impressionner. Il cherche à créer de la reconnaissance, de la clarté et une envie de passer à l'action."
+          ],
+          theoryBlocks: [
+            {
+              title: "Ce qu'on clarifie",
+              text: "Commence par nommer le problème que ta cliente vit déjà. Ensuite, relie ce problème à une transformation tangible qu'elle désire maintenant, pas plus tard."
+            },
+            {
+              title: "Ce qu'on cherche à créer",
+              text: "Un bon contenu ne cherche pas seulement à impressionner. Il cherche à créer de la reconnaissance, de la clarté et une envie de passer à l'action."
+            },
+            {
+              title: "Le piège à éviter",
+              text: "Vouloir tout expliquer dans chaque contenu. Plus ton message est chargé, moins il devient mémorable."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Canal",
+              text: "Garde le lien avec la communauté Telegram pendant le défi."
+            },
+            {
+              title: "Validation",
+              text: "Valide la vidéo puis passe à la prochaine étape quand ton message est plus clair."
+            }
+          ],
+          telegram: true
+        },
+        {
+          day: 2,
+          title: "Rendre ton audience plus précise",
+          type: "valeur_pure",
+          conversionCashflow: false,
+          vslPromoCashflow: false,
+          summary: "Plus ton contenu semble parler à une personne précise, plus il devient puissant.",
+          highlightTitle: "1 personne",
+          text: [
+            "Aujourd'hui, on arrête de créer pour une audience floue. On identifie la personne qui doit se sentir directement concernée.",
+            "Une audience claire ne veut pas dire que tu exclus tout le monde. Ça veut dire que ton contenu devient plus facile à reconnaître.",
+            "Le contenu fonctionne mieux quand la personne se reconnaît avant même que tu lui présentes une solution."
+          ],
+          theoryBlocks: [
+            {
+              title: "Audience large vs audience claire",
+              text: "Une audience claire ne veut pas dire que tu exclus tout le monde. Ça veut dire que ton contenu devient plus facile à reconnaître."
+            },
+            {
+              title: "Les vrais signaux à observer",
+              text: "Ses frustrations, ses questions, ses hésitations, ses objections et ses désirs immédiats."
+            },
+            {
+              title: "Le contenu miroir",
+              text: "Le contenu fonctionne mieux quand la personne se reconnaît avant même que tu lui présentes une solution."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Profil",
+              text: "Décris ta cliente idéale en 5 lignes simples."
+            },
+            {
+              title: "Langage",
+              text: "Liste 10 phrases qu'elle pourrait dire dans ses mots."
+            },
+            {
+              title: "Validation",
+              text: "Choisis 3 frustrations à utiliser dans tes prochains contenus."
+            }
+          ],
+          telegram: true
+        },
+        {
+          day: 3,
+          title: "Trouver tes angles de contenu",
+          type: "valeur_pure",
+          conversionCashflow: false,
+          vslPromoCashflow: false,
+          summary: "Un bon contenu part rarement d'un sujet. Il part d'un angle.",
+          highlightTitle: "3 angles",
+          text: [
+            "Aujourd'hui, tu vas arrêter de chercher quoi publier au jour le jour. On transforme ton message et ton audience en angles de contenu.",
+            "Le sujet est ce dont tu parles. L'angle est la façon dont tu rends ce sujet intéressant.",
+            "Tes angles doivent préparer ton audience à comprendre pourquoi ton offre est pertinente, sans vendre trop tôt."
+          ],
+          theoryBlocks: [
+            {
+              title: "Sujet vs angle",
+              text: "Le sujet est ce dont tu parles. L'angle est la façon dont tu rends ce sujet intéressant."
+            },
+            {
+              title: "Les angles qui fonctionnent",
+              text: "Erreur fréquente, croyance limitante, avant/après, coulisse, prise de position, vérité inconfortable, mini-méthode."
+            },
+            {
+              title: "Le lien avec la vente",
+              text: "Tes angles doivent préparer ton audience à comprendre pourquoi ton offre est pertinente, sans vendre trop tôt."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Piliers",
+              text: "Choisis 3 piliers de contenu reliés à ton offre."
+            },
+            {
+              title: "Angles",
+              text: "Trouve 5 angles par pilier."
+            },
+            {
+              title: "Sélection",
+              text: "Sélectionne un angle à publier aujourd'hui ou demain."
+            }
+          ],
+          telegram: false
+        },
+        {
+          day: 4,
+          title: "Créer du contenu d'autorité",
+          type: "valeur_pure",
+          conversionCashflow: false,
+          vslPromoCashflow: false,
+          summary: "L'autorité vient aussi de ta capacité à rendre ton expertise claire, utile et concrète.",
+          highlightTitle: "1 preuve",
+          text: [
+            "Aujourd'hui, ton contenu doit aider ton audience à te faire confiance. Pas parce que tu te présentes comme une experte intouchable, mais parce que tu expliques clairement ce que les autres compliquent.",
+            "Tu n'as pas besoin de te positionner comme une experte inaccessible. Tu dois rendre ton expertise utile, compréhensible et applicable.",
+            "Le piège à éviter: faire du contenu trop théorique qui donne l'impression que tu sais beaucoup, mais qui ne donne aucun point d'appui concret à ton audience."
+          ],
+          theoryBlocks: [
+            {
+              title: "L'autorité accessible",
+              text: "Tu n'as pas besoin de te positionner comme une experte inaccessible. Tu dois rendre ton expertise utile, compréhensible et applicable."
+            },
+            {
+              title: "Les contenus qui positionnent",
+              text: "Analyse, erreur fréquente, mini-méthode, déconstruction, exemple concret, opinion assumée. Ce sont des formats simples qui montrent ta façon de penser."
+            },
+            {
+              title: "La preuve subtile",
+              text: "Montre comment tu réfléchis. Ta manière d'expliquer, de simplifier et de guider devient une preuve de compétence."
+            },
+            {
+              title: "Le piège à éviter",
+              text: "Faire du contenu trop théorique qui donne l'impression que tu sais beaucoup, mais qui ne donne aucun point d'appui concret à ton audience."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Déconstruction",
+              text: "Écris un contenu qui déconstruit une erreur fréquente dans ton domaine."
+            },
+            {
+              title: "Posture",
+              text: "Ajoute une phrase qui montre ta vision, ta méthode ou ta façon unique d'aborder le problème."
+            },
+            {
+              title: "Validation",
+              text: "Termine avec une question ou une invitation simple, sans vendre directement."
+            }
+          ],
+          telegram: false
+        },
+        {
+          day: 5,
+          title: "Créer du contenu de connexion",
+          type: "valeur_plus_conversion",
+          conversionCashflow: true,
+          vslPromoCashflow: true,
+          summary: "Les gens achètent rarement seulement une méthode. Ils achètent aussi une façon de voir, une énergie, une proximité et une confiance.",
+          highlightTitle: "1 lien",
+          text: [
+            "Aujourd'hui, on travaille la connexion. Pas le partage random de ta vie. La connexion stratégique.",
+            "La connexion utile crée un pont entre ton vécu, ta vision et ce que ton audience traverse.",
+            "Elle aide ton audience à se dire: elle me comprend."
+          ],
+          theoryBlocks: [
+            {
+              title: "Connexion ne veut pas dire tout raconter",
+              text: "La connexion utile crée un pont entre ton vécu, ta vision et ce que ton audience traverse."
+            },
+            {
+              title: "Les 4 types de connexion",
+              text: "Coulisses, valeurs, histoire personnelle et observation du quotidien."
+            },
+            {
+              title: "La connexion qui prépare la vente",
+              text: "Elle aide ton audience à se dire: elle me comprend."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Histoire",
+              text: "Écris une courte histoire reliée à ton offre."
+            },
+            {
+              title: "Message",
+              text: "Identifie la leçon ou le message derrière cette histoire."
+            },
+            {
+              title: "Format",
+              text: "Transforme-la en post, story ou courte vidéo."
+            }
+          ],
+          telegram: false,
+          conversion: true,
+          vslPromo: {
+            intensity: "douce",
+            title: "Le contenu qui vend commence souvent avant l'offre",
+            intro: "Tu as clarifié ton message, ton audience, tes angles et ta posture. Maintenant, la vraie question devient: comment garder ce lien vivant chaque semaine sans repartir de zéro?",
+            keyMessage: "Ce n'est pas seulement une question de posts. C'est une séquence de relation.",
+            cta: "Voir comment Cashflow peut t'aider",
+            points: [
+              "Alterner connexion, autorité et vente sans improviser chaque semaine.",
+              "Transformer tes idées en séquences qui gardent la relation vivante.",
+              "Préparer l'achat sans que ton contenu devienne une vente trop tôt."
+            ]
+          }
+        },
+        {
+          day: 6,
+          title: "Créer des appels à l'action naturels",
+          type: "valeur_plus_conversion",
+          conversionCashflow: true,
+          vslPromoCashflow: true,
+          summary: "Un appel à l'action n'est pas une pression. C'est une direction claire donnée à une personne déjà intéressée.",
+          highlightTitle: "1 invitation",
+          text: [
+            "Aujourd'hui, on enlève la gêne autour de l'appel à l'action. Un bon contenu doit aussi guider la personne vers une suite.",
+            "Tu peux créer un bon contenu, mais si la personne ne sait pas quoi faire ensuite, elle passe à autre chose.",
+            "L'appel à l'action doit être cohérent avec le niveau de conscience de ton audience."
+          ],
+          theoryBlocks: [
+            {
+              title: "Le problème des contenus sans suite",
+              text: "Tu peux créer un bon contenu, mais si la personne ne sait pas quoi faire ensuite, elle passe à autre chose."
+            },
+            {
+              title: "Les CTA doux",
+              text: "Réponds à ce message, écris-moi le mot X, va voir le lien, télécharge la ressource, rejoins la liste, découvre l'offre."
+            },
+            {
+              title: "Le CTA aligné",
+              text: "L'appel à l'action doit être cohérent avec le niveau de conscience de ton audience."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Optimisation",
+              text: "Reprends un ancien contenu et ajoute un CTA clair."
+            },
+            {
+              title: "Variantes",
+              text: "Écris 3 versions de CTA: douce, directe et conversationnelle."
+            },
+            {
+              title: "Choix",
+              text: "Choisis une action simple à demander à ton audience cette semaine."
+            }
+          ],
+          telegram: false,
+          conversion: true,
+          vslPromo: {
+            intensity: "moyenne",
+            title: "Pourquoi tes contenus doivent avoir une suite",
+            intro: "À ce stade, tu vois que publier n'est pas juste une question de visibilité. Il faut aussi savoir quoi dire pour guider l'attention, créer de l'intérêt et ouvrir la porte à ton offre.",
+            keyMessage: "Si ton contenu attire, mais ne guide jamais, tu laisses des clientes potentielles sur la table.",
+            cta: "Découvrir les prompts Cashflow",
+            points: [
+              "Créer des CTA doux, directs ou conversationnels selon le contexte.",
+              "Transformer l'attention en prochaines étapes claires.",
+              "Utiliser des prompts pour guider tes contenus vers une action précise."
+            ]
+          }
+        },
+        {
+          day: 7,
+          title: "Assembler ton mini-système de contenu",
+          type: "valeur_plus_conversion",
+          conversionCashflow: true,
+          vslPromoCashflow: true,
+          summary: "Ton contenu doit créer une relation, renforcer ta crédibilité et guider vers la prochaine action.",
+          highlightTitle: "1 système",
+          text: [
+            "Aujourd'hui, on transforme tes idées en plan concret. Parce que la constance ne vient pas de la motivation. Elle vient d'un système assez simple pour être répété.",
+            "Tu n'as pas besoin d'un calendrier compliqué. Tu as besoin d'un rythme que tu peux maintenir.",
+            "Ton contenu devient plus stratégique quand chaque publication a un rôle précis dans la relation avec ton audience."
+          ],
+          theoryBlocks: [
+            {
+              title: "Le rythme minimum viable",
+              text: "Tu n'as pas besoin d'un calendrier compliqué. Tu as besoin d'un rythme que tu peux maintenir."
+            },
+            {
+              title: "La séquence simple",
+              text: "Connexion, autorité, éducation, invitation, preuve ou coulisse."
+            },
+            {
+              title: "Ce que tu dois retenir",
+              text: "Ton contenu devient plus stratégique quand chaque publication a un rôle précis dans la relation avec ton audience."
+            }
+          ],
+          actionItems: [
+            {
+              title: "Plan",
+              text: "Crée ton plan de contenu pour les 7 prochains jours."
+            },
+            {
+              title: "Priorité",
+              text: "Choisis 2 contenus à produire en priorité."
+            },
+            {
+              title: "Suite",
+              text: "Identifie ce que tu veux vendre, proposer ou inviter à découvrir."
+            }
+          ],
+          telegram: false,
+          conversion: true,
+          vslPromo: {
+            intensity: "directe",
+            title: "La suite pour ne pas repartir de zéro",
+            intro: "Le défi t'a donné une base. Mais si tu veux continuer sans devoir réinventer ton contenu chaque semaine, il te faut un système. C'est exactement le rôle de Cashflow.",
+            keyMessage: "Cashflow t'aide à garder le rythme avec des prompts, des angles, des contenus et une structure pour vendre chaque semaine.",
+            cta: "Rejoindre Cashflow",
+            points: [
+              "Planifier une séquence simple de contenus avec une intention business.",
+              "Garder un rythme réaliste sans repartir d'une page blanche.",
+              "Relier visibilité, confiance et vente dans un système réutilisable."
+            ]
+          }
+        }
+      ];
+
+      const FLOW_STEPS = [
+        { id: "login", type: "login", label: "Connexion", displayDay: -1 },
+        { id: "welcome", type: "welcome", label: "Bienvenue", displayDay: 0 },
+        { id: "day-1", type: "day", label: "Jour 1", day: 1, displayDay: 1 },
+        { id: "wait-2", type: "wait", label: "Attente J2", day: 2, displayDay: 2 },
+        { id: "day-2", type: "day", label: "Jour 2", day: 2, displayDay: 2 },
+        { id: "wait-3", type: "wait", label: "Attente J3", day: 3, displayDay: 3 },
+        { id: "day-3", type: "day", label: "Jour 3", day: 3, displayDay: 3 },
+        { id: "wait-4", type: "wait", label: "Attente J4", day: 4, displayDay: 4 },
+        { id: "day-4", type: "day", label: "Jour 4", day: 4, displayDay: 4 },
+        { id: "wait-5", type: "wait", label: "Attente J5", day: 5, displayDay: 5 },
+        { id: "day-5", type: "day", label: "Jour 5", day: 5, displayDay: 5 },
+        { id: "wait-6", type: "wait", label: "Attente J6", day: 6, displayDay: 6 },
+        { id: "day-6", type: "day", label: "Jour 6", day: 6, displayDay: 6 },
+        { id: "wait-7", type: "wait", label: "Attente J7", day: 7, displayDay: 7 },
+        { id: "day-7", type: "day", label: "Jour 7", day: 7, displayDay: 7 },
+        { id: "thanks", type: "thanks", label: "Remerciements", displayDay: 8 }
+      ];
+
+      const dom = {
+        hero: document.querySelector(".hero"),
+        brandModeLabel: document.getElementById("brandModeLabel"),
+        topbarActions: document.getElementById("topbarActions"),
+        preliveNav: document.getElementById("preliveNav"),
+        preliveNavList: document.getElementById("preliveNavList"),
+        devModeToggle: document.getElementById("devModeToggle"),
+        resetProgressButton: document.getElementById("resetProgressButton"),
+        screenEyebrow: document.getElementById("screenEyebrow"),
+        screenTitle: document.getElementById("screenTitle"),
+        screenSummary: document.getElementById("screenSummary"),
+        progressRail: document.getElementById("progressRail"),
+        screenRoot: document.getElementById("screenRoot"),
+        heroMeta: document.getElementById("heroMeta"),
+        clientDevPanel: document.getElementById("clientDevPanel"),
+        clientDaySelector: document.getElementById("clientDaySelector"),
+        clientStepSelector: document.getElementById("clientStepSelector"),
+        clientOpenDayButton: document.getElementById("clientOpenDayButton"),
+        clientOpenStepButton: document.getElementById("clientOpenStepButton"),
+        clientAdvanceButton: document.getElementById("clientAdvanceButton"),
+        metricsGrid: document.getElementById("metricsGrid"),
+        cadencePanel: document.getElementById("cadencePanel"),
+        nextUnlockText: document.getElementById("nextUnlockText"),
+        nextUnlockDetails: document.getElementById("nextUnlockDetails"),
+        eventTimeline: document.getElementById("eventTimeline"),
+        pageSelector: document.getElementById("pageSelector"),
+        jumpButton: document.getElementById("jumpButton"),
+        simulateWebhookButton: document.getElementById("simulateWebhookButton"),
+        payloadPreview: document.getElementById("payloadPreview"),
+        statsPanel: document.getElementById("statsPanel"),
+        timelinePanel: document.getElementById("timelinePanel"),
+        adminPanel: document.getElementById("adminPanel"),
+        payloadPanel: document.getElementById("payloadPanel")
+      };
+
+      const queryParams = new URLSearchParams(window.location.search);
+      const isClientView = window.location.pathname.startsWith("/client/");
+
+      function readContactContext() {
+        return {
+          firstName: queryParams.get("firstName") || queryParams.get("first_name") || null,
+          lastName: queryParams.get("lastName") || queryParams.get("last_name") || null,
+          email: queryParams.get("email") || null,
+          phone: queryParams.get("phone") || null,
+          ghlContactId: queryParams.get("contactId") || queryParams.get("contact_id") || null,
+          ghlLocationId: queryParams.get("locationId") || queryParams.get("location_id") || null,
+          ghlOpportunityId: queryParams.get("opportunityId") || queryParams.get("opportunity_id") || null,
+          source: queryParams.get("source") || "ghl"
+        };
+      }
+
+      const contactContext = readContactContext();
+
+      const emptyState = () => ({
+        participantId: crypto.randomUUID ? crypto.randomUUID() : `participant-${Date.now()}`,
+        firstSeenAt: new Date().toISOString(),
+        challengeStartedAt: null,
+        currentStepId: "login",
+        currentDay: 0,
+        contact: contactContext,
+        auth: {
+          isRegistered: false,
+          registeredAt: null
+        },
+        access: {
+          tier: "free",
+          vipUnlockedAt: null
+        },
+        intro: {
+          textCompletedAt: null,
+          videoCompletedAt: null,
+          telegramJoinedAt: null,
+          startedAt: null
+        },
+        days: DAY_CONTENT.reduce((accumulator, day) => {
+          accumulator[day.day] = {
+            visitedAt: null,
+            videoCompletedAt: null,
+            completedAt: null,
+            conversionClickedAt: null
+          };
+          return accumulator;
+        }, {}),
+        analytics: {
+          totalVisits: 0,
+          waitScreensShown: 0,
+          webhookAttempts: 0,
+          webhookSuccess: 0,
+          pageViews: {},
+          eventLog: []
+        },
+        ui: {
+          actionErrors: {},
+          checklist: {}
+        },
+        devMode: queryParams.get("dev") === "1",
+        lastPayload: null
+      });
+
+      let state = loadState();
+      let countdownInterval = null;
+
+      function loadState() {
+        const stored = window.localStorage.getItem(APP_CONFIG.storageKey);
+        if (!stored) {
+          return emptyState();
+        }
+
+        try {
+          const parsed = JSON.parse(stored);
+          const inferredRegistration = Boolean(
+            parsed?.auth?.isRegistered ||
+            parsed?.contact?.email ||
+            parsed?.contact?.firstName
+          );
+          return {
+            ...emptyState(),
+            ...parsed,
+            contact: {
+              ...emptyState().contact,
+              ...(parsed.contact || {})
+            },
+            auth: {
+              ...emptyState().auth,
+              ...(parsed.auth || {}),
+              isRegistered: inferredRegistration
+            },
+            access: {
+              ...emptyState().access,
+              ...(parsed.access || {})
+            },
+            intro: {
+              ...emptyState().intro,
+              ...(parsed.intro || {})
+            },
+            analytics: {
+              ...emptyState().analytics,
+              ...(parsed.analytics || {})
+            },
+            ui: {
+              ...emptyState().ui,
+              ...(parsed.ui || {})
+            },
+            days: {
+              ...emptyState().days,
+              ...(parsed.days || {})
+            }
+          };
+        } catch (error) {
+          console.warn("Impossible de lire l'état sauvegardé, réinitialisation.", error);
+          return emptyState();
+        }
+      }
+
+      function saveState() {
+        window.localStorage.setItem(APP_CONFIG.storageKey, JSON.stringify(state));
+      }
+
+      function setState(updater) {
+        const nextState = typeof updater === "function" ? updater(structuredClone(state)) : updater;
+        state = nextState;
+        saveState();
+        render();
+      }
+
+      function pushEvent(eventType, details = {}) {
+        const entry = {
+          id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
+          type: eventType,
+          at: new Date().toISOString(),
+          details
+        };
+
+        state.analytics.totalVisits += 1;
+        state.analytics.eventLog.unshift(entry);
+        state.analytics.eventLog = state.analytics.eventLog.slice(0, 8);
+        state.lastPayload = buildWebhookPayload(eventType, details);
+        saveState();
+        renderSidebar();
+        maybeSendWebhook(state.lastPayload);
+      }
+
+      async function maybeSendWebhook(payload) {
+        if (!APP_CONFIG.webhook.enabled) {
+          return;
+        }
+
+        state.analytics.webhookAttempts += 1;
+        saveState();
+
+        try {
+          const response = await fetch(APP_CONFIG.webhook.endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          if (response.ok) {
+            state.analytics.webhookSuccess += 1;
+            saveState();
+            renderSidebar();
+          }
+        } catch (error) {
+          console.warn("Prévisualisation webhook non disponible.", error);
+        }
+      }
+
+      function buildWebhookPayload(eventType, details = {}) {
+        const completedDays = DAY_CONTENT.filter((day) => Boolean(state.days[day.day]?.completedAt)).length;
+        const nextDay = Math.min(completedDays + 1, 7);
+        const nextUnlockAt = nextDay > 1 ? getUnlockDateForDay(nextDay)?.toISOString() : null;
+
+        return {
+          meta: {
+            event_type: eventType,
+            emitted_at: new Date().toISOString(),
+            webhook_version: "2026-04-23.1",
+            source_platform: APP_CONFIG.webhook.source,
+            locale: APP_CONFIG.locale,
+            timezone: APP_CONFIG.timezone
+          },
+          challenge: {
+            id: APP_CONFIG.challengeId,
+            title: APP_CONFIG.challengeTitle,
+            version: APP_CONFIG.version,
+            current_step_id: state.currentStepId,
+            current_day: state.currentDay
+          },
+          participant: {
+            participant_id: state.participantId,
+            ghl_contact_id: state.contact.ghlContactId,
+            ghl_location_id: state.contact.ghlLocationId,
+            ghl_opportunity_id: state.contact.ghlOpportunityId,
+            first_name: state.contact.firstName,
+            last_name: state.contact.lastName,
+            email: state.contact.email,
+            phone: state.contact.phone,
+            registered: state.auth.isRegistered,
+            registered_at: state.auth.registeredAt,
+            telegram_joined: Boolean(state.intro.telegramJoinedAt),
+            joined_at: state.firstSeenAt,
+            challenge_started_at: state.challengeStartedAt
+          },
+          progression: {
+            intro_text_completed_at: state.intro.textCompletedAt,
+            intro_video_completed_at: state.intro.videoCompletedAt,
+            intro_completed: Boolean(state.intro.textCompletedAt && state.intro.videoCompletedAt),
+            days_completed: completedDays,
+            last_completed_day: completedDays || null,
+            next_day_unlock_at: nextUnlockAt,
+            wait_screens_seen: state.analytics.waitScreensShown
+          },
+          access: {
+            tier: state.access.tier,
+            vip_unlocked_at: state.access.vipUnlockedAt
+          },
+          analytics: {
+            page_views: state.analytics.pageViews,
+            webhook_attempts: state.analytics.webhookAttempts,
+            webhook_success: state.analytics.webhookSuccess,
+            dev_mode: state.devMode
+          },
+          context: {
+            challenge_entry_url: window.location.href,
+            referrer: document.referrer || null,
+            details
+          }
+        };
+      }
+
+      function formatDate(dateLike) {
+        if (!dateLike) {
+          return "Aucune date";
+        }
+        return new Intl.DateTimeFormat(APP_CONFIG.locale, {
+          dateStyle: "medium",
+          timeStyle: "short",
+          timeZone: APP_CONFIG.timezone
+        }).format(new Date(dateLike));
+      }
+
+      function formatCountdown(targetDate) {
+        if (!targetDate) {
+          return "Disponible maintenant";
+        }
+
+        const now = new Date();
+        const diff = targetDate.getTime() - now.getTime();
+        if (diff <= 0) {
+          return "Disponible maintenant";
+        }
+
+        const totalMinutes = Math.floor(diff / 60000);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        const days = Math.floor(hours / 24);
+        const remainingHours = hours % 24;
+
+        if (days > 0) {
+          return `${days}j ${remainingHours}h ${minutes}m`;
+        }
+        return `${hours}h ${minutes}m`;
+      }
+
+      function getTimeZoneParts(dateLike, timeZone = APP_CONFIG.challengeTimezone) {
+        const date = new Date(dateLike);
+        const formatter = new Intl.DateTimeFormat("en-CA", {
+          timeZone,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hourCycle: "h23"
+        });
+
+        const parts = formatter.formatToParts(date).reduce((accumulator, part) => {
+          if (part.type !== "literal") {
+            accumulator[part.type] = Number(part.value);
+          }
+          return accumulator;
+        }, {});
+
+        return {
+          year: parts.year,
+          month: parts.month,
+          day: parts.day,
+          hour: parts.hour,
+          minute: parts.minute,
+          second: parts.second
+        };
+      }
+
+      function getTimeZoneOffsetMs(dateLike, timeZone = APP_CONFIG.challengeTimezone) {
+        const date = new Date(dateLike);
+        const parts = getTimeZoneParts(date, timeZone);
+        const utcFromParts = Date.UTC(
+          parts.year,
+          parts.month - 1,
+          parts.day,
+          parts.hour,
+          parts.minute,
+          parts.second
+        );
+        return utcFromParts - date.getTime();
+      }
+
+      function makeDateInTimeZone(parts, timeZone = APP_CONFIG.challengeTimezone) {
+        const approximateUtc = Date.UTC(
+          parts.year,
+          parts.month - 1,
+          parts.day,
+          parts.hour || 0,
+          parts.minute || 0,
+          parts.second || 0
+        );
+        const offset = getTimeZoneOffsetMs(new Date(approximateUtc), timeZone);
+        return new Date(approximateUtc - offset);
+      }
+
+      function formatCountdownClock(targetDate, options = {}) {
+        const { capHours = 24 } = options;
+        if (!targetDate) {
+          return "00h 00m 00s";
+        }
+
+        const now = new Date();
+        const rawDiff = Math.max(0, targetDate.getTime() - now.getTime());
+        const cappedDiff = Math.min(rawDiff, capHours * 60 * 60 * 1000);
+        const totalSeconds = Math.floor(cappedDiff / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        return `${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+      }
+
+      function getUnlockDateForDay(dayNumber) {
+        if (!state.challengeStartedAt) {
+          return null;
+        }
+
+        if (dayNumber <= 1) {
+          return new Date(state.challengeStartedAt);
+        }
+
+        const startedAt = new Date(state.challengeStartedAt);
+        const startedParts = getTimeZoneParts(startedAt, APP_CONFIG.challengeTimezone);
+
+        return makeDateInTimeZone(
+          {
+            year: startedParts.year,
+            month: startedParts.month,
+            day: startedParts.day + (dayNumber - 1),
+            hour: 8,
+            minute: 0,
+            second: 0
+          },
+          APP_CONFIG.challengeTimezone
+        );
+      }
+
+      function isDayUnlocked(dayNumber) {
+        if (state.devMode) {
+          return true;
+        }
+
+        if (state.access.tier === "vip" && state.access.vipUnlockedAt) {
+          return true;
+        }
+
+        const unlockDate = getUnlockDateForDay(dayNumber);
+        if (!unlockDate) {
+          return dayNumber === 1;
+        }
+        return new Date() >= unlockDate;
+      }
+
+      function currentFlowStep() {
+        return FLOW_STEPS.find((step) => step.id === state.currentStepId) || FLOW_STEPS[0];
+      }
+
+      function hasPreliveFullAccess() {
+        return APP_CONFIG.preliveAccessEnabled && isClientView;
+      }
+
+      function nextTimelineFocusDay() {
+        const current = currentFlowStep();
+        if (current.type === "welcome") {
+          return 1;
+        }
+
+        if (current.type === "wait" && current.day) {
+          return current.day;
+        }
+
+        if (current.type === "day" && current.day) {
+          return Math.min(current.day + 1, DAY_CONTENT.length);
+        }
+
+        return null;
+      }
+
+      function canNavigateToTimelineStep(stepDay) {
+        if (stepDay <= 0) {
+          return true;
+        }
+
+        if (state.devMode && APP_CONFIG.timelineNavigation.allowAllDaysInDev) {
+          return true;
+        }
+
+        if (state.access.tier === "vip" && state.access.vipUnlockedAt) {
+          return true;
+        }
+
+        // Regle prod visee: seules les journees deja passees restent cliquables.
+        const current = currentFlowStep();
+        return Boolean(state.days[stepDay]?.completedAt) || current.displayDay === stepDay;
+      }
+
+      function canNavigateToWaitStep(waitDay) {
+        if (state.devMode) {
+          return true;
+        }
+
+        if (isClientView) {
+          return true;
+        }
+
+        if (state.access.tier === "vip" && state.access.vipUnlockedAt) {
+          return true;
+        }
+
+        return Boolean(state.days[waitDay - 1]?.completedAt);
+      }
+
+      function openTimelineStep(stepDay) {
+        if (!canNavigateToTimelineStep(stepDay)) {
+          return;
+        }
+
+        if (stepDay === 0) {
+          gotoStep("welcome");
+          return;
+        }
+
+        gotoStep(`day-${stepDay}`);
+      }
+
+      function openTimelineWaitStep(waitDay) {
+        if (!canNavigateToWaitStep(waitDay)) {
+          return;
+        }
+
+        gotoStep(`wait-${waitDay}`);
+      }
+
+      function registerPageView(stepId) {
+        state.analytics.pageViews[stepId] = (state.analytics.pageViews[stepId] || 0) + 1;
+        saveState();
+      }
+
+      function gotoStep(stepId, options = {}) {
+        const step = FLOW_STEPS.find((item) => item.id === stepId);
+        if (!step) {
+          return;
+        }
+
+        if (!options.forceAccess && !hasPreliveFullAccess() && !state.devMode && !state.auth.isRegistered && step.id !== "login") {
+          stepId = "login";
+        }
+
+        const targetStep = FLOW_STEPS.find((item) => item.id === stepId);
+        state.currentStepId = targetStep.id;
+        state.currentDay = targetStep.day || 0;
+
+        if (targetStep.type === "day" && targetStep.day) {
+          state.days[targetStep.day].visitedAt = state.days[targetStep.day].visitedAt || new Date().toISOString();
+        }
+
+        if (targetStep.type === "wait") {
+          state.analytics.waitScreensShown += 1;
+        }
+
+        registerPageView(targetStep.id);
+        saveState();
+
+        if (!options.silentEvent) {
+          pushEvent("page_viewed", { step_id: targetStep.id, step_type: targetStep.type, day: targetStep.day || null });
+        }
+
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function openPreliveStep(stepId) {
+        gotoStep(stepId, {
+          forceAccess: true
+        });
+      }
+
+      function completeIntroText() {
+        if (!state.intro.textCompletedAt) {
+          state.intro.textCompletedAt = new Date().toISOString();
+          saveState();
+          pushEvent("intro_text_completed");
+        }
+      }
+
+      function submitRegistration(form) {
+        const firstNameInput = form.querySelector("[name='firstName']");
+        const emailInput = form.querySelector("[name='email']");
+        const phoneInput = form.querySelector("[name='phone']");
+
+        const firstName = firstNameInput?.value?.trim() || "";
+        const email = emailInput?.value?.trim() || "";
+        const phone = phoneInput?.value?.trim() || "";
+
+        if (!firstName || !email) {
+          return;
+        }
+
+        state.contact.firstName = firstName;
+        state.contact.email = email;
+        state.contact.phone = phone || state.contact.phone;
+        state.auth.isRegistered = true;
+        state.auth.registeredAt = state.auth.registeredAt || new Date().toISOString();
+        saveState();
+        pushEvent("registration_completed", {
+          entry_type: "free",
+          first_name: firstName,
+          email
+        });
+        gotoStep("welcome", { silentEvent: true });
+      }
+
+      function completeIntroVideo() {
+        if (!state.intro.videoCompletedAt) {
+          state.intro.videoCompletedAt = new Date().toISOString();
+          saveState();
+          pushEvent("intro_video_completed");
+        }
+      }
+
+      function markTelegramJoined() {
+        if (!state.intro.telegramJoinedAt) {
+          state.intro.telegramJoinedAt = new Date().toISOString();
+          saveState();
+          pushEvent("telegram_joined");
+        }
+      }
+
+      function unlockVipAccess(originDay = null) {
+        if (state.access.tier === "vip") {
+          if (originDay) {
+            gotoStep(`day-${originDay}`);
+          }
+          return;
+        }
+
+        state.access.tier = "vip";
+        state.access.vipUnlockedAt = new Date().toISOString();
+        saveState();
+        pushEvent("vip_upgraded", {
+          price: APP_CONFIG.vipOffer.priceLabel,
+          unlocks_full_challenge: APP_CONFIG.vipOffer.unlocksFullChallenge,
+          origin_day: originDay,
+          simulation_mode: APP_CONFIG.vipOffer.simulationMode
+        });
+
+        if (originDay) {
+          gotoStep(`day-${originDay}`, { silentEvent: true });
+        } else {
+          render();
+        }
+      }
+
+      function startChallenge() {
+        const introReady = Boolean(state.intro.textCompletedAt && state.intro.videoCompletedAt && state.intro.telegramJoinedAt);
+        if (!introReady) {
+          return;
+        }
+
+        if (!state.challengeStartedAt) {
+          const now = new Date().toISOString();
+          state.challengeStartedAt = now;
+          state.intro.startedAt = now;
+        }
+
+        saveState();
+        pushEvent("challenge_started");
+        gotoStep("day-1", { silentEvent: true });
+      }
+
+      function completeDay(dayNumber) {
+        if (!state.days[dayNumber].videoCompletedAt && !state.devMode) {
+          state.ui.actionErrors[`day-${dayNumber}`] = "La vidéo doit être écoutée au complet avant de pouvoir passer à l'autre étape.";
+          saveState();
+          pushEvent("day_completion_blocked", {
+            day: dayNumber,
+            reason: "video_not_completed"
+          });
+          render();
+          return;
+        }
+
+        delete state.ui.actionErrors[`day-${dayNumber}`];
+
+        if (!state.days[dayNumber].completedAt) {
+          state.days[dayNumber].completedAt = new Date().toISOString();
+        }
+        saveState();
+        pushEvent("day_completed", { day: dayNumber });
+
+        if (dayNumber >= 7) {
+          gotoStep("thanks", { silentEvent: true });
+          return;
+        }
+
+        const nextDay = dayNumber + 1;
+        if (isDayUnlocked(nextDay)) {
+          gotoStep(`day-${nextDay}`, { silentEvent: true });
+          return;
+        }
+
+        gotoStep(`wait-${nextDay}`, { silentEvent: true });
+      }
+
+      function openTelegram() {
+        window.open(APP_CONFIG.telegramUrl, "_blank", "noopener,noreferrer");
+        markTelegramJoined();
+      }
+
+      function openSale(dayNumber) {
+        state.days[dayNumber].conversionClickedAt = new Date().toISOString();
+        saveState();
+        pushEvent("conversion_clicked", { day: dayNumber, sale_url: APP_CONFIG.saleUrl });
+        window.open(APP_CONFIG.saleUrl, "_blank", "noopener,noreferrer");
+      }
+
+      function toggleDevMode() {
+        state.devMode = !state.devMode;
+        saveState();
+        pushEvent("dev_mode_toggled", { enabled: state.devMode });
+      }
+
+      function resetProgress() {
+        state = emptyState();
+        saveState();
+        render();
+      }
+
+      function jumpToSelectedPage() {
+        if (!state.devMode) {
+          return;
+        }
+        const value = dom.pageSelector.value;
+        if (!value) {
+          return;
+        }
+        gotoStep(value);
+      }
+
+      function openSelectedClientDay() {
+        if (!state.devMode) {
+          return;
+        }
+        const day = Number(dom.clientDaySelector.value);
+        if (!day) {
+          return;
+        }
+        gotoStep(`day-${day}`);
+      }
+
+      function openSelectedClientStep() {
+        if (!state.devMode) {
+          return;
+        }
+        const value = dom.clientStepSelector.value;
+        if (!value) {
+          return;
+        }
+        gotoStep(value);
+      }
+
+      function advanceToNextStep() {
+        if (!state.devMode) {
+          return;
+        }
+        const currentIndex = FLOW_STEPS.findIndex((step) => step.id === state.currentStepId);
+        if (currentIndex < 0 || currentIndex >= FLOW_STEPS.length - 1) {
+          return;
+        }
+        gotoStep(FLOW_STEPS[currentIndex + 1].id);
+      }
+
+      function markDayVideoCompleted(dayNumber) {
+        if (!state.days[dayNumber].videoCompletedAt) {
+          state.days[dayNumber].videoCompletedAt = new Date().toISOString();
+          delete state.ui.actionErrors[`day-${dayNumber}`];
+          saveState();
+          pushEvent("day_video_completed", { day: dayNumber });
+        }
+      }
+
+      function updateChecklistItem(dayNumber, itemIndex, checked) {
+        const dayKey = `day-${dayNumber}`;
+        state.ui.checklist[dayKey] = {
+          ...(state.ui.checklist[dayKey] || {}),
+          [itemIndex]: checked
+        };
+        saveState();
+        pushEvent("checklist_item_toggled", {
+          day: dayNumber,
+          item_index: itemIndex,
+          checked
+        });
+      }
+
+      function escapeHtml(text) {
+        return String(text)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function getWistiaMediaId(dayNumber) {
+        if (dayNumber === 0) {
+          return APP_CONFIG.videoDefaults.wistiaIds.intro;
+        }
+
+        return APP_CONFIG.videoDefaults.wistiaIds.days[dayNumber] || APP_CONFIG.videoDefaults.wistiaIds.intro;
+      }
+
+      function videoEmbedMarkup(dayNumber, title, options = {}) {
+        const provider = APP_CONFIG.videoDefaults.provider;
+        const minimalChrome = Boolean(options.minimalChrome);
+        const isCompleted = dayNumber === 0
+          ? Boolean(state.intro.videoCompletedAt)
+          : Boolean(state.days[dayNumber]?.videoCompletedAt);
+
+        if (provider === "wistia") {
+          const mediaId = getWistiaMediaId(dayNumber);
+          if (minimalChrome) {
+            return `
+              <div class="video-card video-card-minimal">
+                <div class="video-frame">
+                  ${isCompleted ? `
+                    <div class="video-complete-badge" aria-label="Vidéo complétée">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </div>
+                  ` : ""}
+                  <wistia-player
+                    media-id="${escapeHtml(mediaId)}"
+                    controls-visible-on-load="true"
+                    play-bar-control="false"
+                    settings-control="false"
+                    playback-rate-control="false"
+                    quality-control="false"
+                    fullscreen-control="true"
+                    volume-control="true"
+                    data-wistia-day="${dayNumber}"
+                  ></wistia-player>
+                </div>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="video-card">
+              <span class="eyebrow">Contenu vidéo</span>
+              <h3>${escapeHtml(title)}</h3>
+              <div class="video-frame">
+                <wistia-player
+                  media-id="${escapeHtml(mediaId)}"
+                  controls-visible-on-load="true"
+                  play-bar-control="false"
+                  settings-control="false"
+                  playback-rate-control="false"
+                  quality-control="false"
+                  fullscreen-control="true"
+                  volume-control="true"
+                  data-wistia-day="${dayNumber}"
+                ></wistia-player>
+              </div>
+              <div class="video-actions">
+                <div class="state-pill ${isCompleted ? "done" : ""}">
+                  ${isCompleted ? "Complété" : "À faire"}
+                </div>
+              </div>
+              <div class="video-note">
+                La progression vidéo est validée automatiquement à la fin du visionnement grâce à l'événement <strong>ended</strong> de Wistia.
+              </div>
+            </div>
+          `;
+        }
+
+        const youtubeId = APP_CONFIG.videoDefaults.youtubeId;
+        if (minimalChrome) {
+          return `
+            <div class="video-card video-card-minimal">
+              <div class="video-frame">
+                ${isCompleted ? `
+                  <div class="video-complete-badge" aria-label="Vidéo complétée">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                ` : ""}
+                <iframe
+                  src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1"
+                  title="${escapeHtml(title)}"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="video-card">
+            <span class="eyebrow">Contenu vidéo</span>
+            <h3>${escapeHtml(title)}</h3>
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1"
+                title="${escapeHtml(title)}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-actions">
+              <button class="ghost-button" type="button" data-action="video-complete" data-day="${dayNumber}">
+                Marquer la vidéo comme terminée
+              </button>
+            </div>
+            <div class="video-note">
+              Pour YouTube, la validation reste manuelle. Pour une validation automatique fiable de fin de lecture, utilise Wistia.
+            </div>
+          </div>
+        `;
+      }
+
+      function renderWelcomeScreen() {
+        const introDone = Boolean(state.intro.textCompletedAt && state.intro.videoCompletedAt);
+        const canStart = Boolean(introDone && state.intro.telegramJoinedAt);
+
+        if (isClientView) {
+          const dayError = state.ui.actionErrors[`day-${dayContent.day}`];
+          const checklistState = state.ui.checklist[`day-${dayContent.day}`] || {};
+          const checklistItems = [
+            "Lorem ipsum dolor sit amet.",
+            "Consectetur adipiscing elit.",
+            "Sed do eiusmod tempor incididunt."
+          ];
+          return `
+            <div class="grid-two">
+              <div>
+                ${videoEmbedMarkup(0, "Vidéo d'introduction", { minimalChrome: true })}
+              </div>
+              <div>
+                <div class="card">
+                  <span class="eyebrow">Instructions</span>
+                  <div class="instruction-scroll" id="instructionScroll">
+                    <div class="rich-text">
+                      <p>Bienvenue dans le défi. Cette expérience a été pensée pour accompagner les femmes entrepreneures à développer une présence sociale plus claire, plus régulière et plus stratégique.</p>
+                      <p>Le rythme est volontairement simple: une journée de contenu à la fois. Chaque nouveau jour devient accessible à partir de 8h00, heure locale, le lendemain du début du défi.</p>
+                      <p>Prends le temps de lire les consignes jusqu'au bout, de regarder la vidéo d'introduction et de rejoindre la communauté Telegram avant de démarrer.</p>
+                    </div>
+                  </div>
+                  <div class="instruction-status" id="instructionStatus">
+                    ${state.intro.textCompletedAt ? "Lecture détectée jusqu'au bas des instructions." : "Fais défiler les instructions jusqu'au bas pour les valider."}
+                  </div>
+                  <div class="checklist">
+                    <div class="check-item">
+                      <div>
+                        <strong>Lecture des instructions</strong>
+                        <span>Obligatoire pour activer le défi.</span>
+                      </div>
+                      <div class="state-pill ${state.intro.textCompletedAt ? "done" : ""}">
+                        ${state.intro.textCompletedAt ? "Complété" : "En attente"}
+                      </div>
+                    </div>
+                    <div class="check-item">
+                      <div>
+                        <strong>Vidéo d'introduction</strong>
+                        <span>Visionnement requis avant l'accès au jour 1.</span>
+                      </div>
+                      <div class="state-pill ${state.intro.videoCompletedAt ? "done" : ""}">
+                        ${state.intro.videoCompletedAt ? "Complété" : "En attente"}
+                      </div>
+                    </div>
+                    <div class="check-item">
+                      <div>
+                        <strong>Communauté Telegram</strong>
+                        <span>Point de contact externe obligatoire pour le défi.</span>
+                      </div>
+                      <div class="state-pill ${state.intro.telegramJoinedAt ? "done" : ""}">
+                        ${state.intro.telegramJoinedAt ? "Joint" : "À rejoindre"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="section-card highlight action-only">
+                  <span class="eyebrow">Passage à l'action</span>
+                  <h3>Commencer dans les bonnes conditions</h3>
+                  <div class="page-actions">
+                    <button class="secondary-button" type="button" data-action="join-telegram">
+                      Accéder au groupe Telegram
+                    </button>
+                    <button class="ghost-button" type="button" data-action="intro-complete-video">
+                      Valider la vidéo d'introduction
+                    </button>
+                    <button class="primary-button" type="button" data-action="start-challenge" ${canStart ? "" : "disabled"}>
+                      Commencer le défi
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="grid-two">
+            <div class="card">
+              <span class="eyebrow">Instructions</span>
+              <div class="instruction-scroll" id="instructionScroll">
+                <div class="rich-text">
+                  <p>Bienvenue dans le défi. Cette expérience a été pensée pour accompagner les femmes entrepreneures à développer une présence sociale plus claire, plus régulière et plus stratégique.</p>
+                  <p>Le rythme est volontairement simple: une journée de contenu à la fois. Chaque nouveau jour devient accessible à partir de 8h00, heure locale, le lendemain du début du défi.</p>
+                  <p>Prends le temps de lire les consignes jusqu'au bout, de regarder la vidéo d'introduction et de rejoindre la communauté Telegram avant de démarrer.</p>
+                  <p>Quand ce prototype sera branché à GHL, l'entrée dans l'expérience pourra être personnalisée avec l'identité du contact, son heure d'inscription et les événements de progression nécessaires au suivi.</p>
+                  <p>Tu peux tester librement le mode édition/dev pour inspecter toutes les pages sans attendre les déblocages quotidiens.</p>
+                </div>
+              </div>
+              <div class="instruction-status" id="instructionStatus">
+                ${state.intro.textCompletedAt ? "Lecture détectée jusqu'au bas des instructions." : "Fais défiler les instructions jusqu'au bas pour les valider."}
+              </div>
+              <div class="checklist">
+                <div class="check-item">
+                  <div>
+                    <strong>Lecture des instructions</strong>
+                    <span>Obligatoire pour activer le défi.</span>
+                  </div>
+                  <div class="state-pill ${state.intro.textCompletedAt ? "done" : ""}">
+                    ${state.intro.textCompletedAt ? "Complété" : "En attente"}
+                  </div>
+                </div>
+                <div class="check-item">
+                  <div>
+                    <strong>Vidéo d'introduction</strong>
+                    <span>Visionnement requis avant l'accès au jour 1.</span>
+                  </div>
+                  <div class="state-pill ${state.intro.videoCompletedAt ? "done" : ""}">
+                    ${state.intro.videoCompletedAt ? "Complété" : "En attente"}
+                  </div>
+                </div>
+                <div class="check-item">
+                  <div>
+                    <strong>Communauté Telegram</strong>
+                    <span>Point de contact externe obligatoire pour le défi.</span>
+                  </div>
+                  <div class="state-pill ${state.intro.telegramJoinedAt ? "done" : ""}">
+                    ${state.intro.telegramJoinedAt ? "Joint" : "À rejoindre"}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              ${videoEmbedMarkup(0, "Vidéo d'introduction")}
+              <div class="section-card highlight">
+                <span class="eyebrow">Passage à l'action</span>
+                <h3>Commencer dans les bonnes conditions</h3>
+                <div class="page-actions">
+                  <button class="secondary-button" type="button" data-action="join-telegram">
+                    Accéder au groupe Telegram
+                  </button>
+                  <button class="ghost-button" type="button" data-action="intro-complete-video">
+                    Valider la vidéo d'introduction
+                  </button>
+                  <button class="primary-button" type="button" data-action="start-challenge" ${canStart ? "" : "disabled"}>
+                    Commencer le défi
+                  </button>
+                </div>
+                <div class="status-line">
+                  <strong>Condition d'accès:</strong>
+                  la lecture, la vidéo et le passage par Telegram doivent être validés.
+                </div>
+                <div class="footer-note">
+                  Contact chargé depuis l'URL: ${escapeHtml(
+                    state.contact.email || state.contact.ghlContactId || "aucun paramètre GHL/Lovable détecté"
+                  )}
+                </div>
+                <div class="footer-note">
+                  ${canStart ? `Le défi peut commencer maintenant.` : `Il manque encore ${[
+                    !state.intro.textCompletedAt ? "la lecture" : null,
+                    !state.intro.videoCompletedAt ? "la vidéo" : null,
+                    !state.intro.telegramJoinedAt ? "Telegram" : null
+                  ].filter(Boolean).join(", ")}.`}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderLoginScreen() {
+        const firstName = state.contact.firstName || "";
+        const email = state.contact.email || "";
+        const phone = state.contact.phone || "";
+
+        return `
+          <div class="grid-two">
+            <div class="card auth-card">
+              <span class="eyebrow">Inscription gratuite</span>
+              <h3>Créer ton accès avant le défi</h3>
+              <div class="rich-text">
+                <p>La version gratuite demande une inscription obligatoire avant l'écran de bienvenue. Cela nous permet de préparer le suivi, la progression et la structure webhook pour GHL.</p>
+                <p>Une fois inscrite, tu accèdes à l'introduction, puis tu commences le défi au rythme normal.</p>
+              </div>
+              <form id="registrationForm">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="registrationFirstName">Prénom</label>
+                    <input class="text-input" id="registrationFirstName" name="firstName" type="text" placeholder="Marie" value="${escapeHtml(firstName)}" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="registrationEmail">Courriel</label>
+                    <input class="text-input" id="registrationEmail" name="email" type="email" placeholder="marie@email.com" value="${escapeHtml(email)}" required />
+                  </div>
+                  <div class="form-field full">
+                    <label for="registrationPhone">Téléphone (optionnel)</label>
+                    <input class="text-input" id="registrationPhone" name="phone" type="tel" placeholder="514 000-0000" value="${escapeHtml(phone)}" />
+                  </div>
+                </div>
+                <div class="page-actions">
+                  <button class="primary-button" type="submit">Continuer vers l'introduction</button>
+                </div>
+              </form>
+              <div class="auth-helper">
+                En production, cet écran servira d'entrée obligatoire avant l'expérience gratuite.
+              </div>
+            </div>
+            <div class="section-card vip-offer-card highlight">
+              <span class="eyebrow">Version VIP payante</span>
+              <h3>Débloquer tout le défi dès le jour 1</h3>
+              <div class="offer-comparison">
+                <div class="offer-tier">
+                  <strong>Gratuit</strong>
+                  <p>Introduction + progression normale jour par jour avec écrans d'attente entre les journées.</p>
+                  <span class="offer-tier-price">0$</span>
+                </div>
+                <div class="offer-tier highlight">
+                  <strong>VIP</strong>
+                  <p>Tu peux naviguer dans tout le défi dès le jour 1, sans attendre 8h le lendemain.</p>
+                  <span class="offer-tier-price">${APP_CONFIG.vipOffer.priceLabel}</span>
+                </div>
+              </div>
+              <div class="page-actions">
+                <button class="secondary-button" type="button" data-action="unlock-vip" data-origin-day="1">
+                  Débloquer la version VIP ${APP_CONFIG.vipOffer.priceLabel}
+                </button>
+              </div>
+              <div class="vip-price-note">
+                Prototype actuel: l'activation VIP est simulée localement en attendant un vrai checkout.
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderConversionOffer(dayNumber) {
+        const dayContent = DAY_CONTENT.find((day) => day.day === dayNumber);
+        const promo = dayContent?.vslPromo;
+
+        if (!promo) {
+          return "";
+        }
+
+        return `
+          <div class="section-card highlight cashflow-offer-card">
+            <span class="eyebrow">Cashflow · conversion ${escapeHtml(promo.intensity)}</span>
+            <h3>${escapeHtml(promo.title)}</h3>
+            <div class="rich-text">
+              <p>${escapeHtml(promo.intro)}</p>
+              <p><strong>${escapeHtml(promo.keyMessage)}</strong></p>
+            </div>
+            <div class="conversion-list">
+              ${promo.points.map((point) => `<div class="conversion-point">${escapeHtml(point)}</div>`).join("")}
+            </div>
+            <div class="page-actions">
+              <button class="secondary-button" type="button" data-action="open-sale" data-day="${dayNumber}">
+                ${escapeHtml(promo.cta)}
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderDayScreen(dayContent) {
+        const dayState = state.days[dayContent.day];
+        const dayError = state.ui?.actionErrors?.[`day-${dayContent.day}`];
+        const checklistState = state.ui?.checklist?.[`day-${dayContent.day}`] || {};
+        const theoryBlocks = dayContent.theoryBlocks || [
+          {
+            title: "Focus 01",
+            text: dayContent.text[1] || dayContent.text[0]
+          },
+          {
+            title: "Focus 02",
+            text: dayContent.text[2] || dayContent.text[1] || dayContent.text[0]
+          }
+        ];
+        const checklistItems = (dayContent.actionItems || [
+          { title: "Action", text: "Lorem ipsum dolor sit amet." },
+          { title: "Action", text: "Consectetur adipiscing elit." },
+          { title: "Action", text: "Sed do eiusmod tempor incididunt." }
+        ]).map((item) => {
+          if (typeof item === "string") {
+            return item;
+          }
+
+          return item.title && item.text ? `${item.title}: ${item.text}` : item.text || item.title || "";
+        });
+
+        if (isClientView) {
+          return `
+            <div class="grid-two">
+              <div>
+                ${videoEmbedMarkup(dayContent.day, `Vidéo du jour ${dayContent.day}`, { minimalChrome: true })}
+              </div>
+              <div>
+                <div class="section-card premium-day-story">
+                  <div class="premium-lead">
+                    <div class="premium-lead-card">
+                      <span class="label">Cap du jour</span>
+                      <div class="rich-text">
+                        <p>${escapeHtml(dayContent.text[0])}</p>
+                      </div>
+                    </div>
+                    <div class="premium-highlight-card">
+                      <span class="label">A retenir</span>
+                      <span class="premium-highlight-number">${escapeHtml(dayContent.highlightTitle || "1 message")}</span>
+                      <p>${escapeHtml(dayContent.summary)}</p>
+                    </div>
+                  </div>
+                  <div class="premium-insight-grid">
+                    ${theoryBlocks.map((block, index) => `
+                      <div class="premium-insight-card">
+                        <span class="premium-insight-index">Focus ${String(index + 1).padStart(2, "0")}</span>
+                        <strong>${escapeHtml(block.title)}</strong>
+                        <p>${escapeHtml(block.text)}</p>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+                ${dayContent.conversionCashflow ? renderConversionOffer(dayContent.day) : ""}
+                <div class="section-card premium-action-panel">
+                  <span class="eyebrow">Actions du jour</span>
+                  <h3>Continuer l'expérience</h3>
+                  <div class="premium-action-grid">
+                    ${dayContent.telegram ? `
+                      <div class="premium-action-meta">
+                        <strong>Garder le lien avec la communauté</strong>
+                        <p>Le groupe Telegram sert de point d'appui rapide pendant le défi et pour les rappels de suite.</p>
+                        <div class="page-actions community-action">
+                          <button class="secondary-button" type="button" data-action="join-telegram">
+                            Accéder au groupe Telegram
+                          </button>
+                        </div>
+                      </div>
+                    ` : ""}
+                    <div class="premium-action-meta">
+                      <strong>À accomplir aujourd'hui</strong>
+                      <div class="daily-checklist">
+                        ${checklistItems.map((item, index) => `
+                          <label class="daily-checklist-item">
+                            <input
+                              type="checkbox"
+                              data-action="toggle-checklist-item"
+                              data-day="${dayContent.day}"
+                              data-index="${index}"
+                              ${checklistState[index] ? "checked" : ""}
+                            />
+                            <span>${escapeHtml(item)}</span>
+                          </label>
+                        `).join("")}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="page-actions primary-action-row">
+                    <button class="primary-button" type="button" data-action="complete-day" data-day="${dayContent.day}">
+                      ${dayContent.day < 7 ? "Passer au jour suivant" : "Terminer le défi"}
+                    </button>
+                  </div>
+                  ${dayError ? `<div class="action-error-message">${escapeHtml(dayError)}</div>` : ""}
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="grid-two">
+            <div>
+              <div class="section-card">
+                <span class="eyebrow">Jour ${dayContent.day}</span>
+                <h3>${escapeHtml(dayContent.title)}</h3>
+                <div class="rich-text">
+                  ${dayContent.text.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+                </div>
+              </div>
+              ${dayContent.conversionCashflow ? renderConversionOffer(dayContent.day) : ""}
+            </div>
+            <div>
+              ${videoEmbedMarkup(dayContent.day, `Vidéo du jour ${dayContent.day}`)}
+              <div class="section-card">
+                <span class="eyebrow">Actions du jour</span>
+                <h3>Continuer l'expérience</h3>
+                <div class="page-actions">
+                  ${dayContent.telegram ? `
+                    <button class="secondary-button" type="button" data-action="join-telegram">
+                      Accéder au groupe Telegram
+                    </button>
+                  ` : ""}
+                  <button class="primary-button" type="button" data-action="complete-day" data-day="${dayContent.day}">
+                    ${dayContent.day < 7 ? "Passer au jour suivant" : "Terminer le défi"}
+                  </button>
+                </div>
+                <div class="status-line">
+                  Vidéo marquée: <strong>${dayState.videoCompletedAt ? "oui" : "non"}</strong><br />
+                  Dernière validation du jour: <strong>${dayState.completedAt ? formatDate(dayState.completedAt) : "pas encore"}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderWaitScreen(dayNumber) {
+        if (dayNumber >= 6) {
+          return `
+            <div class="section-card wait-card simple-wait-card">
+              ${renderConversionOffer(dayNumber - 1)}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="section-card wait-card simple-wait-card">
+            <div class="section-card vip-offer-card highlight">
+              <span class="eyebrow">Passer en VIP</span>
+              <h3>Débloquer immédiatement les jours suivants</h3>
+              <div class="rich-text">
+                <p>La version VIP payante te donne un seul avantage: naviguer dans tout le défi dès le jour 1, sans attendre les écrans intermédiaires.</p>
+              </div>
+              <div class="offer-comparison">
+                <div class="offer-tier">
+                  <strong>Version gratuite</strong>
+                  <p>Tu gardes le rythme normal avec le déblocage à 8h AM locale.</p>
+                </div>
+                <div class="offer-tier highlight">
+                  <strong>Version VIP</strong>
+                  <p>Tu débloques tous les jours restants immédiatement.</p>
+                  <span class="offer-tier-price">${APP_CONFIG.vipOffer.priceLabel}</span>
+                </div>
+              </div>
+              <div class="page-actions vip-action-row">
+                <button class="primary-button" type="button" data-action="unlock-vip" data-origin-day="${dayNumber}">
+                  Passe en mode VIP maintenant
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderThanksScreen() {
+        if (isClientView) {
+          return `
+            <div class="grid-two">
+              <div>
+                ${videoEmbedMarkup(7, "Vidéo de conclusion")}
+              </div>
+              <div>
+                <div class="section-card">
+                  <span class="eyebrow">Remerciements</span>
+                  <h3>Le défi est terminé</h3>
+                  <div class="rich-text">
+                    <p>Tu viens de compléter une séquence conçue pour remettre de la clarté, du rythme et une intention de conversion dans ta présence sociale.</p>
+                    <p>La prochaine étape consiste à transformer cette impulsion en stratégie durable. C'est exactement là que la suite de l'expérience peut prendre le relais.</p>
+                    <p>Cette page peut accueillir une vidéo finale, une synthèse, un témoignage, une FAQ ou une offre de passage vers un programme payant.</p>
+                  </div>
+                </div>
+                <div class="section-card highlight">
+                  <span class="eyebrow">Section conversion</span>
+                  <h3>Continuer avec l'offre</h3>
+                  <div class="conversion-list">
+                    <div class="conversion-point">Récapitulatif du défi et bénéfices déjà ressentis.</div>
+                    <div class="conversion-point">Présentation claire de l'accompagnement ou du programme suivant.</div>
+                    <div class="conversion-point">CTA principal vers page de vente, appel découverte ou checkout.</div>
+                  </div>
+                  <div class="page-actions">
+                    <button class="secondary-button" type="button" data-action="open-sale" data-day="7">
+                      Découvrir l'offre
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="grid-two">
+            <div>
+              <div class="section-card">
+                <span class="eyebrow">Remerciements</span>
+                <h3>Le défi est terminé</h3>
+                <div class="rich-text">
+                  <p>Tu viens de compléter une séquence conçue pour remettre de la clarté, du rythme et une intention de conversion dans ta présence sociale.</p>
+                  <p>La prochaine étape consiste à transformer cette impulsion en stratégie durable. C'est exactement là que la suite de l'expérience peut prendre le relais.</p>
+                  <p>Cette page peut accueillir une vidéo finale, une synthèse, un témoignage, une FAQ ou une offre de passage vers un programme payant.</p>
+                </div>
+              </div>
+              <div class="section-card highlight">
+                <span class="eyebrow">Section conversion</span>
+                <h3>Continuer avec l'offre</h3>
+                <div class="conversion-list">
+                  <div class="conversion-point">Récapitulatif du défi et bénéfices déjà ressentis.</div>
+                  <div class="conversion-point">Présentation claire de l'accompagnement ou du programme suivant.</div>
+                  <div class="conversion-point">CTA principal vers page de vente, appel découverte ou checkout.</div>
+                </div>
+                <div class="page-actions">
+                  <button class="secondary-button" type="button" data-action="open-sale" data-day="7">
+                    Découvrir l'offre
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              ${videoEmbedMarkup(7, "Vidéo de conclusion")}
+            </div>
+          </div>
+        `;
+      }
+
+      function renderProgressRail() {
+        const current = currentFlowStep();
+        const nextFocusDay = nextTimelineFocusDay();
+        if (current.type === "login") {
+          dom.progressRail.innerHTML = "";
+          dom.progressRail.classList.add("hidden");
+          return;
+        }
+
+        dom.progressRail.classList.remove("hidden");
+        const clientJourneyView = isClientView && current.type !== "welcome" && current.type !== "login";
+        dom.progressRail.classList.toggle("journey-mode", clientJourneyView);
+
+        const items = clientJourneyView
+          ? DAY_CONTENT.flatMap((day, index) => {
+              const entries = [{ kind: "day", label: `Jour ${day.day}`, shortLabel: `${day.day}`, key: day.day }];
+              if (index < DAY_CONTENT.length - 1) {
+                entries.push({
+                  kind: "wait",
+                  label: `Attente du jour ${day.day + 1}`,
+                  shortLabel: "",
+                  key: day.day + 1
+                });
+              }
+              return entries;
+            })
+          : [
+              { kind: "day", label: "Accueil", shortLabel: "i", key: 0 },
+              ...DAY_CONTENT.map((day) => ({ kind: "day", label: `Jour ${day.day}`, shortLabel: `${day.day}`, key: day.day }))
+            ];
+
+        dom.progressRail.innerHTML = items
+          .map((item) => {
+            if (item.kind === "wait") {
+              const active = current.type === "wait" && current.day === item.key;
+              const done = Boolean(state.days[item.key - 1]?.completedAt);
+              const clickable = canNavigateToWaitStep(item.key);
+              return `
+                <button
+                  class="progress-step intermediate-dot ${done ? "done" : ""} ${active ? "active" : ""} ${clickable ? "is-clickable" : ""}"
+                  type="button"
+                  title="${item.label}"
+                  data-action="timeline-wait-step"
+                  data-day="${item.key}"
+                  ${clickable ? "" : "disabled"}
+                ></button>
+              `;
+            }
+
+            const done = item.key === 0
+              ? Boolean(state.challengeStartedAt)
+              : Boolean(state.days[item.key]?.completedAt);
+            const active = current.displayDay === item.key;
+            const nextUp = item.key === nextFocusDay && !active;
+            const clickable = canNavigateToTimelineStep(item.key);
+            return `
+              <button
+                class="progress-step ${done ? "done" : ""} ${active ? "active" : ""} ${nextUp ? "next-up" : ""} ${clickable ? "is-clickable" : ""}"
+                type="button"
+                title="${item.label}"
+                data-action="timeline-step"
+                data-day="${item.key}"
+                ${clickable ? "" : "disabled"}
+              >
+                ${item.shortLabel}
+              </button>
+            `;
+          })
+          .join("");
+      }
+
+      function renderMetrics() {
+        const completedDays = DAY_CONTENT.filter((day) => Boolean(state.days[day.day]?.completedAt)).length;
+        const percent = Math.round((completedDays / DAY_CONTENT.length) * 100);
+        const metrics = [
+          {
+            label: "Jours complétés",
+            value: `${completedDays}/7`
+          },
+          {
+            label: "Progression",
+            value: `${percent}%`
+          },
+          {
+            label: "Telegram",
+            value: state.intro.telegramJoinedAt ? "Oui" : "Non"
+          },
+          {
+            label: "Accès",
+            value: state.access.tier === "vip" ? "VIP" : "Gratuit"
+          },
+          {
+            label: "Mode dev",
+            value: state.devMode ? "Actif" : "Inactif"
+          }
+        ];
+
+        dom.metricsGrid.innerHTML = metrics
+          .map(
+            (metric) => `
+              <div class="metric">
+                <span>${metric.label}</span>
+                <strong>${metric.value}</strong>
+              </div>
+            `
+          )
+          .join("");
+      }
+
+      function renderEventTimeline() {
+        const entries = state.analytics.eventLog;
+        dom.eventTimeline.innerHTML = entries.length
+          ? entries
+              .map(
+                (entry, index) => `
+                  <div class="timeline-item">
+                    <div class="timeline-badge">${index + 1}</div>
+                    <div>
+                      <strong>${escapeHtml(entry.type)}</strong>
+                      <div class="timeline-copy">${formatDate(entry.at)}</div>
+                    </div>
+                  </div>
+                `
+              )
+              .join("")
+          : `<div class="timeline-copy">Aucun événement pour l'instant.</div>`;
+      }
+
+      function renderNextUnlockPanel() {
+        const current = currentFlowStep();
+        let target = null;
+        let detail = "Le prochain déblocage sera calculé dès qu'une journée sera complétée.";
+
+        if (current.type === "wait" && current.day) {
+          target = getUnlockDateForDay(current.day);
+          detail = `Accès automatique au jour ${current.day} dès que l'heure locale atteint 8h00.`;
+        } else if (current.type === "day" && current.day < 7) {
+          target = getUnlockDateForDay(current.day + 1);
+          detail = `Si tu complètes cette journée maintenant, le prochain accès normal sera prévu pour le ${formatDate(target)}.`;
+        } else if (current.type === "thanks") {
+          detail = "Le défi est complété. Tu peux maintenant concentrer l'expérience sur la conversion.";
+        }
+
+        dom.nextUnlockText.textContent = target ? formatCountdown(target) : "Immédiat";
+        dom.nextUnlockDetails.textContent = detail;
+      }
+
+      function renderSelector() {
+        dom.pageSelector.disabled = !state.devMode;
+        dom.pageSelector.innerHTML = FLOW_STEPS.map((step) => {
+          const selected = step.id === state.currentStepId ? "selected" : "";
+          return `<option value="${step.id}" ${selected}>${step.label}</option>`;
+        }).join("");
+
+        dom.clientStepSelector.disabled = !state.devMode;
+        dom.clientStepSelector.innerHTML = FLOW_STEPS.map((step) => {
+          const selected = step.id === state.currentStepId ? "selected" : "";
+          return `<option value="${step.id}" ${selected}>${step.label}</option>`;
+        }).join("");
+
+        const currentDayValue = state.currentDay >= 1 && state.currentDay <= 7 ? state.currentDay : 1;
+        dom.clientDaySelector.disabled = !state.devMode;
+        dom.clientDaySelector.innerHTML = DAY_CONTENT.map((day) => {
+          const selected = day.day === currentDayValue ? "selected" : "";
+          return `<option value="${day.day}" ${selected}>Jour ${day.day}</option>`;
+        }).join("");
+      }
+
+      function preliveStepMeta(step) {
+        if (step.type === "login") {
+          return {
+            eyebrow: "Accès",
+            hint: "Inscription"
+          };
+        }
+
+        if (step.type === "welcome") {
+          return {
+            eyebrow: "Départ",
+            hint: "Bienvenue"
+          };
+        }
+
+        if (step.type === "wait") {
+          return {
+            eyebrow: "Attente",
+            hint: `Avant jour ${step.day}`
+          };
+        }
+
+        if (step.type === "day") {
+          return {
+            eyebrow: `Jour ${step.day}`,
+            hint: "Contenu"
+          };
+        }
+
+        return {
+          eyebrow: "Finale",
+          hint: "Remerciements"
+        };
+      }
+
+      function renderPreliveMenu() {
+        dom.preliveNavList.innerHTML = FLOW_STEPS.map((step) => {
+          const meta = preliveStepMeta(step);
+          const activeClass = step.id === state.currentStepId ? "is-active" : "";
+          return `
+            <button class="prelive-nav-item ${activeClass}" type="button" data-action="open-prelive-step" data-step-id="${step.id}">
+              <div>
+                <small>${meta.eyebrow}</small>
+                <strong>${step.label}</strong>
+              </div>
+              <span>${meta.hint}</span>
+            </button>
+          `;
+        }).join("");
+      }
+
+      function renderSidebar() {
+        renderMetrics();
+        renderNextUnlockPanel();
+        renderEventTimeline();
+        renderSelector();
+        renderPreliveMenu();
+        dom.jumpButton.disabled = !state.devMode;
+        dom.clientOpenDayButton.disabled = !state.devMode;
+        dom.clientOpenStepButton.disabled = !state.devMode;
+        dom.clientAdvanceButton.disabled = !state.devMode;
+        dom.devModeToggle.textContent = `Mode dev: ${state.devMode ? "actif" : "inactif"}`;
+        dom.payloadPreview.textContent = JSON.stringify(
+          state.lastPayload || buildWebhookPayload("payload_preview"),
+          null,
+          2
+        );
+      }
+
+      function applyStepLayout() {
+        const current = currentFlowStep();
+        const clientJourneyView = isClientView && current.type !== "welcome" && current.type !== "login";
+        const clientTopFocusView = isClientView && (current.type === "welcome" || current.type === "day" || current.type === "wait");
+        document.body.classList.toggle("client-journey-view", clientJourneyView);
+        document.body.classList.toggle("client-top-focus-view", clientTopFocusView);
+        document.body.classList.toggle("client-wait-view", isClientView && current.type === "wait");
+      }
+
+      function applyViewMode() {
+        if (isClientView) {
+          document.body.classList.add("client-view");
+          dom.brandModeLabel.textContent = "Expérience cliente";
+          dom.heroMeta.innerHTML = `
+            <span class="chip">Défi sur 7 jours</span>
+            <span class="chip">1 étape à la fois</span>
+            <span class="chip">Vidéo + contenu + progression</span>
+          `;
+          dom.topbarActions.classList.add("hidden");
+          dom.clientDevPanel.classList.add("hidden");
+          dom.cadencePanel.classList.add("hidden");
+          dom.statsPanel.classList.add("hidden");
+          dom.timelinePanel.classList.add("hidden");
+          dom.adminPanel.classList.add("hidden");
+          dom.payloadPanel.classList.add("hidden");
+          return;
+        }
+
+        document.body.classList.remove("client-view");
+        dom.brandModeLabel.textContent = "Prototype fonctionnel";
+        dom.clientDevPanel.classList.add("hidden");
+        dom.cadencePanel.classList.remove("hidden");
+        dom.heroMeta.innerHTML = `
+          <span class="chip">Responsive mobile et desktop</span>
+          <span class="chip">Compatible intégration HTML Lovable</span>
+          <span class="chip">Payload webhook prêt pour GHL</span>
+        `;
+        dom.topbarActions.classList.remove("hidden");
+        dom.statsPanel.classList.remove("hidden");
+        dom.timelinePanel.classList.remove("hidden");
+        dom.adminPanel.classList.remove("hidden");
+        dom.payloadPanel.classList.remove("hidden");
+      }
+
+      function renderScreen() {
+        const step = currentFlowStep();
+
+        if (step.type === "login") {
+          dom.screenEyebrow.textContent = "Accès";
+          dom.screenTitle.textContent = "Créer ton accès gratuit";
+          dom.screenSummary.textContent = "Inscription obligatoire avant l'écran de bienvenue.";
+          dom.screenRoot.innerHTML = renderLoginScreen();
+          return;
+        }
+
+        if (step.type === "welcome") {
+          dom.screenEyebrow.textContent = "";
+          dom.screenTitle.textContent = "Commencer le défi dans les bonnes conditions";
+          dom.screenSummary.textContent = "Lecture, vidéo d'introduction et passage par Telegram sont requis avant le jour 1.";
+          dom.screenRoot.innerHTML = renderWelcomeScreen();
+          return;
+        }
+
+        if (step.type === "day" && step.day) {
+          const dayContent = DAY_CONTENT.find((day) => day.day === step.day);
+          dom.screenEyebrow.textContent = "";
+          dom.screenTitle.textContent = dayContent.title;
+          dom.screenSummary.textContent = dayContent.summary;
+          dom.screenRoot.innerHTML = renderDayScreen(dayContent);
+          return;
+        }
+
+        if (step.type === "wait" && step.day) {
+          const unlockDate = getUnlockDateForDay(step.day);
+          const unlocked = isDayUnlocked(step.day);
+          dom.screenEyebrow.textContent = "";
+          dom.screenTitle.textContent = unlocked ? `La journée ${step.day} est débloquée` : `La journée ${step.day} débloque dans`;
+          dom.screenSummary.innerHTML = unlocked
+            ? `<button class="primary-button" type="button" data-action="resume-from-wait" data-day="${step.day}">Jour ${step.day} suivant</button>`
+            : formatCountdownClock(unlockDate, { capHours: 24 });
+          dom.screenRoot.innerHTML = renderWaitScreen(step.day);
+          return;
+        }
+
+        dom.screenEyebrow.textContent = "Conclusion";
+        dom.screenTitle.textContent = "Merci d'avoir complété le défi";
+        dom.screenSummary.textContent = "Dernière vidéo, récapitulatif et section de conversion finale.";
+        dom.screenRoot.innerHTML = renderThanksScreen();
+      }
+
+      function bindDynamicActions() {
+        document.querySelectorAll("[data-action='open-prelive-step']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const stepId = button.getAttribute("data-step-id");
+            openPreliveStep(stepId);
+            dom.preliveNav.removeAttribute("open");
+          });
+        });
+
+        const instructionScroll = document.getElementById("instructionScroll");
+        if (instructionScroll) {
+          if (instructionScroll.scrollHeight <= instructionScroll.clientHeight + 8) {
+            completeIntroText();
+          }
+          instructionScroll.addEventListener("scroll", () => {
+            const distanceFromBottom = instructionScroll.scrollHeight - instructionScroll.scrollTop - instructionScroll.clientHeight;
+            if (distanceFromBottom <= 16) {
+              completeIntroText();
+            }
+          });
+        }
+
+        document.querySelectorAll("[data-action='join-telegram']").forEach((button) => {
+          button.addEventListener("click", openTelegram);
+        });
+
+        document.querySelectorAll("[data-action='intro-complete-video']").forEach((button) => {
+          button.addEventListener("click", completeIntroVideo);
+        });
+
+        document.querySelectorAll("[data-action='start-challenge']").forEach((button) => {
+          button.addEventListener("click", startChallenge);
+        });
+
+        const registrationForm = document.getElementById("registrationForm");
+        if (registrationForm) {
+          registrationForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            submitRegistration(registrationForm);
+          });
+        }
+
+        document.querySelectorAll("wistia-player[data-wistia-day]").forEach((player) => {
+          if (player.dataset.endedBound === "true") {
+            return;
+          }
+
+          player.dataset.endedBound = "true";
+          player.addEventListener("ended", () => {
+            const day = Number(player.getAttribute("data-wistia-day"));
+            if (day === 0) {
+              completeIntroVideo();
+              return;
+            }
+
+            markDayVideoCompleted(day);
+          });
+
+          player.addEventListener("error", (event) => {
+            const day = Number(player.getAttribute("data-wistia-day"));
+            pushEvent("video_player_error", {
+              day,
+              provider: "wistia",
+              message: event?.message || "Erreur de lecture vidéo non spécifiée."
+            });
+          });
+        });
+
+        document.querySelectorAll("[data-action='video-complete']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const day = Number(button.getAttribute("data-day"));
+            if (day === 0) {
+              completeIntroVideo();
+              return;
+            }
+            markDayVideoCompleted(day);
+          });
+        });
+
+        document.querySelectorAll("[data-action='complete-day']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const day = Number(button.getAttribute("data-day"));
+            completeDay(day);
+          });
+        });
+
+        document.querySelectorAll("[data-action='toggle-checklist-item']").forEach((input) => {
+          input.addEventListener("change", () => {
+            const day = Number(input.getAttribute("data-day"));
+            const itemIndex = Number(input.getAttribute("data-index"));
+            updateChecklistItem(day, itemIndex, input.checked);
+          });
+        });
+
+        document.querySelectorAll("[data-action='timeline-step']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const day = Number(button.getAttribute("data-day"));
+            openTimelineStep(day);
+          });
+        });
+
+        document.querySelectorAll("[data-action='timeline-wait-step']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const day = Number(button.getAttribute("data-day"));
+            openTimelineWaitStep(day);
+          });
+        });
+
+        document.querySelectorAll("[data-action='unlock-vip']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const originDay = Number(button.getAttribute("data-origin-day") || 0) || null;
+            unlockVipAccess(originDay);
+          });
+        });
+
+        document.querySelectorAll("[data-action='resume-from-wait']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const day = Number(button.getAttribute("data-day"));
+            if (isDayUnlocked(day)) {
+              gotoStep(`day-${day}`);
+              return;
+            }
+            renderSidebar();
+          });
+        });
+
+        document.querySelectorAll("[data-action='open-sale']").forEach((button) => {
+          button.addEventListener("click", () => {
+            const day = Number(button.getAttribute("data-day"));
+            openSale(day);
+          });
+        });
+      }
+
+      function render() {
+        if (!hasPreliveFullAccess() && !state.devMode && !state.auth.isRegistered && !state.challengeStartedAt && state.currentStepId !== "login") {
+          state.currentStepId = "login";
+          saveState();
+        }
+
+        applyViewMode();
+        applyStepLayout();
+        renderProgressRail();
+        renderScreen();
+        renderSidebar();
+        bindDynamicActions();
+        installCountdownLoop();
+      }
+
+      function installCountdownLoop() {
+        if (countdownInterval) {
+          window.clearInterval(countdownInterval);
+        }
+        countdownInterval = window.setInterval(() => {
+          renderNextUnlockPanel();
+          const current = currentFlowStep();
+          if (current.type === "wait" && current.day) {
+            if (!hasPreliveFullAccess() && isDayUnlocked(current.day)) {
+              gotoStep(`day-${current.day}`, { silentEvent: true });
+              return;
+            }
+
+            renderScreen();
+            bindDynamicActions();
+          }
+        }, 1000);
+      }
+
+      function initializeListeners() {
+        dom.devModeToggle.addEventListener("click", toggleDevMode);
+        dom.resetProgressButton.addEventListener("click", resetProgress);
+        dom.jumpButton.addEventListener("click", jumpToSelectedPage);
+        dom.clientOpenDayButton.addEventListener("click", openSelectedClientDay);
+        dom.clientOpenStepButton.addEventListener("click", openSelectedClientStep);
+        dom.clientAdvanceButton.addEventListener("click", advanceToNextStep);
+        dom.simulateWebhookButton.addEventListener("click", () => {
+          const payload = buildWebhookPayload("manual_preview", {
+            current_step_id: state.currentStepId
+          });
+          state.lastPayload = payload;
+          saveState();
+          renderSidebar();
+          maybeSendWebhook(payload);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!dom.preliveNav.hasAttribute("open")) {
+            return;
+          }
+
+          if (!dom.preliveNav.contains(event.target)) {
+            dom.preliveNav.removeAttribute("open");
+          }
+        });
+      }
+
+      initializeListeners();
+      registerPageView(state.currentStepId);
+      render();
+    </script>
+  </body>
+</html>
