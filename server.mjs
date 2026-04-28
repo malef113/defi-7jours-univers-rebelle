@@ -36,7 +36,9 @@ async function servePublicFile(res, filename, contentType) {
 const challengeRoutes = new Set([
   "/",
   "/defi-7jours",
+  "/client/defi-7jours",
   "/client/defi-7-jours",
+  "/prototype/defi-7jours",
   "/prototype/defi-7-jours"
 ]);
 

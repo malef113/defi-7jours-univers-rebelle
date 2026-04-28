@@ -11,7 +11,27 @@ npm start
 Routes utiles:
 
 - `http://localhost:3000/defi-7jours`
+- `http://localhost:3000/client/defi-7jours`
 - `http://localhost:3000/client/defi-7-jours`
+- `http://localhost:3000/prototype/defi-7jours`
+- `http://localhost:3000/prototype/defi-7-jours`
+
+## Matrice des vues
+
+Vues client:
+
+- `/`
+- `/defi-7jours`
+- `/client/defi-7jours`
+- `/client/defi-7-jours`
+
+Vue prototype/dev seulement:
+
+- `/prototype/defi-7jours`
+- `/prototype/defi-7-jours`
+
+La vue client doit cacher les panneaux d'administration, stats, payloads et outils dev.
+La vue prototype/dev peut afficher ces outils pour validation interne.
 
 ## Notes Lovable
 
