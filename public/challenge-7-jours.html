@@ -2315,7 +2315,10 @@
       };
 
       const queryParams = new URLSearchParams(window.location.search);
-      const isClientView = window.location.pathname.startsWith("/client/");
+      const isClientView =
+        window.location.pathname.startsWith("/client/") ||
+        window.location.pathname === "/defi-7jours" ||
+        window.location.pathname === "/";
 
       function readContactContext() {
         return {
