@@ -24,11 +24,14 @@ Vues client:
 - `/defi-7jours`
 - `/client/defi-7jours`
 - `/client/defi-7-jours`
+- `https://defi-7jours.universrebelle.com/`
 
 Vue prototype/dev seulement:
 
 - `/prototype/defi-7jours`
 - `/prototype/defi-7-jours`
+
+Règle de sécurité: toute route qui ne commence pas par `/prototype/` doit être traitée comme une vue client.
 
 La vue client doit cacher les panneaux d'administration, stats, payloads et outils dev.
 La vue prototype/dev peut afficher ces outils pour validation interne.
