@@ -1360,6 +1360,10 @@
         text-align: center;
       }
 
+      body.client-view.client-login-view .content-panel {
+        width: min(100%, 920px);
+      }
+
       body.client-view.client-login-view .screen-header h2 {
         max-width: 12ch;
         margin-left: auto;
@@ -1399,14 +1403,15 @@
 
       body.client-view.client-top-focus-view .screen-header {
         order: 2;
-        max-width: none;
+        width: min(100%, 920px);
+        max-width: 920px;
         margin: 0 auto 26px;
-        text-align: left;
+        text-align: center;
       }
 
       body.client-view.client-top-focus-view .screen-header h2 {
         max-width: none;
-        margin: 0;
+        margin: 0 auto;
         color: #c8048a;
         font-size: clamp(2.5rem, 4vw, 4.4rem);
         line-height: 1;
@@ -1715,8 +1720,8 @@
 
         body.client-view .hero h1,
         body.client-view .hero p {
-          margin-left: 0;
-          margin-right: 0;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         body.client-view.client-journey-view .content-panel {
@@ -1740,8 +1745,8 @@
 
         body.client-view .hero-meta,
         body.client-view .screen-header {
-          justify-content: flex-start;
-          text-align: left;
+          justify-content: center;
+          text-align: center;
         }
 
         .content-panel,
