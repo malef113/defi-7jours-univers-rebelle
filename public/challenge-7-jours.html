@@ -1038,7 +1038,7 @@
 
       .form-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         gap: var(--space-buffer);
         margin-top: var(--space-buffer);
       }
@@ -1070,14 +1070,19 @@
       }
 
       .text-input {
+        appearance: none;
+        box-sizing: border-box;
+        display: block;
         width: 100%;
-        min-height: 52px;
+        height: 56px;
+        min-height: 56px;
         padding: 14px 16px;
         border-radius: 16px;
         border: 1px solid rgba(255, 255, 255, 0.08);
         background: rgba(255, 255, 255, 0.04);
         color: var(--ink);
         font: inherit;
+        line-height: 1.2;
       }
 
       .text-input::placeholder {
