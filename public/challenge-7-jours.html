@@ -1349,6 +1349,20 @@
         display: none;
       }
 
+      body.client-view.client-login-view .screen-header {
+        width: min(100%, 920px);
+        max-width: 920px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      body.client-view.client-login-view .screen-header h2 {
+        max-width: 12ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
       body.client-view .progress-rail {
         max-width: 920px;
         margin-left: auto;
@@ -3963,8 +3977,10 @@
         const current = currentFlowStep();
         const clientJourneyView = isClientView && current.type !== "welcome" && current.type !== "login";
         const clientTopFocusView = isClientView && (current.type === "welcome" || current.type === "day" || current.type === "wait");
+        const clientLoginView = isClientView && current.type === "login";
         document.body.classList.toggle("client-journey-view", clientJourneyView);
         document.body.classList.toggle("client-top-focus-view", clientTopFocusView);
+        document.body.classList.toggle("client-login-view", clientLoginView);
         document.body.classList.toggle("client-wait-view", isClientView && current.type === "wait");
       }
 
