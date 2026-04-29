@@ -1043,6 +1043,17 @@
         margin-top: var(--space-buffer);
       }
 
+      .login-stack {
+        display: grid;
+        gap: var(--space-buffer);
+        width: min(100%, 920px);
+        margin: 0 auto;
+      }
+
+      .login-stack > * {
+        width: 100%;
+      }
+
       .form-field {
         display: grid;
         gap: 8px;
@@ -3341,7 +3352,7 @@
         const phone = state.contact.phone || "";
 
         return `
-          <div class="grid-two">
+          <div class="login-stack">
             <div class="card auth-card">
               <span class="eyebrow">Inscription gratuite</span>
               <h3>Créer ton accès avant le défi</h3>
