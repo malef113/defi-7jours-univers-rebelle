@@ -1133,6 +1133,36 @@
         font-weight: 800;
       }
 
+      .registration-vip-card {
+        display: grid;
+        gap: var(--space-buffer);
+      }
+
+      .registration-vip-card h3 {
+        max-width: 12ch;
+        margin-bottom: 0;
+        font-size: clamp(2.2rem, 4vw, 3.8rem);
+        line-height: 0.92;
+        letter-spacing: -0.06em;
+      }
+
+      .registration-vip-intro {
+        max-width: 62ch;
+        color: rgba(243, 243, 243, 0.78);
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .registration-vip-card .page-actions {
+        margin-top: 0;
+        justify-content: flex-end;
+      }
+
+      .registration-vip-card .primary-button {
+        min-width: min(100%, 320px);
+        padding: 18px 30px;
+      }
+
       .admin-panel label {
         display: block;
         font-size: 0.82rem;
@@ -3388,9 +3418,12 @@
                 En production, cet écran servira d'entrée obligatoire avant l'expérience gratuite.
               </div>
             </div>
-            <div class="section-card vip-offer-card highlight">
+            <div class="section-card vip-offer-card highlight registration-vip-card">
               <span class="eyebrow">Version VIP payante</span>
-              <h3>Débloquer tout le défi dès le jour 1</h3>
+              <h3>Débloque tout le défi</h3>
+              <p class="registration-vip-intro">
+                La version VIP te donne un seul avantage: accéder à toutes les journées maintenant, sans attendre les écrans intermédiaires.
+              </p>
               <div class="offer-comparison">
                 <div class="offer-tier">
                   <strong>Gratuit</strong>
@@ -3403,13 +3436,10 @@
                   <span class="offer-tier-price">${APP_CONFIG.vipOffer.priceLabel}</span>
                 </div>
               </div>
-              <div class="page-actions">
-                <button class="secondary-button" type="button" data-action="unlock-vip" data-origin-day="1">
-                  Débloquer la version VIP ${APP_CONFIG.vipOffer.priceLabel}
+              <div class="page-actions vip-action-row">
+                <button class="primary-button" type="button" data-action="unlock-vip" data-origin-day="1">
+                  Passe en mode VIP maintenant
                 </button>
-              </div>
-              <div class="vip-price-note">
-                Prototype actuel: l'activation VIP est simulée localement en attendant un vrai checkout.
               </div>
             </div>
           </div>
