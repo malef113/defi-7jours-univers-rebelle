@@ -2912,7 +2912,9 @@
         pushEvent("registration_completed", {
           entry_type: "free",
           first_name: firstName,
-          email
+          email,
+          phone: phone || null,
+          ghl_webhook_target: "leadconnector"
         });
         gotoStep("welcome", { silentEvent: true });
       }

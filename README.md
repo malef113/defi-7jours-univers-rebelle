@@ -42,3 +42,6 @@ La vue prototype/dev peut afficher ces outils pour validation interne.
 - Serveur local minimal: `server.mjs`
 - Route cible prévue: `/defi-7jours`
 - Domaine cible prévu: `defi-7jours.universrebelle.com`
+- Webhook V1: le client poste vers `/api/challenge-webhook-preview`, et la route serveur relaie le payload vers GHL.
+- Webhook GHL par défaut: `https://services.leadconnectorhq.com/hooks/KhjV9dtw5xLa0kFbZvbD/webhook-trigger/3db39325-2a63-41fa-8452-b63a90fb5a25`
+- En Lovable/TanStack, conserver ce modèle: ne pas poster directement vers GHL depuis le navigateur; utiliser la server route pour éviter les blocages CORS.

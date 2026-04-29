@@ -6,6 +6,10 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = Number.parseInt(process.env.PORT || "3000", 10);
+const DEFAULT_GHL_WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/KhjV9dtw5xLa0kFbZvbD/webhook-trigger/3db39325-2a63-41fa-8452-b63a90fb5a25";
+const GHL_WEBHOOK_URL =
+  process.env.GHL_WEBHOOK_URL === "" ? "" : process.env.GHL_WEBHOOK_URL || DEFAULT_GHL_WEBHOOK_URL;
 
 function noStoreHeaders() {
   return {
@@ -77,9 +81,30 @@ const server = createServer(async (req, res) => {
         payload = rawBody;
       }
 
+      let ghlForwarded = false;
+      let ghlStatus = null;
+      let ghlError = null;
+
+      if (GHL_WEBHOOK_URL) {
+        try {
+          const ghlResponse = await fetch(GHL_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          ghlForwarded = ghlResponse.ok;
+          ghlStatus = ghlResponse.status;
+        } catch (error) {
+          ghlError = error instanceof Error ? error.message : "Unknown GHL forwarding error";
+        }
+      }
+
       sendJson(res, 200, {
         ok: true,
         preview: true,
+        forwardedToGhl: ghlForwarded,
+        ghlStatus,
+        ghlError,
         receivedAt: new Date().toISOString(),
         payload
       });
