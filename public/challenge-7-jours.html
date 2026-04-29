@@ -1619,7 +1619,7 @@
 
         body.client-view.client-top-focus-view .progress-rail {
           top: 0;
-          margin-bottom: 18px;
+          margin-bottom: 28px;
           padding: 12px 16px 16px;
           border-radius: 18px;
         }
@@ -1651,58 +1651,66 @@
 
         body.client-view.client-journey-view .progress-rail {
           max-width: 100%;
-          gap: 6px;
-          padding: 6px 0;
         }
 
         .premium-action-grid {
           grid-template-columns: 1fr;
         }
 
+        body.client-view.client-top-focus-view .progress-rail,
+        body.client-view.client-journey-view .progress-rail {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          min-height: 68px;
+          padding: 6px 0;
+        }
+
         body.client-view.client-journey-view .progress-rail::before {
-          left: 26px;
-          right: 26px;
+          display: none;
         }
 
+        body.client-view.client-top-focus-view .progress-step,
         body.client-view.client-journey-view .progress-step {
-          width: 34px;
-          height: 34px;
-          min-width: 34px;
-          min-height: 34px;
-          font-size: 0.9rem;
-          opacity: 0.72;
+          display: none;
         }
 
+        body.client-view.client-top-focus-view .progress-step.active,
+        body.client-view.client-top-focus-view .progress-step.next-up,
+        body.client-view.client-journey-view .progress-step.active,
         body.client-view.client-journey-view .progress-step.next-up {
-          width: 42px;
-          height: 42px;
-          min-width: 42px;
-          min-height: 42px;
-          font-size: 0.98rem;
-          opacity: 0.96;
-          border-color: rgba(255, 255, 255, 0.18);
-        }
-
-        body.client-view.client-journey-view .progress-step.active {
-          width: 50px;
-          height: 50px;
-          min-width: 50px;
-          min-height: 50px;
-          font-size: 1.05rem;
+          display: grid;
           opacity: 1;
         }
 
-        body.client-view.client-journey-view .progress-step.intermediate-dot {
-          width: 8px;
-          height: 8px;
-          min-width: 8px;
-          min-height: 8px;
-          margin-top: 13px;
-          opacity: 0.62;
+        body.client-view.client-top-focus-view .progress-step.active,
+        body.client-view.client-journey-view .progress-step.active {
+          width: 58px;
+          height: 58px;
+          min-width: 58px;
+          min-height: 58px;
+          font-size: 1.05rem;
         }
 
+        body.client-view.client-top-focus-view .progress-step.next-up,
+        body.client-view.client-journey-view .progress-step.next-up {
+          width: 44px;
+          height: 44px;
+          min-width: 44px;
+          min-height: 44px;
+          font-size: 0.98rem;
+          opacity: 0.78;
+          border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        body.client-view.client-top-focus-view .progress-step.intermediate-dot.active,
         body.client-view.client-journey-view .progress-step.intermediate-dot.active {
-          box-shadow: 0 0 0 4px rgba(255, 0, 168, 0.16);
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          min-height: 24px;
+          margin-top: 0;
         }
 
         body.client-view .hero h1,
@@ -1716,7 +1724,7 @@
         }
 
         body.client-view.client-journey-view .screen-header {
-          margin-bottom: 18px;
+          margin-bottom: 24px;
           padding-top: 0;
         }
 
