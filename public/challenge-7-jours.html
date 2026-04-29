@@ -248,6 +248,8 @@
         background: rgba(255, 255, 255, 0.03);
         color: var(--ink);
         text-align: left;
+        text-decoration: none;
+        cursor: pointer;
       }
 
       .prelive-nav-item.is-active {
@@ -2446,6 +2448,7 @@
 
       let state = loadState();
       let countdownInterval = null;
+      let requestedStepApplied = false;
 
       function loadState() {
         const stored = window.localStorage.getItem(APP_CONFIG.storageKey);
@@ -2771,6 +2774,48 @@
         return APP_CONFIG.preliveAccessEnabled && isClientView;
       }
 
+      function requestedPreliveStepFromUrl() {
+        const url = new URL(window.location.href);
+        const requestedStep = url.searchParams.get("step") || window.location.hash.replace(/^#/, "");
+        if (!requestedStep) {
+          return null;
+        }
+
+        return FLOW_STEPS.some((step) => step.id === requestedStep) ? requestedStep : null;
+      }
+
+      function syncPreliveStepUrl(stepId) {
+        if (!hasPreliveFullAccess()) {
+          return;
+        }
+
+        const url = new URL(window.location.href);
+        url.searchParams.set("step", stepId);
+        window.history.replaceState({}, "", url);
+      }
+
+      function applyRequestedPreliveStep() {
+        if (requestedStepApplied) {
+          return;
+        }
+
+        requestedStepApplied = true;
+
+        if (!hasPreliveFullAccess() && !state.devMode) {
+          return;
+        }
+
+        const requestedStep = requestedPreliveStepFromUrl();
+        if (!requestedStep) {
+          return;
+        }
+
+        const targetStep = FLOW_STEPS.find((step) => step.id === requestedStep);
+        state.currentStepId = targetStep.id;
+        state.currentDay = targetStep.day || 0;
+        saveState();
+      }
+
       function nextTimelineFocusDay() {
         const current = currentFlowStep();
         if (current.type === "welcome") {
@@ -2886,6 +2931,7 @@
       }
 
       function openPreliveStep(stepId) {
+        syncPreliveStepUrl(stepId);
         gotoStep(stepId, {
           forceAccess: true
         });
@@ -3947,14 +3993,15 @@
         dom.preliveNavList.innerHTML = FLOW_STEPS.map((step) => {
           const meta = preliveStepMeta(step);
           const activeClass = step.id === state.currentStepId ? "is-active" : "";
+          const href = `?step=${encodeURIComponent(step.id)}`;
           return `
-            <button class="prelive-nav-item ${activeClass}" type="button" data-action="open-prelive-step" data-step-id="${step.id}">
+            <a class="prelive-nav-item ${activeClass}" href="${href}" data-action="open-prelive-step" data-step-id="${step.id}">
               <div>
                 <small>${meta.eyebrow}</small>
                 <strong>${step.label}</strong>
               </div>
               <span>${meta.hint}</span>
-            </button>
+            </a>
           `;
         }).join("");
       }
@@ -4070,14 +4117,6 @@
       }
 
       function bindDynamicActions() {
-        document.querySelectorAll("[data-action='open-prelive-step']").forEach((button) => {
-          button.addEventListener("click", () => {
-            const stepId = button.getAttribute("data-step-id");
-            openPreliveStep(stepId);
-            dom.preliveNav.removeAttribute("open");
-          });
-        });
-
         const instructionScroll = document.getElementById("instructionScroll");
         if (instructionScroll) {
           if (instructionScroll.scrollHeight <= instructionScroll.clientHeight + 8) {
@@ -4204,6 +4243,8 @@
       }
 
       function render() {
+        applyRequestedPreliveStep();
+
         if (!hasPreliveFullAccess() && !state.devMode && !state.auth.isRegistered && !state.challengeStartedAt && state.currentStepId !== "login") {
           state.currentStepId = "login";
           saveState();
@@ -4255,6 +4296,15 @@
         });
 
         document.addEventListener("click", (event) => {
+          const preliveTrigger = event.target.closest("[data-action='open-prelive-step']");
+          if (preliveTrigger) {
+            event.preventDefault();
+            const stepId = preliveTrigger.getAttribute("data-step-id");
+            openPreliveStep(stepId);
+            dom.preliveNav.removeAttribute("open");
+            return;
+          }
+
           if (!dom.preliveNav.hasAttribute("open")) {
             return;
           }
