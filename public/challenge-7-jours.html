@@ -3245,13 +3245,6 @@
         const canStart = Boolean(introDone && state.intro.telegramJoinedAt);
 
         if (isClientView) {
-          const dayError = state.ui.actionErrors[`day-${dayContent.day}`];
-          const checklistState = state.ui.checklist[`day-${dayContent.day}`] || {};
-          const checklistItems = [
-            "Lorem ipsum dolor sit amet.",
-            "Consectetur adipiscing elit.",
-            "Sed do eiusmod tempor incididunt."
-          ];
           return `
             <div class="grid-two">
               <div>
