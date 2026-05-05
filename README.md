@@ -53,3 +53,13 @@ La vue prototype/dev peut afficher ces outils pour validation interne.
 - `/admin` permet de tester le nombre de jours, le premier jour de conversion, le modèle d'accès (`free`, `paid`, `free_with_vip`), les IDs vidéo et les règles de visionnement.
 - À l'inscription, un `enrollment` est créé localement avec calendrier complet (`day_schedule`), date de fin, expiration deux jours après la fin et lien direct tokenisé.
 - Le payload webhook inclut maintenant le calendrier complet, la progression, le statut de paiement, le modèle d'accès et le lien direct prévu pour les courriels GHL.
+
+## Fondation portable pour Lovable
+
+- `src-domain/` contient la logique métier extraite en JS pur, prête à porter en modules TypeScript dans Lovable/TanStack.
+- `test/domain.test.mjs` couvre les scénarios critiques: cadence 8h AM, paiement, expiration, VIP off, visibilité de blocs et payload GHL.
+- `docs/lovable-porting-plan.md` décrit les routes serveur, les responsabilités frontend/backend et l'ordre de portage recommandé.
+
+```bash
+npm test
+```
