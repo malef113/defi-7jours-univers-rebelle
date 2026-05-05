@@ -42,6 +42,7 @@ const challengeRoutes = new Set([
   "/defi-7jours",
   "/client/defi-7jours",
   "/client/defi-7-jours",
+  "/admin",
   "/prototype/defi-7jours",
   "/prototype/defi-7-jours"
 ]);

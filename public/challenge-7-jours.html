@@ -1099,6 +1099,82 @@
         line-height: 1.68;
       }
 
+      .admin-dashboard {
+        display: grid;
+        gap: var(--space-section);
+      }
+
+      .admin-dashboard .admin-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: var(--space-buffer);
+      }
+
+      .admin-form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-buffer);
+        margin-top: var(--space-buffer);
+      }
+
+      .admin-form-grid .full {
+        grid-column: 1 / -1;
+      }
+
+      .admin-field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .admin-field label,
+      .admin-toggle span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .admin-field textarea {
+        height: auto;
+        min-height: 118px;
+        resize: vertical;
+      }
+
+      .admin-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .admin-toggle input {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--primary);
+      }
+
+      .admin-preview {
+        position: sticky;
+        top: 18px;
+        align-self: start;
+      }
+
+      .admin-preview-frame {
+        margin-top: var(--space-buffer);
+        padding: var(--card-padding);
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background:
+          radial-gradient(circle at top right, rgba(255, 0, 168, 0.08), transparent 34%),
+          rgba(255, 255, 255, 0.025);
+      }
+
+      .admin-preview-frame .grid-two {
+        grid-template-columns: 1fr;
+      }
+
       .offer-comparison {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1251,6 +1327,15 @@
 
       body.client-view .shell {
         max-width: 1440px;
+      }
+
+      body.admin-view .layout {
+        grid-template-columns: 1fr;
+      }
+
+      body.admin-view .content-panel {
+        width: min(100%, 1180px);
+        margin: 0 auto;
       }
 
       body.client-view .client-hero-logo {
@@ -1588,7 +1673,8 @@
 
       @media (max-width: 1080px) {
         .layout,
-        .grid-two {
+        .grid-two,
+        .admin-dashboard .admin-grid {
           grid-template-columns: 1fr;
         }
 
@@ -1966,6 +2052,36 @@
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Toronto",
         telegramUrl: "https://t.me/helene_collette_communaute",
         saleUrl: "https://orders.helenecollette.com/methode-rebelle",
+        accessModels: {
+          FREE: "free",
+          PAID: "paid",
+          FREE_WITH_VIP: "free_with_vip"
+        },
+        challenge: {
+          id: "hc-defi-presence-sociale-7-jours",
+          slug: "defi-7jours",
+          title: "Défi présence sociale sur 7 jours",
+          subtitle: "7 jours pour prendre plus de place sur les réseaux",
+          status: "draft",
+          accessModel: "paid",
+          price: "7$",
+          vipEnabled: false,
+          vipPrice: "7$",
+          unlockMode: "all",
+          unlockDelayHours: 24,
+          unlockTime: "08:00",
+          timezone: "America/Toronto",
+          totalDays: 7,
+          postChallengeAccessDays: 2,
+          createdAt: "2026-04-23T00:00:00.000Z",
+          updatedAt: "2026-05-05T00:00:00.000Z"
+        },
+        paidAccess: {
+          required: true,
+          priceLabel: "7$",
+          checkoutUrl: "",
+          simulationMode: true
+        },
         timelineNavigation: {
           // Regle temporaire de preview: on laisse la navigation libre en client et en dev.
           allowAllDaysInClientPreview: true,
@@ -1978,6 +2094,7 @@
           source: "lovable"
         },
         vipOffer: {
+          enabled: false,
           priceLabel: "7$",
           unlocksFullChallenge: true,
           simulationMode: true
@@ -2343,27 +2460,294 @@
         }
       ];
 
-      const FLOW_STEPS = [
-        { id: "login", type: "login", label: "Connexion", displayDay: -1 },
-        { id: "welcome", type: "welcome", label: "Bienvenue", displayDay: 0 },
-        { id: "day-1", type: "day", label: "Jour 1", day: 1, displayDay: 1 },
-        { id: "wait-2", type: "wait", label: "Attente J2", day: 2, displayDay: 2 },
-        { id: "day-2", type: "day", label: "Jour 2", day: 2, displayDay: 2 },
-        { id: "wait-3", type: "wait", label: "Attente J3", day: 3, displayDay: 3 },
-        { id: "day-3", type: "day", label: "Jour 3", day: 3, displayDay: 3 },
-        { id: "wait-4", type: "wait", label: "Attente J4", day: 4, displayDay: 4 },
-        { id: "day-4", type: "day", label: "Jour 4", day: 4, displayDay: 4 },
-        { id: "wait-5", type: "wait", label: "Attente J5", day: 5, displayDay: 5 },
-        { id: "day-5", type: "day", label: "Jour 5", day: 5, displayDay: 5 },
-        { id: "wait-6", type: "wait", label: "Attente J6", day: 6, displayDay: 6 },
-        { id: "day-6", type: "day", label: "Jour 6", day: 6, displayDay: 6 },
-        { id: "wait-7", type: "wait", label: "Attente J7", day: 7, displayDay: 7 },
-        { id: "day-7", type: "day", label: "Jour 7", day: 7, displayDay: 7 },
-        { id: "thanks", type: "thanks", label: "Remerciements", displayDay: 8 }
-      ];
+      const ADMIN_CONFIG_STORAGE_KEY = "helene-collette-challenge-admin-config-v1";
+
+      function defaultAdminSettings() {
+        return {
+          dayCount: 7,
+          conversionStartDay: 5,
+          accessModel: APP_CONFIG.challenge.accessModel,
+          unlockMode: APP_CONFIG.challenge.unlockMode,
+          paidAccessRequired: APP_CONFIG.paidAccess.required,
+          vipEnabled: APP_CONFIG.vipOffer.enabled,
+          selectedDay: 1,
+          requireContentVideoComplete: true,
+          requireSalesVideoComplete: true,
+          days: DAY_CONTENT.reduce((accumulator, day) => {
+            accumulator[day.day] = {
+              title: day.title,
+              summary: day.summary,
+              cap: day.text[0] || "",
+              focus1Title: day.theoryBlocks?.[0]?.title || "",
+              focus1Text: day.theoryBlocks?.[0]?.text || "",
+              focus2Title: day.theoryBlocks?.[1]?.title || "",
+              focus2Text: day.theoryBlocks?.[1]?.text || "",
+              contentVideoId: APP_CONFIG.videoDefaults.wistiaIds.days[day.day] || APP_CONFIG.videoDefaults.wistiaIds.intro,
+              salesVideoId: "",
+              requireContentVideoComplete: true,
+              requireSalesVideoComplete: true
+            };
+            return accumulator;
+          }, {})
+        };
+      }
+
+      function loadAdminSettings() {
+        const fallback = defaultAdminSettings();
+        try {
+          const stored = window.localStorage.getItem(ADMIN_CONFIG_STORAGE_KEY);
+          if (!stored) {
+            return fallback;
+          }
+
+          const parsed = JSON.parse(stored);
+          return {
+            ...fallback,
+            ...parsed,
+            dayCount: clampDayCount(parsed.dayCount || fallback.dayCount),
+            conversionStartDay: clampConversionStartDay(parsed.conversionStartDay || fallback.conversionStartDay, parsed.dayCount || fallback.dayCount),
+            accessModel: parsed.accessModel || fallback.accessModel,
+            unlockMode: parsed.unlockMode || fallback.unlockMode,
+            paidAccessRequired: parsed.paidAccessRequired ?? fallback.paidAccessRequired,
+            vipEnabled: Boolean(parsed.vipEnabled && APP_CONFIG.vipOffer.enabled),
+            days: {
+              ...fallback.days,
+              ...(parsed.days || {})
+            }
+          };
+        } catch (error) {
+          console.warn("Impossible de lire la configuration admin.", error);
+          return fallback;
+        }
+      }
+
+      function clampDayCount(value) {
+        return Math.max(1, Math.min(14, Number(value) || 7));
+      }
+
+      function clampConversionStartDay(value, dayCount = 7) {
+        return Math.max(1, Math.min(clampDayCount(dayCount), Number(value) || 5));
+      }
+
+      let adminSettings = loadAdminSettings();
+
+      function saveAdminSettings() {
+        window.localStorage.setItem(ADMIN_CONFIG_STORAGE_KEY, JSON.stringify(adminSettings));
+      }
+
+      function getConfiguredDayCount() {
+        return clampDayCount(adminSettings.dayCount || APP_CONFIG.challenge.totalDays);
+      }
+
+      function getCurrentChallenge() {
+        return {
+          ...APP_CONFIG.challenge,
+          accessModel: adminSettings.accessModel || APP_CONFIG.challenge.accessModel,
+          unlockMode: adminSettings.unlockMode || APP_CONFIG.challenge.unlockMode,
+          totalDays: getConfiguredDayCount(),
+          vipEnabled: isVipEnabled()
+        };
+      }
+
+      function getAccessModel() {
+        return adminSettings.accessModel || APP_CONFIG.challenge.accessModel || APP_CONFIG.accessModels.PAID;
+      }
+
+      function isFreeChallenge() {
+        return getAccessModel() === APP_CONFIG.accessModels.FREE;
+      }
+
+      function isPaidChallenge() {
+        return getAccessModel() === APP_CONFIG.accessModels.PAID;
+      }
+
+      function isFreeWithVipChallenge() {
+        return getAccessModel() === APP_CONFIG.accessModels.FREE_WITH_VIP;
+      }
+
+      function isPaymentRequiredForChallenge() {
+        return isPaidChallenge() && Boolean(adminSettings.paidAccessRequired);
+      }
+
+      function shouldUseCadence() {
+        if (isPaidChallenge()) {
+          return getCurrentChallenge().unlockMode !== "all";
+        }
+
+        if (hasVipAccess()) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function challengeUsesWaitPages() {
+        return !isPaidChallenge() || getCurrentChallenge().unlockMode !== "all";
+      }
+
+      function baseDayFor(dayNumber) {
+        return DAY_CONTENT.find((day) => day.day === dayNumber) || DAY_CONTENT[DAY_CONTENT.length - 1];
+      }
+
+      function getDayContent(dayNumber) {
+        const baseDay = baseDayFor(dayNumber);
+        const override = adminSettings.days[dayNumber] || {};
+        const conversionCashflow = dayNumber >= clampConversionStartDay(adminSettings.conversionStartDay, getConfiguredDayCount());
+        const theoryBlocks = [
+          {
+            title: override.focus1Title || baseDay.theoryBlocks?.[0]?.title || "Focus 01",
+            text: override.focus1Text || baseDay.theoryBlocks?.[0]?.text || baseDay.text?.[1] || ""
+          },
+          {
+            title: override.focus2Title || baseDay.theoryBlocks?.[1]?.title || "Focus 02",
+            text: override.focus2Text || baseDay.theoryBlocks?.[1]?.text || baseDay.text?.[2] || ""
+          }
+        ];
+
+        return {
+          ...baseDay,
+          day: dayNumber,
+          title: override.title || (dayNumber <= DAY_CONTENT.length ? baseDay.title : `Jour ${dayNumber}`),
+          summary: override.summary || baseDay.summary,
+          text: [
+            override.cap || baseDay.text?.[0] || "",
+            theoryBlocks[0].text,
+            theoryBlocks[1].text
+          ],
+          theoryBlocks,
+          conversionCashflow,
+          contentVideoId: override.contentVideoId || APP_CONFIG.videoDefaults.wistiaIds.days[dayNumber] || APP_CONFIG.videoDefaults.wistiaIds.intro,
+          salesVideoId: override.salesVideoId || "",
+          requireContentVideoComplete: override.requireContentVideoComplete ?? adminSettings.requireContentVideoComplete,
+          requireSalesVideoComplete: override.requireSalesVideoComplete ?? adminSettings.requireSalesVideoComplete
+        };
+      }
+
+      function dayBlocksFor(dayNumber) {
+        const day = getDayContent(dayNumber);
+        return [
+          {
+            block_id: `day-${dayNumber}-timeline`,
+            day_id: dayNumber,
+            type: "timeline",
+            title: "Progression",
+            content: "",
+            media_url: null,
+            cta_label: null,
+            cta_url: null,
+            sort_order: 10,
+            is_enabled: true,
+            visibility_rule: "always"
+          },
+          {
+            block_id: `day-${dayNumber}-video`,
+            day_id: dayNumber,
+            type: "video",
+            title: `Vidéo du jour ${dayNumber}`,
+            content: "",
+            media_url: day.contentVideoId,
+            cta_label: null,
+            cta_url: null,
+            sort_order: 20,
+            is_enabled: true,
+            visibility_rule: "always"
+          },
+          {
+            block_id: `day-${dayNumber}-theorie`,
+            day_id: dayNumber,
+            type: "theorie",
+            title: day.title,
+            content: day.text.join("\n\n"),
+            media_url: null,
+            cta_label: null,
+            cta_url: null,
+            sort_order: 30,
+            is_enabled: true,
+            visibility_rule: "always"
+          },
+          {
+            block_id: `day-${dayNumber}-actions`,
+            day_id: dayNumber,
+            type: "actions",
+            title: "Actions du jour",
+            content: (day.actionItems || []).map((item) => `${item.title || "Action"}: ${item.text || item}`).join("\n"),
+            media_url: null,
+            cta_label: "Passer au jour suivant",
+            cta_url: null,
+            sort_order: 40,
+            is_enabled: true,
+            visibility_rule: "always"
+          },
+          {
+            block_id: `day-${dayNumber}-vente`,
+            day_id: dayNumber,
+            type: "bloc_vente_optionnel",
+            title: day.vslPromo?.title || "Offre",
+            content: day.vslPromo?.intro || "",
+            media_url: day.salesVideoId || null,
+            cta_label: day.vslPromo?.cta || "Découvrir l'offre",
+            cta_url: APP_CONFIG.saleUrl,
+            sort_order: 50,
+            is_enabled: Boolean(day.conversionCashflow),
+            visibility_rule: "access_model_paid_only"
+          }
+        ];
+      }
+
+      function isBlockVisible(block, accessModel = getAccessModel()) {
+        if (!block?.is_enabled || block.visibility_rule === "hidden") {
+          return false;
+        }
+
+        const rule = block.visibility_rule || "always";
+        const userIsVip = hasVipAccess();
+        const userIsPaid = hasPaidAccess();
+
+        return {
+          always: true,
+          free_users_only: !userIsPaid && !userIsVip,
+          paid_users_only: userIsPaid,
+          vip_users_only: userIsVip,
+          non_vip_users_only: !userIsVip,
+          access_model_free_only: accessModel === APP_CONFIG.accessModels.FREE,
+          access_model_paid_only: accessModel === APP_CONFIG.accessModels.PAID,
+          access_model_free_with_vip_only: accessModel === APP_CONFIG.accessModels.FREE_WITH_VIP
+        }[rule] ?? true;
+      }
+
+      function visibleBlocksForDay(dayNumber) {
+        return dayBlocksFor(dayNumber)
+          .filter((block) => isBlockVisible(block))
+          .sort((a, b) => a.sort_order - b.sort_order);
+      }
+
+      function getChallengeDays() {
+        return Array.from({ length: getConfiguredDayCount() }, (_, index) => getDayContent(index + 1));
+      }
+
+      function buildFlowSteps() {
+        const steps = [
+          { id: "login", type: "login", label: "Connexion", displayDay: -1 },
+          { id: "welcome", type: "welcome", label: "Bienvenue", displayDay: 0 }
+        ];
+
+        getChallengeDays().forEach((day, index) => {
+          if (index > 0 && challengeUsesWaitPages()) {
+            steps.push({ id: `wait-${day.day}`, type: "wait", label: `Attente J${day.day}`, day: day.day, displayDay: day.day });
+          }
+          steps.push({ id: `day-${day.day}`, type: "day", label: `Jour ${day.day}`, day: day.day, displayDay: day.day });
+        });
+
+        steps.push({ id: "thanks", type: "thanks", label: "Remerciements", displayDay: getConfiguredDayCount() + 1 });
+        return steps;
+      }
+
+      let FLOW_STEPS = buildFlowSteps();
 
       const dom = {
         hero: document.querySelector(".hero"),
+        sidebar: document.querySelector(".sidebar"),
+        contentPanel: document.querySelector(".content-panel"),
         brandModeLabel: document.getElementById("brandModeLabel"),
         topbarActions: document.getElementById("topbarActions"),
         preliveNav: document.getElementById("preliveNav"),
@@ -2399,7 +2783,8 @@
 
       const queryParams = new URLSearchParams(window.location.search);
       const isPrototypeView = window.location.pathname.startsWith("/prototype/");
-      const isClientView = !isPrototypeView;
+      const isAdminView = window.location.pathname === "/admin" || window.location.pathname.startsWith("/admin/");
+      const isClientView = !isPrototypeView && !isAdminView;
 
       function readContactContext() {
         return {
@@ -2419,6 +2804,7 @@
       const emptyState = () => ({
         participantId: crypto.randomUUID ? crypto.randomUUID() : `participant-${Date.now()}`,
         firstSeenAt: new Date().toISOString(),
+        enrollment: null,
         challengeStartedAt: null,
         currentStepId: "login",
         currentDay: 0,
@@ -2428,7 +2814,12 @@
           registeredAt: null
         },
         access: {
-          tier: "free",
+          tier: "unpaid",
+          paymentRequired: isPaymentRequiredForChallenge(),
+          paymentAmount: APP_CONFIG.paidAccess.priceLabel,
+          paymentCheckoutStartedAt: null,
+          paymentCompletedAt: null,
+          paymentMode: null,
           vipUnlockedAt: null
         },
         intro: {
@@ -2437,7 +2828,7 @@
           telegramJoinedAt: null,
           startedAt: null
         },
-        days: DAY_CONTENT.reduce((accumulator, day) => {
+        days: getChallengeDays().reduce((accumulator, day) => {
           accumulator[day.day] = {
             visitedAt: null,
             videoCompletedAt: null,
@@ -2465,6 +2856,8 @@
       let state = loadState();
       let countdownInterval = null;
       let requestedStepApplied = false;
+      let paymentReturnApplied = false;
+      let magicLinkApplied = false;
 
       function loadState() {
         const stored = window.localStorage.getItem(APP_CONFIG.storageKey);
@@ -2495,6 +2888,7 @@
               ...emptyState().access,
               ...(parsed.access || {})
             },
+            enrollment: parsed.enrollment || null,
             intro: {
               ...emptyState().intro,
               ...(parsed.intro || {})
@@ -2571,9 +2965,12 @@
       }
 
       function buildWebhookPayload(eventType, details = {}) {
-        const completedDays = DAY_CONTENT.filter((day) => Boolean(state.days[day.day]?.completedAt)).length;
-        const nextDay = Math.min(completedDays + 1, 7);
-        const nextUnlockAt = nextDay > 1 ? getUnlockDateForDay(nextDay)?.toISOString() : null;
+        syncEnrollmentProgress();
+        const completedDays = getChallengeDays().filter((day) => Boolean(state.days[day.day]?.completedAt)).length;
+        const progressionState = enrollmentProgression();
+        const nextDay = Math.min(completedDays + 1, getConfiguredDayCount());
+        const nextUnlockAt = progressionState.next_unlock_at || (nextDay > 1 ? getUnlockDateForDay(nextDay)?.toISOString() : null);
+        const currentChallenge = getCurrentChallenge();
 
         return {
           meta: {
@@ -2585,11 +2982,46 @@
             timezone: APP_CONFIG.timezone
           },
           challenge: {
-            id: APP_CONFIG.challengeId,
-            title: APP_CONFIG.challengeTitle,
+            id: currentChallenge.id,
+            slug: currentChallenge.slug,
+            title: currentChallenge.title,
+            subtitle: currentChallenge.subtitle,
             version: APP_CONFIG.version,
+            status: currentChallenge.status,
+            access_model: getAccessModel(),
+            price: currentChallenge.price,
+            vip_enabled: isVipEnabled(),
+            vip_price: currentChallenge.vipPrice,
+            unlock_mode: currentChallenge.unlockMode,
+            unlock_delay_hours: currentChallenge.unlockDelayHours,
+            unlock_time: currentChallenge.unlockTime,
+            timezone: currentChallenge.timezone,
+            total_days: getConfiguredDayCount(),
+            post_challenge_access_days: currentChallenge.postChallengeAccessDays,
             current_step_id: state.currentStepId,
             current_day: state.currentDay
+          },
+          enrollment: {
+            enrollment_id: state.enrollment?.id || null,
+            challenge_id: state.enrollment?.challenge_id || currentChallenge.id,
+            contact_id: state.enrollment?.contact_id || state.contact.ghlContactId,
+            access_model: state.enrollment?.access_model || getAccessModel(),
+            access_status: progressionState.access_status,
+            payment_status: state.enrollment?.payment_status || (hasPaidAccess() ? "paid" : "pending"),
+            enrolled_at: state.enrollment?.enrolled_at || state.auth.registeredAt,
+            challenge_start_at: state.enrollment?.challenge_start_at || state.challengeStartedAt,
+            current_day: progressionState.current_day,
+            current_step: progressionState.current_step,
+            timezone: state.enrollment?.timezone || APP_CONFIG.challengeTimezone,
+            day_schedule: progressionState.day_schedule,
+            unlocked_days: progressionState.unlocked_days,
+            locked_days: progressionState.locked_days,
+            next_unlock_at: progressionState.next_unlock_at,
+            challenge_end_at: state.enrollment?.challenge_end_at || null,
+            access_expires_at: state.enrollment?.access_expires_at || null,
+            magic_link_token: state.enrollment?.magic_link_token || null,
+            magic_link_expires_at: state.enrollment?.magic_link_expires_at || null,
+            direct_access_link: state.enrollment?.direct_access_link || null
           },
           participant: {
             participant_id: state.participantId,
@@ -2613,11 +3045,23 @@
             days_completed: completedDays,
             last_completed_day: completedDays || null,
             next_day_unlock_at: nextUnlockAt,
+            current_day_from_calendar: progressionState.current_day,
+            current_step_from_calendar: progressionState.current_step,
+            unlocked_days: progressionState.unlocked_days,
+            locked_days: progressionState.locked_days,
+            day_schedule: progressionState.day_schedule,
             wait_screens_seen: state.analytics.waitScreensShown
           },
           access: {
-            tier: state.access.tier,
-            vip_unlocked_at: state.access.vipUnlockedAt
+            tier: hasVipAccess() ? "vip" : hasPaidAccess() ? "paid" : "unpaid",
+            payment_required: isPaymentRequiredForChallenge(),
+            payment_amount: APP_CONFIG.paidAccess.priceLabel,
+            payment_checkout_started_at: state.access.paymentCheckoutStartedAt,
+            payment_completed: hasPaidAccess(),
+            payment_completed_at: state.access.paymentCompletedAt,
+            payment_mode: state.access.paymentMode,
+            vip_enabled: isVipEnabled(),
+            vip_unlocked_at: hasVipAccess() ? state.access.vipUnlockedAt : null
           },
           analytics: {
             page_views: state.analytics.pageViews,
@@ -2724,6 +3168,230 @@
         return new Date(approximateUtc - offset);
       }
 
+      function parseUnlockTime(unlockTime = APP_CONFIG.challenge.unlockTime) {
+        const [hour = "8", minute = "0"] = String(unlockTime || "08:00").split(":");
+        return {
+          hour: Number(hour) || 8,
+          minute: Number(minute) || 0
+        };
+      }
+
+      function makeEnrollmentToken() {
+        const rawId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
+        return `enroll_${rawId.replaceAll("-", "")}`;
+      }
+
+      function directAccessLinkForToken(token) {
+        if (!token) {
+          return null;
+        }
+
+        const url = new URL(window.location.href);
+        url.pathname = "/defi-7jours";
+        url.search = "";
+        url.searchParams.set("token", token);
+        return url.toString();
+      }
+
+      function buildDaySchedule(enrolledAt = new Date().toISOString()) {
+        const enrolledDate = new Date(enrolledAt);
+        const enrolledParts = getTimeZoneParts(enrolledDate, APP_CONFIG.challengeTimezone);
+        const unlockTime = parseUnlockTime();
+
+        return getChallengeDays().map((day) => {
+          const unlockAt = day.day === 1
+            ? enrolledDate
+            : makeDateInTimeZone(
+                {
+                  year: enrolledParts.year,
+                  month: enrolledParts.month,
+                  day: enrolledParts.day + (day.day - 1),
+                  hour: unlockTime.hour,
+                  minute: unlockTime.minute,
+                  second: 0
+                },
+                APP_CONFIG.challengeTimezone
+              );
+
+          return {
+            day_number: day.day,
+            step_id: `day-${day.day}`,
+            unlock_at: unlockAt.toISOString(),
+            status: "locked",
+            completed_at: null
+          };
+        });
+      }
+
+      function buildEnrollmentRecord(enrolledAt = new Date().toISOString()) {
+        const token = makeEnrollmentToken();
+        const schedule = buildDaySchedule(enrolledAt);
+        const unlockTime = parseUnlockTime();
+        const enrolledParts = getTimeZoneParts(new Date(enrolledAt), APP_CONFIG.challengeTimezone);
+        const challengeEndAt = makeDateInTimeZone(
+          {
+            year: enrolledParts.year,
+            month: enrolledParts.month,
+            day: enrolledParts.day + getConfiguredDayCount(),
+            hour: unlockTime.hour,
+            minute: unlockTime.minute,
+            second: 0
+          },
+          APP_CONFIG.challengeTimezone
+        );
+        const accessExpiresAt = makeDateInTimeZone(
+          {
+            ...getTimeZoneParts(challengeEndAt, APP_CONFIG.challengeTimezone),
+            day: getTimeZoneParts(challengeEndAt, APP_CONFIG.challengeTimezone).day + APP_CONFIG.challenge.postChallengeAccessDays
+          },
+          APP_CONFIG.challengeTimezone
+        );
+
+        return {
+          id: crypto.randomUUID ? crypto.randomUUID() : `enrollment-${Date.now()}`,
+          challenge_id: APP_CONFIG.challenge.id,
+          participant_id: state?.participantId || null,
+          contact_id: state?.contact?.ghlContactId || null,
+          email: state?.contact?.email || null,
+          first_name: state?.contact?.firstName || null,
+          access_model: getAccessModel(),
+          access_status: isPaymentRequiredForChallenge() ? "pending_payment" : "active",
+          payment_status: isPaymentRequiredForChallenge() ? "pending" : "not_required",
+          enrolled_at: enrolledAt,
+          challenge_start_at: enrolledAt,
+          current_day: 1,
+          current_step: "welcome",
+          timezone: APP_CONFIG.challengeTimezone,
+          day_schedule: schedule,
+          next_unlock_at: schedule[1]?.unlock_at || null,
+          challenge_end_at: challengeEndAt.toISOString(),
+          access_expires_at: accessExpiresAt.toISOString(),
+          magic_link_token: token,
+          magic_link_expires_at: null,
+          direct_access_link: directAccessLinkForToken(token),
+          created_at: enrolledAt,
+          updated_at: enrolledAt
+        };
+      }
+
+      function ensureEnrollment() {
+        if (!state.enrollment) {
+          state.enrollment = buildEnrollmentRecord(state.auth.registeredAt || new Date().toISOString());
+          state.challengeStartedAt = state.challengeStartedAt || state.enrollment.challenge_start_at;
+        }
+
+        return state.enrollment;
+      }
+
+      function dayScheduleWithCompletion() {
+        const enrollment = state.enrollment;
+        if (!enrollment?.day_schedule) {
+          return buildDaySchedule(state.challengeStartedAt || new Date().toISOString());
+        }
+
+        const now = new Date();
+        return enrollment.day_schedule.map((day) => {
+          const completedAt = state.days[day.day_number]?.completedAt || null;
+          const unlocked = now >= new Date(day.unlock_at) || !shouldUseCadence();
+          return {
+            ...day,
+            status: completedAt ? "completed" : unlocked ? "unlocked" : "locked",
+            completed_at: completedAt
+          };
+        });
+      }
+
+      function enrollmentProgression(now = new Date()) {
+        const enrollment = state.enrollment;
+        if (!enrollment) {
+          return {
+            access_status: "not_enrolled",
+            current_day: 0,
+            current_step: "login",
+            unlocked_days: [],
+            locked_days: [],
+            next_unlock_at: null,
+            day_schedule: []
+          };
+        }
+
+        if (isAccessExpired(now)) {
+          return {
+            access_status: "expired",
+            current_day: getConfiguredDayCount(),
+            current_step: "expired",
+            unlocked_days: dayScheduleWithCompletion().map((day) => day.day_number),
+            locked_days: [],
+            next_unlock_at: null,
+            day_schedule: dayScheduleWithCompletion()
+          };
+        }
+
+        if (isPaymentRequiredForChallenge() && !hasPaidAccess()) {
+          return {
+            access_status: "pending_payment",
+            current_day: 0,
+            current_step: "login",
+            unlocked_days: [],
+            locked_days: dayScheduleWithCompletion().map((day) => day.day_number),
+            next_unlock_at: dayScheduleWithCompletion()[0]?.unlock_at || null,
+            day_schedule: dayScheduleWithCompletion()
+          };
+        }
+
+        const schedule = dayScheduleWithCompletion();
+        const unlockedDays = schedule.filter((day) => day.status !== "locked").map((day) => day.day_number);
+        const lockedDays = schedule.filter((day) => day.status === "locked").map((day) => day.day_number);
+        const firstIncompleteDay = schedule.find((day) => day.status !== "completed")?.day_number || getConfiguredDayCount();
+        const currentDay = shouldUseCadence()
+          ? Math.max(1, unlockedDays[unlockedDays.length - 1] || 1)
+          : firstIncompleteDay;
+
+        return {
+          access_status: "active",
+          current_day: currentDay,
+          current_step: `day-${currentDay}`,
+          unlocked_days: unlockedDays,
+          locked_days: lockedDays,
+          next_unlock_at: schedule.find((day) => day.status === "locked")?.unlock_at || null,
+          day_schedule: schedule
+        };
+      }
+
+      function isAccessExpired(now = new Date()) {
+        return Boolean(state.enrollment?.access_expires_at && now > new Date(state.enrollment.access_expires_at));
+      }
+
+      function syncEnrollmentProgress() {
+        if (!state.enrollment) {
+          return;
+        }
+
+        const progression = enrollmentProgression();
+        state.enrollment = {
+          ...state.enrollment,
+          access_status: progression.access_status,
+          current_day: progression.current_day,
+          current_step: progression.current_step,
+          next_unlock_at: progression.next_unlock_at,
+          day_schedule: progression.day_schedule,
+          updated_at: new Date().toISOString()
+        };
+      }
+
+      function syncCurrentStepFromCalendar() {
+        if (isAdminView || state.devMode || hasPreliveFullAccess() || !canEnterChallenge() || isAccessExpired()) {
+          return;
+        }
+
+        const progression = enrollmentProgression();
+        if (progression.current_step && progression.current_step !== state.currentStepId) {
+          state.currentStepId = progression.current_step;
+          state.currentDay = progression.current_day || state.currentDay;
+          saveState();
+        }
+      }
+
       function formatCountdownClock(targetDate, options = {}) {
         const { capHours = 24 } = options;
         if (!targetDate) {
@@ -2742,6 +3410,11 @@
       }
 
       function getUnlockDateForDay(dayNumber) {
+        const scheduleEntry = state.enrollment?.day_schedule?.find((day) => day.day_number === dayNumber);
+        if (scheduleEntry?.unlock_at) {
+          return new Date(scheduleEntry.unlock_at);
+        }
+
         if (!state.challengeStartedAt) {
           return null;
         }
@@ -2771,7 +3444,7 @@
           return true;
         }
 
-        if (state.access.tier === "vip" && state.access.vipUnlockedAt) {
+        if (!shouldUseCadence()) {
           return true;
         }
 
@@ -2788,6 +3461,22 @@
 
       function hasPreliveFullAccess() {
         return APP_CONFIG.preliveAccessEnabled && isClientView;
+      }
+
+      function hasPaidAccess() {
+        return !isPaymentRequiredForChallenge() || Boolean(state.access.paymentCompletedAt);
+      }
+
+      function canEnterChallenge() {
+        return Boolean(state.auth.isRegistered && hasPaidAccess());
+      }
+
+      function isVipEnabled() {
+        return Boolean(APP_CONFIG.vipOffer.enabled && adminSettings.vipEnabled);
+      }
+
+      function hasVipAccess() {
+        return isVipEnabled() && state.access.tier === "vip" && Boolean(state.access.vipUnlockedAt);
       }
 
       function requestedPreliveStepFromUrl() {
@@ -2832,6 +3521,42 @@
         saveState();
       }
 
+      function applyPaymentReturnFromUrl() {
+        if (paymentReturnApplied) {
+          return;
+        }
+
+        paymentReturnApplied = true;
+
+        const paidReturn = queryParams.get("paid") === "1" || queryParams.get("payment") === "success";
+        if (!paidReturn || hasPaidAccess()) {
+          return;
+        }
+
+        completePaidAccess("checkout_return", { silentEvent: false });
+      }
+
+      function applyMagicLinkFromUrl() {
+        if (magicLinkApplied) {
+          return;
+        }
+
+        magicLinkApplied = true;
+        const token = queryParams.get("token") || queryParams.get("enrollment_token");
+        if (!token || token !== state.enrollment?.magic_link_token) {
+          return;
+        }
+
+        state.auth.isRegistered = true;
+        syncEnrollmentProgress();
+        saveState();
+
+        if (canEnterChallenge() && !isAccessExpired()) {
+          const progression = enrollmentProgression();
+          gotoStep(progression.current_step || "welcome", { forceAccess: true, silentEvent: true });
+        }
+      }
+
       function nextTimelineFocusDay() {
         const current = currentFlowStep();
         if (current.type === "welcome") {
@@ -2843,7 +3568,7 @@
         }
 
         if (current.type === "day" && current.day) {
-          return Math.min(current.day + 1, DAY_CONTENT.length);
+          return Math.min(current.day + 1, getChallengeDays().length);
         }
 
         return null;
@@ -2862,7 +3587,7 @@
           return true;
         }
 
-        if (state.access.tier === "vip" && state.access.vipUnlockedAt) {
+        if (hasVipAccess()) {
           return true;
         }
 
@@ -2880,7 +3605,7 @@
           return true;
         }
 
-        if (state.access.tier === "vip" && state.access.vipUnlockedAt) {
+        if (hasVipAccess()) {
           return true;
         }
 
@@ -2919,7 +3644,7 @@
           return;
         }
 
-        if (!options.forceAccess && !hasPreliveFullAccess() && !state.devMode && !state.auth.isRegistered && step.id !== "login") {
+        if (!options.forceAccess && !hasPreliveFullAccess() && !state.devMode && !canEnterChallenge() && step.id !== "login") {
           stepId = "login";
         }
 
@@ -2928,7 +3653,8 @@
         state.currentDay = targetStep.day || 0;
 
         if (targetStep.type === "day" && targetStep.day) {
-          state.days[targetStep.day].visitedAt = state.days[targetStep.day].visitedAt || new Date().toISOString();
+          const dayState = ensureDayState(targetStep.day);
+          dayState.visitedAt = dayState.visitedAt || new Date().toISOString();
         }
 
         if (targetStep.type === "wait") {
@@ -2979,15 +3705,71 @@
         state.contact.phone = phone || state.contact.phone;
         state.auth.isRegistered = true;
         state.auth.registeredAt = state.auth.registeredAt || new Date().toISOString();
+        state.enrollment = buildEnrollmentRecord(state.auth.registeredAt);
+        state.challengeStartedAt = state.enrollment.challenge_start_at;
         saveState();
         pushEvent("registration_completed", {
-          entry_type: "free",
+          entry_type: getAccessModel(),
+          enrollment_id: state.enrollment.id,
+          direct_access_link: state.enrollment.direct_access_link,
+          payment_required: isPaymentRequiredForChallenge(),
+          payment_amount: APP_CONFIG.paidAccess.priceLabel,
           first_name: firstName,
           email,
           phone: phone || null,
           ghl_webhook_target: "leadconnector"
         });
-        gotoStep("welcome", { silentEvent: true });
+
+        if (!isPaymentRequiredForChallenge() || hasPaidAccess()) {
+          gotoStep("welcome", { silentEvent: true });
+          return;
+        }
+
+        startPaidCheckout();
+      }
+
+      function completePaidAccess(mode = "local_simulation", options = {}) {
+        state.access.paymentRequired = isPaymentRequiredForChallenge();
+        state.access.paymentAmount = APP_CONFIG.paidAccess.priceLabel;
+        state.access.paymentCompletedAt = state.access.paymentCompletedAt || new Date().toISOString();
+        state.access.paymentMode = mode;
+        state.access.tier = "paid";
+        ensureEnrollment();
+        state.enrollment.payment_status = "paid";
+        state.enrollment.access_status = "active";
+        state.enrollment.updated_at = new Date().toISOString();
+        saveState();
+
+        if (!options.silentEvent) {
+          pushEvent("payment_completed", {
+            payment_amount: APP_CONFIG.paidAccess.priceLabel,
+            payment_mode: mode,
+            simulation_mode: APP_CONFIG.paidAccess.simulationMode
+          });
+        }
+
+        if (state.auth.isRegistered) {
+          gotoStep("welcome", { silentEvent: true });
+        }
+      }
+
+      function startPaidCheckout() {
+        state.access.paymentRequired = isPaymentRequiredForChallenge();
+        state.access.paymentAmount = APP_CONFIG.paidAccess.priceLabel;
+        state.access.paymentCheckoutStartedAt = new Date().toISOString();
+        saveState();
+        pushEvent("payment_checkout_started", {
+          payment_amount: APP_CONFIG.paidAccess.priceLabel,
+          checkout_url_configured: Boolean(APP_CONFIG.paidAccess.checkoutUrl),
+          simulation_mode: APP_CONFIG.paidAccess.simulationMode
+        });
+
+        if (APP_CONFIG.paidAccess.simulationMode || !APP_CONFIG.paidAccess.checkoutUrl) {
+          completePaidAccess("local_simulation", { silentEvent: false });
+          return;
+        }
+
+        window.location.href = APP_CONFIG.paidAccess.checkoutUrl;
       }
 
       function completeIntroVideo() {
@@ -3007,6 +3789,10 @@
       }
 
       function unlockVipAccess(originDay = null) {
+        if (!isVipEnabled()) {
+          return;
+        }
+
         if (state.access.tier === "vip") {
           if (originDay) {
             gotoStep(`day-${originDay}`);
@@ -3038,9 +3824,9 @@
         }
 
         if (!state.challengeStartedAt) {
-          const now = new Date().toISOString();
-          state.challengeStartedAt = now;
-          state.intro.startedAt = now;
+          ensureEnrollment();
+          state.challengeStartedAt = state.enrollment.challenge_start_at;
+          state.intro.startedAt = state.enrollment.challenge_start_at;
         }
 
         saveState();
@@ -3049,12 +3835,25 @@
       }
 
       function completeDay(dayNumber) {
-        if (!state.days[dayNumber].videoCompletedAt && !state.devMode) {
+        const dayContent = getDayContent(dayNumber);
+        const dayState = ensureDayState(dayNumber);
+        if (dayContent.requireContentVideoComplete && !dayState.videoCompletedAt && !state.devMode) {
           state.ui.actionErrors[`day-${dayNumber}`] = "La vidéo doit être écoutée au complet avant de pouvoir passer à l'autre étape.";
           saveState();
           pushEvent("day_completion_blocked", {
             day: dayNumber,
-            reason: "video_not_completed"
+            reason: "content_video_not_completed"
+          });
+          render();
+          return;
+        }
+
+        if (dayContent.conversionCashflow && dayContent.requireSalesVideoComplete && !dayState.salesVideoCompletedAt && !state.devMode) {
+          state.ui.actionErrors[`day-${dayNumber}`] = "La vidéo de vente doit être écoutée au complet avant de pouvoir passer à la suite du défi.";
+          saveState();
+          pushEvent("day_completion_blocked", {
+            day: dayNumber,
+            reason: "sales_video_not_completed"
           });
           render();
           return;
@@ -3062,13 +3861,14 @@
 
         delete state.ui.actionErrors[`day-${dayNumber}`];
 
-        if (!state.days[dayNumber].completedAt) {
-          state.days[dayNumber].completedAt = new Date().toISOString();
+        if (!dayState.completedAt) {
+          dayState.completedAt = new Date().toISOString();
         }
+        syncEnrollmentProgress();
         saveState();
         pushEvent("day_completed", { day: dayNumber });
 
-        if (dayNumber >= 7) {
+        if (dayNumber >= getConfiguredDayCount()) {
           gotoStep("thanks", { silentEvent: true });
           return;
         }
@@ -3088,7 +3888,7 @@
       }
 
       function openSale(dayNumber) {
-        state.days[dayNumber].conversionClickedAt = new Date().toISOString();
+        ensureDayState(dayNumber).conversionClickedAt = new Date().toISOString();
         saveState();
         pushEvent("conversion_clicked", { day: dayNumber, sale_url: APP_CONFIG.saleUrl });
         window.open(APP_CONFIG.saleUrl, "_blank", "noopener,noreferrer");
@@ -3103,6 +3903,13 @@
       function resetProgress() {
         state = emptyState();
         saveState();
+        render();
+      }
+
+      function restartChallengeEnrollment() {
+        state = emptyState();
+        saveState();
+        pushEvent("challenge_reenrollment_requested");
         render();
       }
 
@@ -3150,12 +3957,37 @@
         gotoStep(FLOW_STEPS[currentIndex + 1].id);
       }
 
+      function ensureDayState(dayNumber) {
+        if (!state.days[dayNumber]) {
+          state.days[dayNumber] = {
+            visitedAt: null,
+            videoCompletedAt: null,
+            salesVideoCompletedAt: null,
+            completedAt: null,
+            conversionClickedAt: null
+          };
+        }
+
+        return state.days[dayNumber];
+      }
+
       function markDayVideoCompleted(dayNumber) {
-        if (!state.days[dayNumber].videoCompletedAt) {
-          state.days[dayNumber].videoCompletedAt = new Date().toISOString();
+        const dayState = ensureDayState(dayNumber);
+        if (!dayState.videoCompletedAt) {
+          dayState.videoCompletedAt = new Date().toISOString();
           delete state.ui.actionErrors[`day-${dayNumber}`];
           saveState();
           pushEvent("day_video_completed", { day: dayNumber });
+        }
+      }
+
+      function markSalesVideoCompleted(dayNumber) {
+        const dayState = ensureDayState(dayNumber);
+        if (!dayState.salesVideoCompletedAt) {
+          dayState.salesVideoCompletedAt = new Date().toISOString();
+          delete state.ui.actionErrors[`day-${dayNumber}`];
+          saveState();
+          pushEvent("sales_video_completed", { day: dayNumber });
         }
       }
 
@@ -3187,7 +4019,11 @@
           return APP_CONFIG.videoDefaults.wistiaIds.intro;
         }
 
-        return APP_CONFIG.videoDefaults.wistiaIds.days[dayNumber] || APP_CONFIG.videoDefaults.wistiaIds.intro;
+        return getDayContent(dayNumber).contentVideoId || APP_CONFIG.videoDefaults.wistiaIds.intro;
+      }
+
+      function getSalesWistiaMediaId(dayNumber) {
+        return getDayContent(dayNumber).salesVideoId || getWistiaMediaId(dayNumber);
       }
 
       function videoEmbedMarkup(dayNumber, title, options = {}) {
@@ -3469,11 +4305,11 @@
         return `
           <div class="login-stack">
             <div class="card auth-card">
-              <span class="eyebrow">Inscription gratuite</span>
-              <h3>Créer ton accès avant le défi</h3>
+              <span class="eyebrow">Accès payant · ${APP_CONFIG.paidAccess.priceLabel}</span>
+              <h3>Créer ton accès au défi</h3>
               <div class="rich-text">
-                <p>La version gratuite demande une inscription obligatoire avant l'écran de bienvenue. Cela nous permet de préparer le suivi, la progression et la structure webhook pour GHL.</p>
-                <p>Une fois inscrite, tu accèdes à l'introduction, puis tu commences le défi au rythme normal.</p>
+                <p>L'entrée au défi est payante. Ton paiement de ${APP_CONFIG.paidAccess.priceLabel} débloque l'écran de bienvenue, l'introduction et la progression normale sur 7 jours.</p>
+                <p>Remplis tes informations pour préparer ton accès, déclencher le suivi GHL et passer au paiement.</p>
               </div>
               <form id="registrationForm">
                 <div class="form-grid">
@@ -3491,44 +4327,50 @@
                   </div>
                 </div>
                 <div class="page-actions">
-                  <button class="primary-button" type="submit">Continuer vers l'introduction</button>
+                  <button class="primary-button" type="submit">Payer ${APP_CONFIG.paidAccess.priceLabel} et entrer dans le défi</button>
                 </div>
               </form>
               <div class="auth-helper">
-                En production, cet écran servira d'entrée obligatoire avant l'expérience gratuite.
+                ${APP_CONFIG.paidAccess.simulationMode
+                  ? "Prototype: le paiement est simulé localement en attendant le lien de checkout final."
+                  : "Le paiement est obligatoire avant d'accéder à l'expérience."}
               </div>
             </div>
-            <div class="section-card vip-offer-card highlight registration-vip-card">
-              <span class="eyebrow">Version VIP payante</span>
-              <h3>Débloque tout le défi</h3>
-              <p class="registration-vip-intro">
-                La version VIP te donne un seul avantage: accéder à toutes les journées maintenant, sans attendre les écrans intermédiaires.
-              </p>
-              <div class="offer-comparison">
-                <div class="offer-tier">
-                  <strong>Gratuit</strong>
-                  <p>Introduction + progression normale jour par jour avec écrans d'attente entre les journées.</p>
-                  <span class="offer-tier-price">0$</span>
+            ${isVipEnabled() ? `
+              <div class="section-card vip-offer-card highlight registration-vip-card">
+                <span class="eyebrow">Version VIP payante</span>
+                <h3>Débloque tout le défi</h3>
+                <p class="registration-vip-intro">
+                  La version VIP te donne un seul avantage: accéder à toutes les journées maintenant, sans attendre les écrans intermédiaires.
+                </p>
+                <div class="offer-comparison">
+                  <div class="offer-tier">
+                    <strong>Gratuit</strong>
+                    <p>Introduction + progression normale jour par jour avec écrans d'attente entre les journées.</p>
+                    <span class="offer-tier-price">0$</span>
+                  </div>
+                  <div class="offer-tier highlight">
+                    <strong>VIP</strong>
+                    <p>Tu peux naviguer dans tout le défi dès le jour 1, sans attendre 8h le lendemain.</p>
+                    <span class="offer-tier-price">${APP_CONFIG.vipOffer.priceLabel}</span>
+                  </div>
                 </div>
-                <div class="offer-tier highlight">
-                  <strong>VIP</strong>
-                  <p>Tu peux naviguer dans tout le défi dès le jour 1, sans attendre 8h le lendemain.</p>
-                  <span class="offer-tier-price">${APP_CONFIG.vipOffer.priceLabel}</span>
+                <div class="page-actions vip-action-row">
+                  <button class="primary-button" type="button" data-action="unlock-vip" data-origin-day="1">
+                    Passe en mode VIP maintenant
+                  </button>
                 </div>
               </div>
-              <div class="page-actions vip-action-row">
-                <button class="primary-button" type="button" data-action="unlock-vip" data-origin-day="1">
-                  Passe en mode VIP maintenant
-                </button>
-              </div>
-            </div>
+            ` : ""}
           </div>
         `;
       }
 
       function renderConversionOffer(dayNumber) {
-        const dayContent = DAY_CONTENT.find((day) => day.day === dayNumber);
+        const dayContent = getDayContent(dayNumber);
         const promo = dayContent?.vslPromo;
+        const dayState = ensureDayState(dayNumber);
+        const salesVideoCompleted = Boolean(dayState.salesVideoCompletedAt);
 
         if (!promo) {
           return "";
@@ -3542,6 +4384,31 @@
               <p>${escapeHtml(promo.intro)}</p>
               <p><strong>${escapeHtml(promo.keyMessage)}</strong></p>
             </div>
+            <div class="video-frame">
+              ${salesVideoCompleted ? `
+                <div class="video-complete-badge" aria-label="Vidéo de vente complétée">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+              ` : ""}
+              <wistia-player
+                media-id="${escapeHtml(getSalesWistiaMediaId(dayNumber))}"
+                controls-visible-on-load="true"
+                play-bar-control="false"
+                settings-control="false"
+                playback-rate-control="false"
+                quality-control="false"
+                fullscreen-control="true"
+                volume-control="true"
+                data-wistia-sales-day="${dayNumber}"
+              ></wistia-player>
+            </div>
+            <div class="video-actions">
+              <div class="state-pill ${salesVideoCompleted ? "done" : ""}">
+                ${salesVideoCompleted ? "Vidéo de vente complétée" : "Vidéo de vente obligatoire"}
+              </div>
+            </div>
             <div class="conversion-list">
               ${promo.points.map((point) => `<div class="conversion-point">${escapeHtml(point)}</div>`).join("")}
             </div>
@@ -3554,8 +4421,8 @@
         `;
       }
 
-      function renderDayScreen(dayContent) {
-        const dayState = state.days[dayContent.day];
+      function renderDayScreen(dayContent, options = {}) {
+        const dayState = ensureDayState(dayContent.day);
         const dayError = state.ui?.actionErrors?.[`day-${dayContent.day}`];
         const checklistState = state.ui?.checklist?.[`day-${dayContent.day}`] || {};
         const theoryBlocks = dayContent.theoryBlocks || [
@@ -3580,7 +4447,7 @@
           return item.title && item.text ? `${item.title}: ${item.text}` : item.text || item.title || "";
         });
 
-        if (isClientView) {
+        if (isClientView || options.forceClient) {
           return `
             <div class="grid-two">
               <div>
@@ -3647,7 +4514,7 @@
                   </div>
                   <div class="page-actions primary-action-row">
                     <button class="primary-button" type="button" data-action="complete-day" data-day="${dayContent.day}">
-                      ${dayContent.day < 7 ? "Passer au jour suivant" : "Terminer le défi"}
+                      ${dayContent.day < getConfiguredDayCount() ? "Passer au jour suivant" : "Terminer le défi"}
                     </button>
                   </div>
                   ${dayError ? `<div class="action-error-message">${escapeHtml(dayError)}</div>` : ""}
@@ -3681,7 +4548,7 @@
                     </button>
                   ` : ""}
                   <button class="primary-button" type="button" data-action="complete-day" data-day="${dayContent.day}">
-                    ${dayContent.day < 7 ? "Passer au jour suivant" : "Terminer le défi"}
+                    ${dayContent.day < getConfiguredDayCount() ? "Passer au jour suivant" : "Terminer le défi"}
                   </button>
                 </div>
                 <div class="status-line">
@@ -3695,12 +4562,16 @@
       }
 
       function renderWaitScreen(dayNumber) {
-        if (dayNumber >= 6) {
+        if (dayNumber > clampConversionStartDay(adminSettings.conversionStartDay, getConfiguredDayCount())) {
           return `
             <div class="section-card wait-card simple-wait-card">
               ${renderConversionOffer(dayNumber - 1)}
             </div>
           `;
+        }
+
+        if (!isVipEnabled()) {
+          return `<div class="wait-card simple-wait-card"></div>`;
         }
 
         return `
@@ -3737,7 +4608,7 @@
           return `
             <div class="grid-two">
               <div>
-                ${videoEmbedMarkup(7, "Vidéo de conclusion")}
+                ${videoEmbedMarkup(getConfiguredDayCount(), "Vidéo de conclusion")}
               </div>
               <div>
                 <div class="section-card">
@@ -3758,7 +4629,7 @@
                     <div class="conversion-point">CTA principal vers page de vente, appel découverte ou checkout.</div>
                   </div>
                   <div class="page-actions">
-                    <button class="secondary-button" type="button" data-action="open-sale" data-day="7">
+                    <button class="secondary-button" type="button" data-action="open-sale" data-day="${getConfiguredDayCount()}">
                       Découvrir l'offre
                     </button>
                   </div>
@@ -3789,14 +4660,218 @@
                   <div class="conversion-point">CTA principal vers page de vente, appel découverte ou checkout.</div>
                 </div>
                 <div class="page-actions">
-                  <button class="secondary-button" type="button" data-action="open-sale" data-day="7">
+                  <button class="secondary-button" type="button" data-action="open-sale" data-day="${getConfiguredDayCount()}">
                     Découvrir l'offre
                   </button>
                 </div>
               </div>
             </div>
             <div>
-              ${videoEmbedMarkup(7, "Vidéo de conclusion")}
+              ${videoEmbedMarkup(getConfiguredDayCount(), "Vidéo de conclusion")}
+            </div>
+          </div>
+        `;
+      }
+
+      function adminDayOptions() {
+        return Array.from({ length: getConfiguredDayCount() }, (_, index) => {
+          const day = index + 1;
+          const selected = day === Number(adminSettings.selectedDay || 1) ? "selected" : "";
+          return `<option value="${day}" ${selected}>Jour ${day}</option>`;
+        }).join("");
+      }
+
+      function renderAdminDashboard() {
+        const selectedDay = Math.min(Number(adminSettings.selectedDay || 1), getConfiguredDayCount());
+        adminSettings.selectedDay = selectedDay;
+        const day = getDayContent(selectedDay);
+
+        return `
+          <div class="admin-dashboard">
+            <div class="admin-grid">
+              <div class="section-card">
+                <span class="eyebrow">Structure du défi</span>
+                <h3>Contrôles globaux</h3>
+                <div class="admin-form-grid">
+                  <div class="admin-field">
+                    <label for="adminDayCount">Nombre de jours</label>
+                    <input class="text-input" id="adminDayCount" type="number" min="1" max="14" value="${getConfiguredDayCount()}" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminConversionStartDay">Premier jour avec offre</label>
+                    <input class="text-input" id="adminConversionStartDay" type="number" min="1" max="${getConfiguredDayCount()}" value="${adminSettings.conversionStartDay}" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminAccessModel">Modèle d'accès</label>
+                    <select class="text-input" id="adminAccessModel">
+                      <option value="${APP_CONFIG.accessModels.FREE}" ${getAccessModel() === APP_CONFIG.accessModels.FREE ? "selected" : ""}>free</option>
+                      <option value="${APP_CONFIG.accessModels.PAID}" ${getAccessModel() === APP_CONFIG.accessModels.PAID ? "selected" : ""}>paid</option>
+                      <option value="${APP_CONFIG.accessModels.FREE_WITH_VIP}" ${getAccessModel() === APP_CONFIG.accessModels.FREE_WITH_VIP ? "selected" : ""}>free_with_vip</option>
+                    </select>
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminUnlockMode">Déblocage</label>
+                    <select class="text-input" id="adminUnlockMode">
+                      <option value="all" ${getCurrentChallenge().unlockMode === "all" ? "selected" : ""}>Toutes les journées accessibles</option>
+                      <option value="daily_8am" ${getCurrentChallenge().unlockMode === "daily_8am" ? "selected" : ""}>Cadence 8h AM</option>
+                    </select>
+                  </div>
+                  <label class="admin-toggle">
+                    <span>Paiement requis avant l'entrée</span>
+                    <input id="adminPaidAccessRequired" type="checkbox" ${isPaymentRequiredForChallenge() ? "checked" : ""} />
+                  </label>
+                  <label class="admin-toggle">
+                    <span>VIP activé (master flag actuellement ${APP_CONFIG.vipOffer.enabled ? "ON" : "OFF"})</span>
+                    <input id="adminVipEnabled" type="checkbox" ${isVipEnabled() ? "checked" : ""} ${APP_CONFIG.vipOffer.enabled ? "" : "disabled"} />
+                  </label>
+                  <label class="admin-toggle full">
+                    <span>Vidéo de contenu obligatoire avant de passer au jour suivant</span>
+                    <input id="adminRequireContentVideo" type="checkbox" ${adminSettings.requireContentVideoComplete ? "checked" : ""} />
+                  </label>
+                  <label class="admin-toggle full">
+                    <span>Vidéo de vente obligatoire pour les jours avec offre</span>
+                    <input id="adminRequireSalesVideo" type="checkbox" ${adminSettings.requireSalesVideoComplete ? "checked" : ""} />
+                  </label>
+                </div>
+              </div>
+
+              <div class="section-card">
+                <span class="eyebrow">Page à modifier</span>
+                <h3>Contenu de la journée</h3>
+                <div class="admin-form-grid">
+                  <div class="admin-field full">
+                    <label for="adminSelectedDay">Journée</label>
+                    <select class="text-input" id="adminSelectedDay">${adminDayOptions()}</select>
+                  </div>
+                  <div class="admin-field full">
+                    <label for="adminDayTitle">Titre</label>
+                    <input class="text-input" id="adminDayTitle" type="text" value="${escapeHtml(day.title)}" />
+                  </div>
+                  <div class="admin-field full">
+                    <label for="adminDaySummary">Résumé / à retenir</label>
+                    <textarea class="text-input" id="adminDaySummary">${escapeHtml(day.summary)}</textarea>
+                  </div>
+                  <div class="admin-field full">
+                    <label for="adminDayCap">Cap du jour</label>
+                    <textarea class="text-input" id="adminDayCap">${escapeHtml(day.text[0] || "")}</textarea>
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminContentVideoId">ID vidéo contenu Wistia</label>
+                    <input class="text-input" id="adminContentVideoId" type="text" value="${escapeHtml(day.contentVideoId || "")}" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminSalesVideoId">ID vidéo vente Wistia</label>
+                    <input class="text-input" id="adminSalesVideoId" type="text" value="${escapeHtml(day.salesVideoId || "")}" placeholder="Optionnel" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminFocus1Title">Focus 01 titre</label>
+                    <input class="text-input" id="adminFocus1Title" type="text" value="${escapeHtml(day.theoryBlocks[0]?.title || "")}" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminFocus2Title">Focus 02 titre</label>
+                    <input class="text-input" id="adminFocus2Title" type="text" value="${escapeHtml(day.theoryBlocks[1]?.title || "")}" />
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminFocus1Text">Focus 01 texte</label>
+                    <textarea class="text-input" id="adminFocus1Text">${escapeHtml(day.theoryBlocks[0]?.text || "")}</textarea>
+                  </div>
+                  <div class="admin-field">
+                    <label for="adminFocus2Text">Focus 02 texte</label>
+                    <textarea class="text-input" id="adminFocus2Text">${escapeHtml(day.theoryBlocks[1]?.text || "")}</textarea>
+                  </div>
+                </div>
+                <div class="page-actions">
+                  <button class="primary-button" type="button" data-action="save-admin-config">Sauvegarder et prévisualiser</button>
+                  <button class="ghost-button" type="button" data-action="reset-admin-config">Réinitialiser le contenu admin</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-card admin-preview">
+              <span class="eyebrow">Prévisualisation</span>
+              <h3>${escapeHtml(day.title)}</h3>
+              <p class="auth-helper">
+                Conversion active à partir du jour ${adminSettings.conversionStartDay}. Cette journée est ${day.conversionCashflow ? "une page avec offre et vidéo de vente obligatoire" : "une page de valeur sans offre"}.
+              </p>
+              <div class="admin-preview-frame">
+                ${renderDayScreen(day, { forceClient: true })}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function readAdminInput(id) {
+        return document.getElementById(id)?.value?.trim() || "";
+      }
+
+      function saveAdminConfigFromForm() {
+        const dayCount = clampDayCount(readAdminInput("adminDayCount"));
+        const conversionStartDay = clampConversionStartDay(readAdminInput("adminConversionStartDay"), dayCount);
+        const selectedDay = Math.min(Number(readAdminInput("adminSelectedDay")) || 1, dayCount);
+        const existingDay = adminSettings.days[selectedDay] || {};
+
+        adminSettings = {
+          ...adminSettings,
+          dayCount,
+          conversionStartDay,
+          accessModel: readAdminInput("adminAccessModel") || APP_CONFIG.accessModels.PAID,
+          unlockMode: readAdminInput("adminUnlockMode") || "all",
+          paidAccessRequired: Boolean(document.getElementById("adminPaidAccessRequired")?.checked),
+          vipEnabled: Boolean(APP_CONFIG.vipOffer.enabled && document.getElementById("adminVipEnabled")?.checked),
+          selectedDay,
+          requireContentVideoComplete: Boolean(document.getElementById("adminRequireContentVideo")?.checked),
+          requireSalesVideoComplete: Boolean(document.getElementById("adminRequireSalesVideo")?.checked),
+          days: {
+            ...adminSettings.days,
+            [selectedDay]: {
+              ...existingDay,
+              title: readAdminInput("adminDayTitle"),
+              summary: readAdminInput("adminDaySummary"),
+              cap: readAdminInput("adminDayCap"),
+              contentVideoId: readAdminInput("adminContentVideoId"),
+              salesVideoId: readAdminInput("adminSalesVideoId"),
+              focus1Title: readAdminInput("adminFocus1Title"),
+              focus1Text: readAdminInput("adminFocus1Text"),
+              focus2Title: readAdminInput("adminFocus2Title"),
+              focus2Text: readAdminInput("adminFocus2Text")
+            }
+          }
+        };
+
+        FLOW_STEPS = buildFlowSteps();
+        saveAdminSettings();
+        render();
+      }
+
+      function resetAdminConfig() {
+        adminSettings = defaultAdminSettings();
+        FLOW_STEPS = buildFlowSteps();
+        saveAdminSettings();
+        render();
+      }
+
+      function renderExpiredAccessScreen() {
+        return `
+          <div class="section-card highlight cashflow-offer-card">
+            <span class="eyebrow">Accès terminé</span>
+            <h3>La fenêtre du défi est maintenant fermée</h3>
+            <div class="rich-text">
+              <p>Ton accès au défi était disponible jusqu'au ${escapeHtml(formatDate(state.enrollment?.access_expires_at))}.</p>
+              <p>La suite logique est de transformer ce que tu as clarifié en système de contenu simple, répétable et connecté à ton offre.</p>
+            </div>
+            <div class="conversion-list">
+              <div class="conversion-point">Continuer avec Cashflow pour garder le rythme sans repartir de zéro.</div>
+              <div class="conversion-point">Réutiliser les angles, CTA et séquences créées pendant le défi.</div>
+              <div class="conversion-point">Te réinscrire au défi si tu veux refaire le parcours depuis le départ.</div>
+            </div>
+            <div class="page-actions">
+              <button class="primary-button" type="button" data-action="open-sale" data-day="${getConfiguredDayCount()}">
+                Découvrir Cashflow
+              </button>
+              <button class="ghost-button" type="button" data-action="restart-challenge">
+                Me réinscrire au défi
+              </button>
             </div>
           </div>
         `;
@@ -3816,9 +4891,9 @@
         dom.progressRail.classList.toggle("journey-mode", clientJourneyView);
 
         const items = clientJourneyView
-          ? DAY_CONTENT.flatMap((day, index) => {
+          ? getChallengeDays().flatMap((day, index) => {
               const entries = [{ kind: "day", label: `Jour ${day.day}`, shortLabel: `${day.day}`, key: day.day }];
-              if (index < DAY_CONTENT.length - 1) {
+              if (challengeUsesWaitPages() && index < getChallengeDays().length - 1) {
                 entries.push({
                   kind: "wait",
                   label: `Attente du jour ${day.day + 1}`,
@@ -3830,7 +4905,7 @@
             })
           : [
               { kind: "day", label: "Accueil", shortLabel: "i", key: 0 },
-              ...DAY_CONTENT.map((day) => ({ kind: "day", label: `Jour ${day.day}`, shortLabel: `${day.day}`, key: day.day }))
+              ...getChallengeDays().map((day) => ({ kind: "day", label: `Jour ${day.day}`, shortLabel: `${day.day}`, key: day.day }))
             ];
 
         dom.progressRail.innerHTML = items
@@ -3874,12 +4949,12 @@
       }
 
       function renderMetrics() {
-        const completedDays = DAY_CONTENT.filter((day) => Boolean(state.days[day.day]?.completedAt)).length;
-        const percent = Math.round((completedDays / DAY_CONTENT.length) * 100);
+        const completedDays = getChallengeDays().filter((day) => Boolean(state.days[day.day]?.completedAt)).length;
+        const percent = Math.round((completedDays / getChallengeDays().length) * 100);
         const metrics = [
           {
             label: "Jours complétés",
-            value: `${completedDays}/7`
+            value: `${completedDays}/${getConfiguredDayCount()}`
           },
           {
             label: "Progression",
@@ -3891,7 +4966,7 @@
           },
           {
             label: "Accès",
-            value: state.access.tier === "vip" ? "VIP" : "Gratuit"
+            value: hasPaidAccess() ? "Payé" : "Paiement requis"
           },
           {
             label: "Mode dev",
@@ -3938,7 +5013,7 @@
         if (current.type === "wait" && current.day) {
           target = getUnlockDateForDay(current.day);
           detail = `Accès automatique au jour ${current.day} dès que l'heure locale atteint 8h00.`;
-        } else if (current.type === "day" && current.day < 7) {
+        } else if (current.type === "day" && current.day < getConfiguredDayCount()) {
           target = getUnlockDateForDay(current.day + 1);
           detail = `Si tu complètes cette journée maintenant, le prochain accès normal sera prévu pour le ${formatDate(target)}.`;
         } else if (current.type === "thanks") {
@@ -3962,9 +5037,9 @@
           return `<option value="${step.id}" ${selected}>${step.label}</option>`;
         }).join("");
 
-        const currentDayValue = state.currentDay >= 1 && state.currentDay <= 7 ? state.currentDay : 1;
+        const currentDayValue = state.currentDay >= 1 && state.currentDay <= getConfiguredDayCount() ? state.currentDay : 1;
         dom.clientDaySelector.disabled = !state.devMode;
-        dom.clientDaySelector.innerHTML = DAY_CONTENT.map((day) => {
+        dom.clientDaySelector.innerHTML = getChallengeDays().map((day) => {
           const selected = day.day === currentDayValue ? "selected" : "";
           return `<option value="${day.day}" ${selected}>Jour ${day.day}</option>`;
         }).join("");
@@ -4042,6 +5117,7 @@
 
       function applyStepLayout() {
         const current = currentFlowStep();
+        document.body.classList.toggle("admin-view", isAdminView);
         const clientJourneyView = isClientView && current.type !== "welcome" && current.type !== "login";
         const clientTopFocusView = isClientView && (current.type === "welcome" || current.type === "day" || current.type === "wait");
         const clientLoginView = isClientView && current.type === "login";
@@ -4052,11 +5128,30 @@
       }
 
       function applyViewMode() {
+        if (isAdminView) {
+          document.body.classList.remove("client-view");
+          dom.brandModeLabel.textContent = "Admin du défi";
+          dom.heroMeta.innerHTML = `
+            <span class="chip">Configuration contenu</span>
+            <span class="chip">Vidéos Wistia</span>
+            <span class="chip">Règles de progression</span>
+          `;
+          dom.topbarActions.classList.remove("hidden");
+          dom.clientDevPanel.classList.add("hidden");
+          dom.cadencePanel.classList.add("hidden");
+          dom.statsPanel.classList.add("hidden");
+          dom.timelinePanel.classList.add("hidden");
+          dom.adminPanel.classList.add("hidden");
+          dom.payloadPanel.classList.add("hidden");
+          dom.sidebar.classList.add("hidden");
+          return;
+        }
+
         if (isClientView) {
           document.body.classList.add("client-view");
           dom.brandModeLabel.textContent = "Expérience cliente";
           dom.heroMeta.innerHTML = `
-            <span class="chip">Défi sur 7 jours</span>
+            <span class="chip">Défi sur ${getConfiguredDayCount()} jours</span>
             <span class="chip">1 étape à la fois</span>
             <span class="chip">Vidéo + contenu + progression</span>
           `;
@@ -4067,10 +5162,12 @@
           dom.timelinePanel.classList.add("hidden");
           dom.adminPanel.classList.add("hidden");
           dom.payloadPanel.classList.add("hidden");
+          dom.sidebar.classList.add("hidden");
           return;
         }
 
         document.body.classList.remove("client-view");
+        dom.sidebar.classList.remove("hidden");
         dom.brandModeLabel.textContent = "Prototype fonctionnel";
         dom.clientDevPanel.classList.add("hidden");
         dom.cadencePanel.classList.remove("hidden");
@@ -4087,12 +5184,32 @@
       }
 
       function renderScreen() {
+        if (isAdminView) {
+          dom.hero.classList.add("hidden");
+          dom.progressRail.innerHTML = "";
+          dom.progressRail.classList.add("hidden");
+          dom.screenEyebrow.textContent = "Admin";
+          dom.screenTitle.textContent = "Contrôler le défi";
+          dom.screenSummary.textContent = "Modifier les textes, vidéos, journées et règles de visionnement.";
+          dom.screenRoot.innerHTML = renderAdminDashboard();
+          return;
+        }
+
+        dom.hero.classList.remove("hidden");
+        if (!state.devMode && !hasPreliveFullAccess() && isAccessExpired()) {
+          dom.screenEyebrow.textContent = "Fin d'accès";
+          dom.screenTitle.textContent = "Ton accès au défi est terminé";
+          dom.screenSummary.textContent = "La suite recommandée est Cashflow, ou une nouvelle inscription au défi.";
+          dom.screenRoot.innerHTML = renderExpiredAccessScreen();
+          return;
+        }
+
         const step = currentFlowStep();
 
         if (step.type === "login") {
           dom.screenEyebrow.textContent = "Accès";
-          dom.screenTitle.textContent = "Créer ton accès gratuit";
-          dom.screenSummary.textContent = "Inscription obligatoire avant l'écran de bienvenue.";
+          dom.screenTitle.textContent = "Créer ton accès au défi";
+          dom.screenSummary.textContent = "Paiement requis avant l'écran de bienvenue.";
           dom.screenRoot.innerHTML = renderLoginScreen();
           return;
         }
@@ -4106,7 +5223,7 @@
         }
 
         if (step.type === "day" && step.day) {
-          const dayContent = DAY_CONTENT.find((day) => day.day === step.day);
+          const dayContent = getDayContent(step.day);
           dom.screenEyebrow.textContent = "";
           dom.screenTitle.textContent = dayContent.title;
           dom.screenSummary.textContent = dayContent.summary;
@@ -4133,6 +5250,27 @@
       }
 
       function bindDynamicActions() {
+        document.querySelectorAll("[data-action='save-admin-config']").forEach((button) => {
+          button.addEventListener("click", saveAdminConfigFromForm);
+        });
+
+        document.querySelectorAll("[data-action='reset-admin-config']").forEach((button) => {
+          button.addEventListener("click", resetAdminConfig);
+        });
+
+        document.querySelectorAll("[data-action='restart-challenge']").forEach((button) => {
+          button.addEventListener("click", restartChallengeEnrollment);
+        });
+
+        const adminSelectedDay = document.getElementById("adminSelectedDay");
+        if (adminSelectedDay) {
+          adminSelectedDay.addEventListener("change", () => {
+            adminSettings.selectedDay = Number(adminSelectedDay.value) || 1;
+            saveAdminSettings();
+            render();
+          });
+        }
+
         const instructionScroll = document.getElementById("instructionScroll");
         if (instructionScroll) {
           if (instructionScroll.scrollHeight <= instructionScroll.clientHeight + 8) {
@@ -4188,6 +5326,27 @@
               day,
               provider: "wistia",
               message: event?.message || "Erreur de lecture vidéo non spécifiée."
+            });
+          });
+        });
+
+        document.querySelectorAll("wistia-player[data-wistia-sales-day]").forEach((player) => {
+          if (player.dataset.endedBound === "true") {
+            return;
+          }
+
+          player.dataset.endedBound = "true";
+          player.addEventListener("ended", () => {
+            const day = Number(player.getAttribute("data-wistia-sales-day"));
+            markSalesVideoCompleted(day);
+          });
+
+          player.addEventListener("error", (event) => {
+            const day = Number(player.getAttribute("data-wistia-sales-day"));
+            pushEvent("sales_video_player_error", {
+              day,
+              provider: "wistia",
+              message: event?.message || "Erreur de lecture vidéo de vente non spécifiée."
             });
           });
         });
@@ -4260,8 +5419,12 @@
 
       function render() {
         applyRequestedPreliveStep();
+        applyPaymentReturnFromUrl();
+        applyMagicLinkFromUrl();
+        syncEnrollmentProgress();
+        syncCurrentStepFromCalendar();
 
-        if (!hasPreliveFullAccess() && !state.devMode && !state.auth.isRegistered && !state.challengeStartedAt && state.currentStepId !== "login") {
+        if (!isAdminView && !hasPreliveFullAccess() && !state.devMode && !canEnterChallenge() && state.currentStepId !== "login") {
           state.currentStepId = "login";
           saveState();
         }
