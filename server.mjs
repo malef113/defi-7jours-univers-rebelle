@@ -39,12 +39,8 @@ async function servePublicFile(res, filename, contentType) {
 
 const challengeRoutes = new Set([
   "/",
-  "/defi-7jours",
-  "/client/defi-7jours",
-  "/client/defi-7-jours",
   "/admin",
-  "/prototype/defi-7jours",
-  "/prototype/defi-7-jours"
+  "/prototypeclient"
 ]);
 
 const server = createServer(async (req, res) => {
@@ -121,5 +117,7 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Défi 7 jours running on http://localhost:${PORT}/defi-7jours`);
+  console.log(`Défi 7 jours running on http://localhost:${PORT}/`);
+  console.log(`Admin running on http://localhost:${PORT}/admin`);
+  console.log(`Prototype client running on http://localhost:${PORT}/prototypeclient`);
 });

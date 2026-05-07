@@ -6,14 +6,12 @@ Ce document sert de garde-fou pour porter le prototype HTML du Défi vers Lovabl
 
 - Repo source: `defi-7jours-univers-rebelle`
 - Ne pas toucher au repo Génie Rebelle.
-- Vues client:
-  - `/defi-7jours`
-  - `/client/defi-7jours`
-  - `/client/defi-7-jours`
+- Vue client pure:
+  - `/`
   - domaine: `defi-7jours.universrebelle.com`
-- Vues internes:
-  - `/prototype/defi-7jours`
-  - `/prototype/defi-7-jours`
+- Vue client pré-live avec menu hamburger:
+  - `/prototypeclient`
+- Vue construction:
   - `/admin`
 
 ## Principe d'architecture
@@ -118,4 +116,3 @@ Relais serveur vers GHL. Ne pas poster directement vers GHL depuis le navigateur
 - Deux jours après la fin: `access_status = expired`.
 - Token courriel: ouvre automatiquement la bonne journée.
 - Payload GHL: contient `day_schedule`, `next_unlock_at`, `challenge_end_at`, `access_expires_at`, `direct_access_link`.
-

@@ -2782,9 +2782,9 @@
       };
 
       const queryParams = new URLSearchParams(window.location.search);
-      const isPrototypeView = window.location.pathname.startsWith("/prototype/");
+      const isPrototypeClientView = window.location.pathname === "/prototypeclient" || window.location.pathname.startsWith("/prototypeclient/");
       const isAdminView = window.location.pathname === "/admin" || window.location.pathname.startsWith("/admin/");
-      const isClientView = !isPrototypeView && !isAdminView;
+      const isClientView = !isPrototypeClientView && !isAdminView;
 
       function readContactContext() {
         return {
@@ -3187,7 +3187,7 @@
         }
 
         const url = new URL(window.location.href);
-        url.pathname = "/defi-7jours";
+        url.pathname = "/";
         url.search = "";
         url.searchParams.set("token", token);
         return url.toString();
@@ -3460,7 +3460,7 @@
       }
 
       function hasPreliveFullAccess() {
-        return APP_CONFIG.preliveAccessEnabled && isClientView;
+        return APP_CONFIG.preliveAccessEnabled && isPrototypeClientView;
       }
 
       function hasPaidAccess() {
@@ -5144,6 +5144,7 @@
           dom.adminPanel.classList.add("hidden");
           dom.payloadPanel.classList.add("hidden");
           dom.sidebar.classList.add("hidden");
+          dom.preliveNav.classList.add("hidden");
           return;
         }
 
@@ -5163,24 +5164,27 @@
           dom.adminPanel.classList.add("hidden");
           dom.payloadPanel.classList.add("hidden");
           dom.sidebar.classList.add("hidden");
+          dom.preliveNav.classList.add("hidden");
+          dom.preliveNav.removeAttribute("open");
           return;
         }
 
-        document.body.classList.remove("client-view");
-        dom.sidebar.classList.remove("hidden");
-        dom.brandModeLabel.textContent = "Prototype fonctionnel";
+        document.body.classList.add("client-view");
+        dom.sidebar.classList.add("hidden");
+        dom.brandModeLabel.textContent = "Prototype client";
         dom.clientDevPanel.classList.add("hidden");
-        dom.cadencePanel.classList.remove("hidden");
+        dom.cadencePanel.classList.add("hidden");
         dom.heroMeta.innerHTML = `
-          <span class="chip">Responsive mobile et desktop</span>
-          <span class="chip">Compatible intégration HTML Lovable</span>
-          <span class="chip">Payload webhook prêt pour GHL</span>
+          <span class="chip">Défi sur ${getConfiguredDayCount()} jours</span>
+          <span class="chip">Menu hamburger actif</span>
+          <span class="chip">Vue cliente pré-live</span>
         `;
-        dom.topbarActions.classList.remove("hidden");
-        dom.statsPanel.classList.remove("hidden");
-        dom.timelinePanel.classList.remove("hidden");
-        dom.adminPanel.classList.remove("hidden");
-        dom.payloadPanel.classList.remove("hidden");
+        dom.topbarActions.classList.add("hidden");
+        dom.statsPanel.classList.add("hidden");
+        dom.timelinePanel.classList.add("hidden");
+        dom.adminPanel.classList.add("hidden");
+        dom.payloadPanel.classList.add("hidden");
+        dom.preliveNav.classList.remove("hidden");
       }
 
       function renderScreen() {
